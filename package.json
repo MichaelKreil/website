@@ -1,0 +1,19 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "website": "generate.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Kreil",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "hogan.js": "^3.0.2",
+    "tsv": "^0.2.0"
+  }
+}

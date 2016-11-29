@@ -1,0 +1,35 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/snap/snap.svg-min.js"></script>
+	<script type="text/javascript" src="/assets/script/main.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="/assets/style/main.css">
+	<link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
+</head>
+<body>
+	<header><h1>Michael Kreil</h1></header>
+	<div id="container">
+		<svg id="timeline">
+		</svg>
+		<div id="entries">
+		{{#entries}}
+			<section class="entry entry_{{type}}" entrytype="{{type}}">
+				<h2>
+					<span class="symbol"><i class="fa fa-{{symbol}}" aria-hidden="true"></i></span>
+					<span class="title">
+						{{#link}}<a href="{{link.url}}">{{/link}}
+							{{title}}
+						{{#link}}</a>{{/link}}
+					</span>
+					<time>{{time}}</time>
+				</h2>
+			</section>
+		{{/entries}}
+		</div>
+	</div>
+	<footer></footer>
+</body>
+</html>
