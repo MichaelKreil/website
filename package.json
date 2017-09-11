@@ -13,7 +13,6 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "hogan.js": "^3.0.2",
-    "tsv": "^0.2.0"
+    "hogan.js": "^3.0.2"
   }
 }

@@ -1,31 +1,28 @@
 <html>
 <head>
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
 	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
-	<script type="text/javascript" src="/assets/snap/snap.svg-min.js"></script>
-	<script type="text/javascript" src="/assets/script/main.js"></script>
-
+	<script type="text/javascript" src="/assets/main.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/style/main.css">
-	<link rel="stylesheet" type="text/css" href="/assets/font-awesome/css/font-awesome.min.css">
 </head>
 <body>
-	<header><h1>Michael Kreil</h1></header>
-	<div id="container">
-		<svg id="timeline">
-		</svg>
-		<div id="entries">
+	<header>
+		<h1>Michael Kreil</h1>
+		<p>
+			<a href="https://twitter.com/MichaelKreil" target="_blank">Twitter</a>,
+			<a href="https://github.com/MichaelKreil" target="_blank">GitHub</a>,
+			<a href="https://dsst.io" target="_blank">Work</a>
+		</p>
+	</header>
+	<div id="wrapper">
+		<div id="container">
 		{{#entries}}
-			<section class="entry entry_{{type}}" entrytype="{{type}}">
-				<h2>
-					<span class="symbol"><i class="fa fa-{{symbol}}" aria-hidden="true"></i></span>
-					<span class="title">
-						{{#link}}<a href="{{link.url}}">{{/link}}
-							{{title}}
-						{{#link}}</a>{{/link}}
-					</span>
-					<time>{{time}}</time>
-				</h2>
+			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}} noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}" tabindex="{{tabindex}}">
+				<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}})"{{/image}}></div>
+				<a{{#link}} href="{{link}}" target="_blank"{{/link}}>
+					<h2>{{title}}</h2>
+				</a>
 			</section>
 		{{/entries}}
 		</div>

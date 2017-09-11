@@ -1,108 +1,126 @@
 body {
 	background: #000;
-	color: #eee;
+	color: #aaa;
 	font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+	font-weight: 200;
 }
 
 header {
 	margin: 30px 0px 80px;
 }
-header h1 {
-	font-weight: 200;
-	text-align: center;
-}
 
-#timeline {
-	display: none;
-}
-
-.entry {
-	border: 1px solid rgba(255,255,255,0.3);
-	border-radius: 5px;
-	font-size: 10px;
-	margin-bottom: 20px;
-	padding: 5px;
-}
-
-	.entry h2 {
-		font-size: 14px;
-		font-weight: normal;
-		margin: 0px;
+	header h1, p {
+		text-align: center;
+		font-weight: 200;
 	}
 
-		.entry h2 time {
-			font-size: 8px;
-			opacity: 0.5;
-		}
-
-	.entry p.link {
-		margin: 5px 0px 0px;
-	}
-
-	.entry a {
+	header a {
 		color: inherit;
 		text-decoration: none;
+		border-bottom: 1px solid rgba(255,255,255,0.2);
+		transition: border-bottom-color 100ms;
+		
 	}
-	.entry a:hover {
-		text-decoration: underline;
-	}
+		header a:hover {
+			border-bottom: 1px solid rgba(255,255,255,0.5);
+		}
 
-	.entry.entry_work, .entry.entry_school {
-		color: rgba(255,0,0,0.9);
-		background-color: rgba(255,0,0,0.1);
-		border-color: rgba(255,0,0,0.3);
-		filter: drop-shadow(0px 0px 8px rgba(255,0,0,0.8));
-	}
+#wrapper {
+	width: 100%;
+}
 
-	.entry.entry_award {
-		color: rgba(255,170,0,0.9);
-		background-color: rgba(255,170,0,0.1);
-		border-color: rgba(255,170,0,0.3);
-		filter: drop-shadow(0px 0px 8px rgba(255,170,0,0.8));
-	}
-
-	.entry.entry_project {
-		color: rgba(0,85,255,0.9);
-		background-color: rgba(0,85,255,0.1);
-		border-color: rgba(0,85,255,0.3);
-		filter: drop-shadow(0px 0px 8px rgba(0,85,255,0.8));
-	}
-
-	.entry.entry_press, .entry.entry_link {
-		color: rgba(85,85,85,0.9);
-		background-color: rgba(85,85,85,0.1);
-		border-color: rgba(85,85,85,0.3);
-	}
-
-
-.enhanced #container {
+#container {
+	margin: 0 auto;
 	position: relative;
 }
 
-	.enhanced #timeline {
-		display: block;
+	.entry {
 		position: absolute;
-		width: 200px;
-		top: 0px;
-		left: 0px;
+		cursor: pointer;
+		display: none;
+		overflow: hidden;
+		transition: left 500ms, top 500ms, width 500ms, height 500ms, transform 200ms, box-shadow 200ms;
+		font-size: 9px;
+		-webkit-tap-highlight-color: transparent;
 	}
 
-	.enhanced #entries {
-		position: absolute;
-		top: 0px;
-		left: 200px;
-		right: 0px;
-	}
-
-		.enhanced .entry {
-			position: absolute;
-			left: 0px;
-			display: inline-block;
+		.entry:hover, .entry:focus {
+			outline: none;
+			transform: scale(1.1);
+			box-shadow: 0 0 16px rgba(0,0,0,0.5);
+			z-index: 10000;
 		}
 
-.yearlabel {
-	font-size: 30px;
-}
-.monthlabel {
+		.entry .entry_background, .entry a {
+			display: block;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+		}
+
+		.entry .entry_background {
+			background-color: #eee;
+			background-position: center center;
+			background-size: cover;
+		}
+
+		.entry a {
+			display: none;
+			color: #333;
+			text-decoration: none;
+		}
+
+		.entry:hover a, .entry:focus a {
+			display: block;
+		}
+
+			.noimage .entry_background {
+				opacity: 0.2;
+				transition: opacity 200ms;
+			}
+
+			.noimage.entry_press .entry_background {
+				background-image: url('press.png');
+			}
+
+			.noimage.entry_award .entry_background {
+				background-image: url('award.png');
+			}
+
+			.noimage.entry_presentation .entry_background {
+				background-image: url('presentation.png');
+			}
+
+				.noimage:hover .entry_background, .entry:focus .entry_background {
+					opacity: 1;
+				}
+
+		.entry h2 {
+			position: absolute;
+			font-size: inherit;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			padding: 0.5em;
+			margin: 0;
+			text-align: right;
+			opacity: 0;
+			background-color: rgba(255,255,255,0.7);
+			transition: opacity 200ms;
+			font-weight: normal;
+			overflow-wrap: break-word;
+		}
+
+			.entry:hover h2, .entry:focus a h2 {
+				opacity: 1;
+			}
+
+footer {
+	padding-top: 300px;
+	text-align: center;
 	font-size: 10px;
+	color: #666;
 }
+
