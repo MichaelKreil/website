@@ -18,12 +18,6 @@ fs.writeFileSync(resolve(__dirname, '../web/index.html'), html, 'utf8');
 
 
 function checkEntries(entries) {
-	entries.forEach(entry => {
-		if (!entry.title) console.error('Missing title!!!');
-		if (!entry.slug) entry.slug = entry.start+'_'+entry.type;
-
-		entry.image = getImage(entry);
-	})
 
 	entries = entries.filter(entry => {
 		if (entry.ignore) return false;
@@ -40,7 +34,7 @@ function checkEntries(entries) {
 			case 'press': break;
 
 			case 'presentation':
-				if (entry.image && !entry.size) entry.size = 2;
+				if (!entry.size) entry.size = 2;
 			break;
 			case 'award': break;
 			case 'work': break;
@@ -52,6 +46,13 @@ function checkEntries(entries) {
 		if (entry.highlight) entry.size *= 2;
 
 		return use;
+	})
+
+	entries.forEach(entry => {
+		if (!entry.title) console.error('Missing title!!!');
+		if (!entry.slug) entry.slug = entry.start+'_'+entry.type;
+
+		entry.image = getImage(entry);
 	})
 
 	entries.sort((a,b) => b.date - a.date);
@@ -79,13 +80,17 @@ function getImage(entry) {
 
 	var size = entry.size*96*3;
 
-	spawnSync('convert', [
+	var attr = [
 		filenameSrc,
 		'-resize', size+'x'+size+'!',
 		'-quality','80',
 		'-interlace','JPEG',
 		filenameDst
-	])
+	];
+	spawnSync('convert', attr)
+
+	console.log('   generating: '+dst);
+	console.log('      convert '+attr.join(' '));
 	
 	return dst;
 }

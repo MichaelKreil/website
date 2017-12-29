@@ -1,12 +1,93 @@
 module.exports = [
-	/*
+	{
+		title:'Social Bots, Fake News und Filterblasen',
+		start:'2017-12-28',
+		type:'presentation',
+		link:'https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen'
+	},
+	{
+		title:'FAZ - Die Twitterinsel der AfD-Getreuen',
+		start:'2017-12-28',
+		type:'press',
+		link:'http://www.faz.net/aktuell/feuilleton/medien/chaos-communication-congress-die-twitterinsel-der-afd-getreuen-15361701.html',
+	},
+	{
+		title:'stern - Datenjournalist sieht Fehler in Social Bots-Forschung',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.stern.de/digital/chaos-communication-congress-datenjournalist-sieht-fehler-in-social-bots-forschung-7803286.html',
+	},
+	{
+		title:'BR - Social Bots sind seltener als gedacht',
+		start:'2017-12-28',
+		type:'press',
+		link:'http://www.br.de/nachrichten/34c3-social-bots-sind-seltener-als-gedacht-100.html',
+	},
+	{
+		title:'WELT - Datenjournalist sieht Fehler in Social Bots-Forschung',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html',
+	},
+	{
+		title:'WELT - Datenjournalist sieht Fehler in Social Bots-Forschung',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html',
+	},
+	{
+		title:'ZDF heute journal - Schwachstellen der digitalen Welt',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.zdf.de/nachrichten/heute-journal/schwachstellen-der-digitalen-welt-100.html',
+	},
+	{
+		title:'Deutschlandfunk Nova - Daten zu Fake News und Filterblasen',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.deutschlandfunknova.de/beitrag/chaos-communication-congress-daten-zu-fake-news-und-filterblasen',
+	},
+	{
+		title:'heise - Grundlose Hysterie um Social Bots',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.heise.de/newsticker/meldung/34C3-Grundlose-Hysterie-um-Social-Bots-3928440.html',
+	},
+	{
+		title:'taz - Schlecht informiert in der AfD-Blase',
+		start:'2017-12-28',
+		type:'press',
+		link:'http://www.taz.de/!5473411/',
+	},
+	{
+		title:'golem - Social Bots verzweifelt gesucht',
+		start:'2017-12-28',
+		type:'press',
+		link:'https://www.golem.de/news/soziale-medien-social-bots-verzweifelt-gesucht-1712-131890.html',
+	},
+	
+	
+	{
+		title:'wikidatacon - Keynote #2',
+		start:'2017-10-29',
+		type:'presentation',
+		link:'https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories'
+	},
+	
+	
+	
+	{
+		title:'Tagesspiegel - Soll Tegel offen bleiben?',
+		start:'2017-09-25',
+		type:'project',
+		link:'https://wahl.tagesspiegel.de/2017/karten/tegel/'
+	},
 	{
 		title:'np13 - Datenjournalismus für die Informationsgesellschaft',
 		start:'2017-09-01',
 		type:'presentation',
 		link:'https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft'
 	},
-	*/
 	{
 		title:'Tagesspiegel - Wie Berliner Kieze seit der Wende wählten',
 		start:'2017-08-31',
