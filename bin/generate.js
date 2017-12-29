@@ -75,7 +75,7 @@ function getImage(entry) {
 
 	if (!filenameSrc) return false;
 
-	var size = entry.size*192;
+	var size = entry.size*96*3;
 
 	spawnSync('convert', [
 		filenameSrc,
