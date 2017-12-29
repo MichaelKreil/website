@@ -39,15 +39,13 @@ header {
 		cursor: pointer;
 		display: none;
 		overflow: hidden;
-		transition: left 500ms, top 500ms, width 500ms, height 500ms, transform 200ms, box-shadow 200ms;
+		transition: left 500ms, top 500ms, width 500ms, height 500ms;
 		font-size: 9px;
 		-webkit-tap-highlight-color: transparent;
 	}
 
 		.entry:hover, .entry:focus {
 			outline: none;
-			transform: scale(1.1);
-			box-shadow: 0 0 16px rgba(0,0,0,0.5);
 			z-index: 10000;
 		}
 
@@ -67,19 +65,23 @@ header {
 		}
 
 		.entry a {
-			display: none;
+			opacity: 0.3;
 			color: #333;
+			transition: opacity 200ms;
 			text-decoration: none;
 		}
 
 		.entry:hover a, .entry:focus a {
-			display: block;
+			opacity: 1.0;
 		}
 
-			.noimage .entry_background {
-				opacity: 0.2;
+			.noimage {
+				opacity: 0.3;
 				transition: opacity 200ms;
 			}
+				.noimage a {
+					opacity: 1.0;
+				}
 
 			.noimage.entry_press .entry_background {
 				background-image: url('press.png');
@@ -93,7 +95,7 @@ header {
 				background-image: url('presentation.png');
 			}
 
-				.noimage:hover .entry_background, .entry:focus .entry_background {
+				.entry:hover, .entry:focus {
 					opacity: 1;
 				}
 
@@ -106,7 +108,6 @@ header {
 			padding: 0.5em;
 			margin: 0;
 			text-align: right;
-			opacity: 0;
 			background-color: rgba(255,255,255,0.7);
 			transition: opacity 200ms;
 			font-weight: normal;
@@ -114,7 +115,6 @@ header {
 		}
 
 			.entry:hover h2, .entry:focus a h2 {
-				opacity: 1;
 			}
 
 footer {
