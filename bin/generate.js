@@ -18,6 +18,13 @@ fs.writeFileSync(resolve(__dirname, '../web/index.html'), html, 'utf8');
 
 
 function checkEntries(entries) {
+	entries.forEach(entry => {
+		if (!entry.title) console.error('Missing title!!!');
+		if (!entry.slug) entry.slug = entry.start+'_'+entry.type;
+
+		entry.image = getImage(entry);
+	})
+
 	entries = entries.filter(entry => {
 		if (entry.ignore) return false;
 
@@ -32,7 +39,9 @@ function checkEntries(entries) {
 
 			case 'press': break;
 
-			case 'presentation': break;
+			case 'presentation':
+				if (entry.image && !entry.size) entry.size = 2;
+			break;
 			case 'award': break;
 			case 'work': break;
 			case 'school': use = false; break;
@@ -43,13 +52,6 @@ function checkEntries(entries) {
 		if (entry.highlight) entry.size *= 2;
 
 		return use;
-	})
-
-	entries.forEach(entry => {
-		if (!entry.title) console.error('Missing title!!!');
-		if (!entry.slug) entry.slug = entry.start+'_'+entry.type;
-
-		entry.image = getImage(entry);
 	})
 
 	entries.sort((a,b) => b.date - a.date);
