@@ -30,12 +30,6 @@ module.exports = [
 		link:'https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html',
 	},
 	{
-		title:'WELT - Datenjournalist sieht Fehler in Social Bots-Forschung',
-		start:'2017-12-28',
-		type:'press',
-		link:'https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html',
-	},
-	{
 		title:'ZDF heute journal - Schwachstellen der digitalen Welt',
 		start:'2017-12-28',
 		type:'press',
@@ -65,6 +59,13 @@ module.exports = [
 		type:'press',
 		link:'https://www.golem.de/news/soziale-medien-social-bots-verzweifelt-gesucht-1712-131890.html',
 	},
+	{
+		title:'Spiegel - Twitter-Datenanalyse',
+		start:'2017-12-30',
+		type:'press',
+		link:'http://www.spiegel.de/netzwelt/web/twitter-datenanalyse-wir-hatten-eine-falsche-vorstellung-von-der-filterblase-a-1185406.html',
+	},
+
 	
 	
 	{
