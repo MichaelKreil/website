@@ -1,6 +1,6 @@
 module.exports = [
 	{
-		title:'Social Bots, Fake News und Filterblasen',
+		title:'34C3 - Social Bots, Fake News und Filterblasen',
 		start:'2017-12-28',
 		type:'presentation',
 		link:'https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen'
