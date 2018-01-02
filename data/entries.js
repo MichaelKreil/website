@@ -3,7 +3,8 @@ module.exports = [
 		title:'34C3 - Social Bots, Fake News und Filterblasen',
 		start:'2017-12-28',
 		type:'presentation',
-		link:'https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen'
+		link:'https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen',
+		size:2,
 	},
 	{
 		title:'FAZ - Die Twitterinsel der AfD-Getreuen',
@@ -65,6 +66,19 @@ module.exports = [
 		type:'press',
 		link:'http://www.spiegel.de/netzwelt/web/twitter-datenanalyse-wir-hatten-eine-falsche-vorstellung-von-der-filterblase-a-1185406.html',
 	},
+	{
+		title:'MDR - Beeinflussen "Social Bots" tatsächlich politische Meinungen?',
+		start:'2017-12-30',
+		type:'press',
+		link:'https://www.mdr.de/nachrichten/politik/inland/beeinflussen-social-bots-politische-meinung-100.html',
+	},
+	{
+		title:'Deutschlandfunk - Das Raumschiff ist gelandet',
+		start:'2017-12-30',
+		type:'press',
+		link:'http://www.deutschlandfunkkultur.de/live-vom-34-chaos-communication-congress-das-raumschiff-ist.1264.de.html?dram:article_id=407157',
+
+	},
 
 	
 	
@@ -72,7 +86,8 @@ module.exports = [
 		title:'wikidatacon - Keynote #2',
 		start:'2017-10-29',
 		type:'presentation',
-		link:'https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories'
+		link:'https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories',
+		size:2
 	},
 	
 	
@@ -87,7 +102,8 @@ module.exports = [
 		title:'np13 - Datenjournalismus für die Informationsgesellschaft',
 		start:'2017-09-01',
 		type:'presentation',
-		link:'https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft'
+		link:'https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft',
+		size:2
 	},
 	{
 		title:'Tagesspiegel - Wie Berliner Kieze seit der Wende wählten',

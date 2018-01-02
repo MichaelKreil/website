@@ -32,10 +32,7 @@ function checkEntries(entries) {
 			break;
 
 			case 'press': break;
-
-			case 'presentation':
-				if (!entry.size) entry.size = 2;
-			break;
+			case 'presentation': break;
 			case 'award': break;
 			case 'work': break;
 			case 'school': use = false; break;
