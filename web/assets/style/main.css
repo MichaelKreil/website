@@ -84,15 +84,15 @@ header {
 				}
 
 			.noimage.entry_press .entry_background {
-				background-image: url('press.png');
+				background-image: url('assets/style/press.png');
 			}
 
 			.noimage.entry_award .entry_background {
-				background-image: url('award.png');
+				background-image: url('assets/style/award.png');
 			}
 
 			.noimage.entry_presentation .entry_background {
-				background-image: url('presentation.png');
+				background-image: url('assets/style/presentation.png');
 			}
 
 				.entry:hover, .entry:focus {
