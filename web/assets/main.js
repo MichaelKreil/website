@@ -1,23 +1,24 @@
-$(function () {
+document.addEventListener('DOMContentLoaded', function(event) {
 	var size = 80;
 	var cols = 0;
 
-	var wrapper = $('#wrapper');
-	var container = $('#container');
+	var wrapper = document.getElementById('wrapper');
+	var container = document.getElementById('container');
 
 	var layoutTimeout = 500;
 	var layoutHandler = false;
 
-	var entries = $('.entry').map(function () {
-		var node = $(this);
+	var entries = document.getElementsByClassName('entry');
+	entries = [].slice.call(entries);
+	entries = entries.map(function (node) {
 		return {
-			size:parseFloat(node.attr('entry_size')),
-			type:node.attr('entry_type'),
-			node:node,
+			size: parseFloat(node.getAttribute('entry_size')),
+			type: node.getAttribute('entry_type'),
+			node: node,
 		}
-	}).get();
+	});
 
-	$(window).resize(tryResize);
+	window.addEventListener('resize', tryResize, false);
 	resize();
 
 	function tryResize() {
@@ -29,7 +30,7 @@ $(function () {
 	}
 
 	function resize() {
-		var width = wrapper.width();
+		var width = wrapper.clientWidth;
 		width = (width < 320) ? width : (width-320)*0.8+320;
 		size = (width < 480) ? 80 : 96;
 
@@ -56,19 +57,15 @@ $(function () {
 
 			if (y > height) height = y;
 
-			entry.node.css({
-				width:  (s-1)+'px',
-				height: (s-1)+'px',
-				left:   x+'px',
-				top:    y+'px',
-				display:'block'
-			})
+			entry.node.style.width = (s-1)+'px';
+			entry.node.style.height = (s-1)+'px';
+			entry.node.style.left = x+'px';
+			entry.node.style.top = y+'px';
+			entry.node.style.display = 'block';
 		})
 
-		container.css({
-			height:(height + size)+'px',
-			width: (cols*size)+'px',
-		})
+		container.style.height = (height + size)+'px';
+		container.style.width = (cols*size)+'px';
 	}
 
 	function layoutEntries() {

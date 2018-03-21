@@ -12,7 +12,6 @@ var template = fs.readFileSync(resolve(__dirname, '../data/index.template.html')
 template = hogan.compile(template);
 
 var importedFiles = {
-	jquery: fs.readFileSync(resolve(__dirname, '../web/assets/jquery/jquery.slim.min.js'), 'utf8'),
 	mainscript: fs.readFileSync(resolve(__dirname, '../web/assets/main.js'), 'utf8'),
 	mainstyle: fs.readFileSync(resolve(__dirname, '../web/assets/style/main.css'), 'utf8'),
 }
