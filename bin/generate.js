@@ -55,7 +55,16 @@ function checkEntries(entries) {
 		if (!entry.title) console.error('Missing title!!!');
 		if (!entry.slug) entry.slug = entry.start+'_'+entry.type;
 
-		entry.image = getImage(entry);
+		entry.slug = getImage(entry);
+
+		if (entry.slug) {
+			entry.image = entry.slug+'.jpg';
+
+			var icon = '../icons/'+entry.slug+'.gif';
+			icon = resolve(__dirname, icon);
+			icon = fs.readFileSync(icon);
+			entry.icon = icon.toString('base64');
+		}
 	})
 
 	entries.sort((a,b) => b.date - a.date);
@@ -64,10 +73,8 @@ function checkEntries(entries) {
 }
 
 function getImage(entry) {
-	var dst = entry.slug+'.jpg';
-	var filenameDst = resolve(__dirname, '../web/assets/images/'+dst);
-
-	if (fs.existsSync(filenameDst)) return dst;
+	var filenameWeb = resolve(__dirname, '../web/assets/images/'+entry.slug+'.jpg');
+	var filenameIco = resolve(__dirname, '../icons/'+entry.slug+'.gif');
 
 	var png = resolve(__dirname, '../images/'+entry.slug+'.png');
 	var jpg = resolve(__dirname, '../images/'+entry.slug+'.jpg');
@@ -81,19 +88,35 @@ function getImage(entry) {
 
 	var size = (entry.size*96-1)*2;
 
-	var attr = [
-		filenameSrc,
-		'-resize', size+'x'+size+'!',
-		'-quality','80',
-		'-interlace','JPEG',
-		filenameDst
-	];
-	spawnSync('convert', attr)
+	if (!fs.existsSync(filenameWeb)) {
+		var attr = [
+			filenameSrc,
+			'-resize', size+'x'+size+'!',
+			'-quality','80',
+			'-interlace','JPEG',
+			filenameWeb
+		];
+		spawnSync('convert', attr)
 
-	console.log('   generating: '+dst);
-	console.log('      convert '+attr.join(' '));
+		console.log('   generating: '+filenameWeb);
+		console.log('      convert '+attr.join(' '));
+	}
+
+	if (!fs.existsSync(filenameIco)) {
+		var attr = [
+			filenameSrc,
+			'-resize', '16x16!',
+			'-dither', 'FloydSteinberg',
+			'-colors', '16',
+			filenameIco
+		];
+		spawnSync('convert', attr)
+
+		console.log('   generating: '+filenameIco);
+		console.log('      convert '+attr.join(' '));
+	}
 	
-	return dst;
+	return entry.slug;
 }
 
 function parseDate(text) {
