@@ -1,11 +1,12 @@
 document.addEventListener('DOMContentLoaded', function(event) {
 	var size = 80;
-	var cols = 0;
+	var padding = 1;
+	var lastState = '';
 
 	var wrapper = document.getElementById('wrapper');
 	var container = document.getElementById('container');
 
-	var layoutTimeout = 500;
+	var layoutTimeout = 200;
 	var layoutHandler = false;
 
 	var entries = document.getElementsByClassName('entry');
@@ -24,23 +25,34 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	function tryResize() {
 		if (layoutHandler) clearTimeout(layoutHandler);
 		layoutHandler = setTimeout(function () {
-			resize();
 			layoutHandler = false;
+			resize();
 		}, layoutTimeout)
 	}
 
 	function resize() {
 		var width = wrapper.clientWidth;
 		width = (width < 320) ? width : (width-320)*0.8+320;
-		size = (width < 480) ? 80 : 96;
 
-		var newCols = Math.floor(width/size);
+		if (width < 480) {
+			size = 80;
+			padding = 1;
+		} else if (window.innerWidth < 1500) {
+			size = 96;
+			padding = 1;
+		} else {
+			size = 192;
+			padding = 2;
+		}
+
+		cols = Math.floor(width/size);
 		
-		if (newCols < 2) newCols = 2;
-		if (newCols > 8) newCols = 8;
+		if (cols < 2) cols = 2;
+		if (cols > 8) cols = 8;
 
-		if (cols === newCols) return;
-		cols = newCols;
+		var state = [size, padding, cols].join(',');
+		if (state === lastState) return;
+		lastState = state;
 
 		layoutEntries();
 
@@ -57,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 			if (y > height) height = y;
 
-			entry.node.style.width = (s-1)+'px';
-			entry.node.style.height = (s-1)+'px';
+			entry.node.style.width = s+'px';
+			entry.node.style.height = s+'px';
 			entry.node.style.left = x+'px';
 			entry.node.style.top = y+'px';
 			entry.node.style.display = 'block';
@@ -90,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 					}
 				}
 
-				entry.s = entrySize*size;
+				entry.s = entrySize*size-padding;
 				entry.x = x0*size;
 				entry.y = y0*size;
 
