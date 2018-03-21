@@ -75,7 +75,7 @@ function getImage(entry) {
 
 	if (!filenameSrc) return false;
 
-	var size = entry.size*96*3;
+	var size = (entry.size*96-1)*2;
 
 	var attr = [
 		filenameSrc,
