@@ -91,6 +91,7 @@ function getImage(entry) {
 	if (!fs.existsSync(filenameWeb)) {
 		var attr = [
 			filenameSrc,
+			'-strip',
 			'-resize', size+'x'+size+'!',
 			'-quality','80',
 			'-interlace','JPEG',
@@ -105,6 +106,7 @@ function getImage(entry) {
 	if (!fs.existsSync(filenameIco)) {
 		var attr = [
 			filenameSrc,
+			'-strip',
 			'-resize', '16x16!',
 			'-dither', 'FloydSteinberg',
 			'-colors', '16',
