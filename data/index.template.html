@@ -1,7 +1,8 @@
-<html>
+<html lang="de">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Michael Kreil</title>
 	<script type="text/javascript" src="/assets/jquery/jquery.min.js"></script>
 	<script type="text/javascript" src="/assets/main.js"></script>
 	<link rel="stylesheet" type="text/css" href="/assets/style/main.css">
@@ -20,7 +21,7 @@
 		{{#entries}}
 			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}">
 				<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}})"{{/image}}></div>
-				<a{{#link}} href="{{link}}" target="_blank"{{/link}}>
+				<a{{#link}} href="{{link}}" target="_blank" rel="noopener"{{/link}}>
 					<h2>{{title}}</h2>
 				</a>
 			</section>
