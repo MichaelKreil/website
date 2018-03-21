@@ -6,12 +6,13 @@
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function(event) {
 	var size = 80;
-	var cols = 0;
+	var padding = 1;
+	var lastState = '';
 
 	var wrapper = document.getElementById('wrapper');
 	var container = document.getElementById('container');
 
-	var layoutTimeout = 500;
+	var layoutTimeout = 200;
 	var layoutHandler = false;
 
 	var entries = document.getElementsByClassName('entry');
@@ -30,23 +31,34 @@
 	function tryResize() {
 		if (layoutHandler) clearTimeout(layoutHandler);
 		layoutHandler = setTimeout(function () {
-			resize();
 			layoutHandler = false;
+			resize();
 		}, layoutTimeout)
 	}
 
 	function resize() {
 		var width = wrapper.clientWidth;
 		width = (width < 320) ? width : (width-320)*0.8+320;
-		size = (width < 480) ? 80 : 96;
 
-		var newCols = Math.floor(width/size);
+		if (width < 480) {
+			size = 80;
+			padding = 1;
+		} else if (window.innerWidth < 1500) {
+			size = 96;
+			padding = 1;
+		} else {
+			size = 192;
+			padding = 2;
+		}
+
+		cols = Math.floor(width/size);
 		
-		if (newCols < 2) newCols = 2;
-		if (newCols > 8) newCols = 8;
+		if (cols < 2) cols = 2;
+		if (cols > 8) cols = 8;
 
-		if (cols === newCols) return;
-		cols = newCols;
+		var state = [size, padding, cols].join(',');
+		if (state === lastState) return;
+		lastState = state;
 
 		layoutEntries();
 
@@ -63,8 +75,8 @@
 
 			if (y > height) height = y;
 
-			entry.node.style.width = (s-1)+'px';
-			entry.node.style.height = (s-1)+'px';
+			entry.node.style.width = s+'px';
+			entry.node.style.height = s+'px';
 			entry.node.style.left = x+'px';
 			entry.node.style.top = y+'px';
 			entry.node.style.display = 'block';
@@ -96,7 +108,7 @@
 					}
 				}
 
-				entry.s = entrySize*size;
+				entry.s = entrySize*size-padding;
 				entry.x = x0*size;
 				entry.y = y0*size;
 
@@ -119,26 +131,41 @@
 	color: #aaa;
 	font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
 	font-weight: 200;
+	font-size: 20px;
+}
+
+@media (min-width: 1500px) {
+	body {
+		font-size: 40px;
+	}
 }
 
 header {
 	margin: 30px 0px 80px;
 }
-
+	
 	header h1, p {
 		text-align: center;
 		font-weight: 200;
+	}
+	
+	header h1 {
+		font-size: 2em;
+	}
+	
+	header p {
+		font-size: 1em;
 	}
 
 	header a {
 		color: inherit;
 		text-decoration: none;
-		border-bottom: 1px solid rgba(255,255,255,0.2);
+		border-bottom: 0.05em solid rgba(255,255,255,0.2);
 		transition: border-bottom-color 100ms;
 		
 	}
 		header a:hover {
-			border-bottom: 1px solid rgba(255,255,255,0.5);
+			border-bottom-color: rgba(255,255,255,0.5);
 		}
 
 #wrapper {
@@ -156,7 +183,7 @@ header {
 		display: none;
 		overflow: hidden;
 		transition: left 500ms, top 500ms, width 500ms, height 500ms;
-		font-size: 9px;
+		font-size: 0.5em;
 		-webkit-tap-highlight-color: transparent;
 	}
 
@@ -193,7 +220,7 @@ header {
 
 			.noimage {
 				opacity: 0.3;
-				transition: opacity 200ms;
+				transition: opacity 200ms left 500ms, top 500ms, width 500ms, height 500ms;
 			}
 				.noimage a {
 					opacity: 1.0;
@@ -217,7 +244,7 @@ header {
 
 		.entry h2 {
 			position: absolute;
-			font-size: inherit;
+			font-size: 1em;
 			left: 0px;
 			right: 0px;
 			bottom: 0px;
@@ -230,14 +257,8 @@ header {
 			overflow-wrap: break-word;
 		}
 
-			.entry:hover h2, .entry:focus a h2 {
-			}
-
 footer {
 	padding-top: 300px;
-	text-align: center;
-	font-size: 10px;
-	color: #666;
 }
 
 
@@ -285,7 +306,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-12-28_presentation.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-12-28_presentation.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAsKCC4qKi8SGFQVImNPTk48QqN5g2yhpJqbmouytbDMztnn5/X29tHQ0Oior8NLUyH5BAAAAAAALAAAAAAQABAAAARfEMhJq7206c1bmAIjjiTzTeKilibFLErclKcEJ0eiK1pLCADYYUg0PBwfAyEIUxATRiSgUAjBbomFw7EICAjg12tFCgwC6BSZVBicASyaWyBA2O94hHuPoeyBfQCAEhEAOw==)"></div>
 				<a href="https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen" target="_blank" rel="noopener">
 					<h2>34C3 - Social Bots, Fake News und Filterblasen</h2>
 				</a>
@@ -345,49 +366,49 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-10-29_presentation.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-10-29_presentation.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAACUhH0o3MElDPG9gVo1zZJuLeqSRfV+oi6ylm9fX0+Xl3Ovs6eHa0LfAvQAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR2MMlJa1ISXztRQx7YMJxhIGbKkBVSDEOKrNtmEEFcFIjSJI3DofEZBAK3gkHB8AgPCQIMKRj0mh9iQxoAHAFL1u83AHjNgMGC00WbBWsLOkeQKu6LhSJ/zBmreQl5g2VnAAIEe4KDayCORHoJDIwXa2sYdxKMEQA7)"></div>
 				<a href="https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories" target="_blank" rel="noopener">
 					<h2>wikidatacon - Keynote #2</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-09-25_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-09-25_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJC5brnRqqbMj8XWuZC3zdC/xLLK2MzX0dnk1sza49vk6PHy8ePi29GipV6bvgAAACH5BAAAAAAALAAAAAAQABAAAAR/cK0kq5VsGULvVQtBGF6pGE4ClgepbWOlHAtyrEYyOoai2AdERjOCGQyHICNQSfSOi4NAEEBgGMmETnsYAAIAKoMxwBYOgeSAOq2WC43GJBmsdgNp38KXOPQRCGU2Jz0gCjpJQgyAGU5HT4CRK04ch3s+gYAgRyOHXEELAwgzEQA7)"></div>
 				<a href="https://wahl.tagesspiegel.de/2017/karten/tegel/" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Soll Tegel offen bleiben?</h2>
 				</a>
 			</section>
 			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-09-01_presentation.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-09-01_presentation.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAACQ2RjNLVTdhZVljaSotOWR2h3mJlnOizZefqam8yJq0w7PE0M/O1sO9xol6hgAAACH5BAAAAAAALAAAAAAQABAAAASKUCk0kbUGFTTM+MEQjAFgEmgZoCxhmuRQFCVQF4oxSUohkoKAjpdQJATBQFK4kyQSsg8yOHQ+DVjDVFBdKBZQ32BaOCCeCfDC5ykIPuenejHgzNjnRnrBdzgQDgN/Fg18YGl+gH+DDQ0MDFAMFw0XhJYDDAsMjo+cDAcFCRwMCgMEgigfA6ABfgERADs=)"></div>
 				<a href="https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft" target="_blank" rel="noopener">
 					<h2>np13 - Datenjournalismus für die Informationsgesellschaft</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-08-31_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-08-31_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAG1tbZCQkKGenrKxssW5us7Av9O61dPP0ebT0eXW5fb29t7E4AAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARhUMlJq002JwKyDYkQHNvgHUcgDAShtcnBxseyTOmAKgeCLAabQZIIDGgIlG1jOEoIMmiStDisFBjMIOBLeGM6heDwHEu/Xh4qAAioBCKv4Qu1stkENxSbOXRoZGR9Fx4eEQA7)"></div>
 				<a href="https://wahl.tagesspiegel.de/2017/karten/berlin/" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Wie Berliner Kieze seit der Wende wählten</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-08-21_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-08-21_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAHJwcFdWVjAdHpJZXX+KiZOQkaeYmayqqsqpq73FxNLS0vX19QAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARfcClJl62zSnOm8hd2FB2XYchhDAbXhdfoHnRyZUpbkDRwwBIAoKAb/UKKwYCASO1Up8VBMFAZdgRCIaogDDnXLXBxDRCuhmhoFyBq1UhAoDWyjbvDbMEOtGKPYzdwCxEAOw==)"></div>
 				<a href="https://wahl.tagesspiegel.de/2017/karten/gemeindegewinner/" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Platz eins, zwei, drei</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-04-28_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-04-28_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAOFfX+IICGShrNqxs+KbnJ3CyLbQ1c3W2OTb3Njf4Nvm6Oju77e7uwAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARaUK25kqQ4H6puTsYkhN53FVtJHcqxLUa4eGFiKcNSFDpftoAAADErKgSCxAIBIAByxJYk1kEQBoQD6mApUgwKxABhYE0TB1k34w2z2WXOe0XMqOYzzx1fZ0cAADs=)"></div>
 				<a href="http://digitalpresent.tagesspiegel.de/afd-unterstuetzernetzwerk" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Auf Linie: Das inoffizielle Unterstützernetzwerk der AfD</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-04-20_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-04-20_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAGwvL5RJStRuc4Y8PHGw11mezK+fruahpp22zuG9w57N6P39/t3Y4QAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARFcMlJVzqp6nWEP9vECAMwCGCYCEEpZOHCBsEbX52tGowVW7yfBGEQLhgIRO+nIBCWG0aTUED8GE6n4qroboWEr1EB/UUAADs=)"></div>
 				<a href="http://digitalpresent.tagesspiegel.de/balleryna" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Größter AfD-Twitter-Account ist ein Scheinriese</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2017-04-18_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2017-04-18_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAALa0rtC3rNyvrLXQqZ/UmczIs+Tiq+Gy29jRy+jSz9Dmzunp1O7Q7Pr6+tfw9bvl8CH5BAAAAAAALAAAAAAQABAAAAResMlJq21s3bqSSIm2NZ7wIUhypWaAAgBCLcowBEJQBLA81QTCAFAowAoiiSIo3A2KBkPSsbzpoNEkTVE4IDqKhZiDOHhDYwvDfGA0pg4KY92mOByP+GTutuD1I4GCEQA7)"></div>
 				<a href="http://digitalpresent.tagesspiegel.de/afd" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - So twittert die AfD</h2>
 				</a>
@@ -411,13 +432,13 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2016-04-25_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2016-04-25_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFdwa29zc19dWzRVTqkwMJg1M5FfXmqCfHaIhYmSj5CknZmrpAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR6MIhAgyHErK2WCkhiJIhhbagnCAk1IZ4iK4gygSBy0AmtJK0AEKhZhGTD1WjI7CUAABDJZAkdgAfAQYgIdX0/xWFrEWDOl7MAWjljDJdCwXDFBbbRQ1erbRkQFRVZfC5RgRRQUDoHKzeCdwhRbI6OWQN8hlQVXZGXFBEAOw==)"></div>
 				<a href="https://1928.tagesspiegel.de" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - 1928</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2016-04-12_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2016-04-12_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAGk3R1ROW2VUWlpZYmNdZGpoan8rN6AmKn17gIJ9g46MkQAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARpsBRCJCpKyjopGZz2fds3BOEAdpXiutfrVu2bJLLbDYiC3D+MIoEYFAIBS+GCuGhUyE1HQJWcUEZJlUqlIEMFrkB5pWy4Wg9ydQUEBOtAmYAMGA54fH19DQD+f3t8JiZxex4iRygUKgQRADs=)"></div>
 				<a href="https://hausnummern.tagesspiegel.de" target="_blank" rel="noopener">
 					<h2>Tagesspiegel - Hausnummern</h2>
 				</a>
@@ -429,7 +450,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-11-06_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-11-06_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAB0eGB8gGiMkHi4vKSEeGkVFODJJSU1PTWltbClAP3p9gKalpcjIx/39/X+ChQAAACH5BAAAAAAALAAAAAAQABAAAARlsMlJq72U6c07C6CQDMJgBgQIAKZpGMMhm/JRrIDwCkXR9r4DQogoIhY2k2/AWCyaHMSgJ0ocHA6EQ+Fw1gq2Uq1mKBRlQ5KgFFive9NCqUQjtebrQWA1368IgCkEHoQbGIeIFREAOw==)"></div>
 				<a href="http://data.deutschebahn.com" target="_blank" rel="noopener">
 					<h2>DB Datenportal</h2>
 				</a>
@@ -441,7 +462,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-11_work.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-11_work.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAALoCAsIXGMYxMc9OTtZqauGTkwAAAAAAACH5BAAAAAAALAAAAAAQABAAAAM+CLrc/jA6Mighoox3C/XaI4wkMD7DIKSDJhDOSq6pEMubZFH2EwQmEvDXAKYwBA0lx1DRVFAGUFKUTIdURQIAOw==)"></div>
 				<a href="https://dsst.io" target="_blank" rel="noopener">
 					<h2>Data Science and Stories (Der Tagesspiegel)</h2>
 				</a>
@@ -483,19 +504,19 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-10-07_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-10-07_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAE50mlJ7onKVtF2Gq3Wmz2qdx9jJrJGwyrDG1tTX0tPd5djm7eDl4p6orQAAAAAAACH5BAAAAAAALAAAAAAQABAAAASCkEhS6rgjaAAmLcpRYAHXSRUYHgoymB6CLIay3AQ82fy9IDrJLZFQGA2HIIJINCqKpdPBYCgOE7eXtLpoFo0CDuWQMDC+xUNU2qUmGIuwCSASIBiGhSKPWAMEBAICU2YKDAx9UYGCDUxEDA0BGQGCjI4JLpIAAweVggMCDaAADX8DEQA7)"></div>
 				<a href="http://netzradar.deutschebahn.com" target="_blank" rel="noopener">
 					<h2>DB Netzradar</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-09-31_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-09-31_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAALvG1s/OzuLU0+Xh3cDN4N7g5e/s6wAAACH5BAAAAAAALAAAAAAQABAAAAM/GDrcbMOoAMgor5i9Gfga9HCcIkRaSG5U4KzkdMGr4HIj3e169OoGjAi4ihB5R1wSAssVNRffiyGoPhgpLCMBADs=)"></div>
 				<a href="http://future.arte.tv/de/datenpakete-auf-reisen-europa/wie-das-internet-europa-verbindet?language=de" target="_blank" rel="noopener">
 					<h2>ARTE Future - Wie das Internet Europa verbindet</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-09-30_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-09-30_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFNTU2RjY7q4uMC/v8G/wNPS0eLb2+bj3OjY5urn6Nrd4a/a3AAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARoMIBJKwg4iM17LwXhbcMQgmhaGKyxumwiz4lCz8adIEtxKzlZcIfQBQ+LhUIBIqxkhxzrACwcCooDTZo4HAaGA8I2A96i4hhOx661wl4vQmuLulR4ELBDGHD8AiUrIQSFA30FAoknBREAOw==)"></div>
 				<a href="http://future.arte.tv/de/vernetzte-burger-unter-uberwachung/internet-uberwachung-wer-liest-mit-0?language=de" target="_blank" rel="noopener">
 					<h2>ARTE Future - Internet-Überwachung: Wer liest mit?</h2>
 				</a>
@@ -507,7 +528,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-05-05_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-05-05_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAChNWTBWaDZnbx5EVEtxdkZwVg41T2CMamycMYy/MS1zj1B5imaJjmOLlymGn4OjrSH5BAAAAAAALAAAAAAQABAAAASLcIA5h5Xg2hkoCN0HhkARCKegnKxQFAmSKo4iqIRA5IipO47AS7DY7WwLlQ2BOOiMUELShcApjIXdwXEo0GpXAkN7TCS+DumCcWC4GYqDYiFvLNaHA6HNuDcaCn92bG9ueQsICQ0Piw0Ha4UHDWZ/D5ZvfA0EfwoGAQt/dHQJoER/I1JjRXdGfyhGEQA7)"></div>
 				<a href="https://lobbyradar.org" target="_blank" rel="noopener">
 					<h2>ZDF-Lobbyradar</h2>
 				</a>
@@ -519,7 +540,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2015-01-21_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2015-01-21_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAAhPQUzTyY4USBPaFJidN1cY9E9XNqvYVl1h9J6hmqZpFGappqlqqjGytfb2cSwrCH5BAAAAAAALAAAAAAQABAAAASSMABVigqYPMWYkMpROVfANMviEEDwHPDhDENDMiQAOLGMOY7Ew8FoEToiBEbxGA1agUFHGTUlGCyMdlDVYlrQgWJBwHADhPMX12hsF8KBAHpSOJQITiHBxyAWHQ8PAlIMD4YJcjgJBURcCm0NTEo4gg4Njw0wKDonKZdRJCIJCjoEJAuSGDgGBlhfkB1eDHsILREAOw==)"></div>
 				<a href="http://datenblumen.wired.de" target="_blank" rel="noopener">
 					<h2>WIRED - Datenblumen</h2>
 				</a>
@@ -531,7 +552,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2014-04-26_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2014-04-26_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAAN26udrV1erZ1+vl3Nzf4Pvf4t7s9vHx8CH5BAAAAAAALAAAAAAQABAAAANJeHTcFDC0yQZbxNCqd7NLxQheZ33hNJxTIRRHAQ/aEADquoqHIFUsD80i8xxoCkYhyDBRBINlcJA6dFRHgnZybVp5ze7R+CWbEwA7)"></div>
 				<a href="https://apps.opendatacity.de/vds/" target="_blank" rel="noopener">
 					<h2>Vorratsdatenspeicherung in der Schweiz</h2>
 				</a>
@@ -543,7 +564,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2013-12-28_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2013-12-28_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAK3OMsfaMOXmLrjTV9XdWyir6We+xdTfoK7h9Nvd19jd49Lr9O71+OHi26HMlAAAACH5BAAAAAAALAAAAAAQABAAAASGMLWpzkknBJJUwp3ifVlwNR0xUeCwSQyjegrqJMQhNrFwrJOLThSTCRq1SmCgKvYEqgRguUTEFk+CgqAJGAoILJZhOXA1joIBES5+CIB4GmxdjAdx/KHANyzYRQd4AAcLamx2YwwVhAxtjop1AwcMdlciCZUxF1cLHXZICkU8jhI1gCKiDBEAOw==)"></div>
 				<a href="http://gsmmap.org" target="_blank" rel="noopener">
 					<h2>GSM-Map</h2>
 				</a>
@@ -561,7 +582,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2013-07-05_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2013-07-05_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFtbW2BgX2lqaouNjrCxsM7Ozt7g3uDh3+7u7QAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAQ+EMlJq7046322/2DVVUVpFkQ6qIJknGiaogFy3MeLwkQrdTiBcCioXYqBQBFgFCGT0MtBwEwCrhikcCAYRAAAOw==)"></div>
 				<a href="https://apps.opendatacity.de/stasi-vs-nsa/" target="_blank" rel="noopener">
 					<h2>Stasi vs NSA</h2>
 				</a>
@@ -573,13 +594,13 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2013-05-31_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2013-05-31_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAANx2HtyIMOeSMu+iOe2yU+q6Z+GZRe/Hcu7MifXdsf79+/fn0uy5igAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR4UEm50po4q0UKqsyXIUjRFYUxCMFFIUe3BoKwJlNyHOtAGDWCb7Mj7AQGAECgVCYSA190BWRaDQiCVhulNRmLRWFgMJ4ILAYGYQhsOyUPJvHrGA+F3QGhMcXwJDAFLgpQeHl7OnkYY3c7iHwTC4k6eEYMYBo5YRoRADs=)"></div>
 				<a href="https://Zensuskarte.de" target="_blank" rel="noopener">
 					<h2>Zensuskarte</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2013-05-24_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2013-05-24_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAIuQkp6wtqm1ubzHyqfd7rjs+8vR0s/e4tTt9PH5+wAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARMMKEkK7qTaooR+cXGiUWZiUZyXNwhnhIrWnIibGlirCziDq8NUDNcSVyxmeZyMwkEuadLhigdeCokJ9OhTCcwZU2pwaJSWoCRzE5EAAA7)"></div>
 				<a href="https://apps.opendatacity.de/relog/" target="_blank" rel="noopener">
 					<h2>re:log</h2>
 				</a>
@@ -639,7 +660,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2013-01-28_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2013-01-28_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAH0oK48wMoIdIJtJTLN4eaJPT5Y9QdOxsciGg97Y1uLd2uXh3ufm5OLf4Muhob9/hCH5BAAAAAAALAAAAAAQABAAAARn8Jwkq7WIoPdIGeDwFcEQCOcpoEHrpgHwusZs36/Z6kFt176WDOeSBWkt1myVRA0M0IKBVOgQrAmFIsHtMr7g72I8ViwaWUZj8TWPGQszuiGOx91qdUMB1sYZfm96bGZ6bmQNe3BZEQA7)"></div>
 				<a href="http://apps.opendatacity.de/gema-vs-youtube/" target="_blank" rel="noopener">
 					<h2>GEMA versus YouTubes Top 1000</h2>
 				</a>
@@ -699,13 +720,13 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-11-27_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-11-27_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPEAAO7fwN7vzO3ty/39+iH5BAAAAAAALAAAAAAQABAAAAI2nBWimuaWkFzvhLhUPXqFPVADIIRltQBkumXeB5qm1makXLv0M7mgnskpVjvHECgkrWIz5a4AADs=)"></div>
 				<a href="http://afghanistan.derwesten-recherche.org" target="_blank" rel="noopener">
 					<h2>WAZ - Die Afghanistan Papiere</h2>
 				</a>
 			</section>
 			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-11-15_presentation.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-11-15_presentation.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAB0WFiYZGDQtKjIhHUU3M1JCO1lZWZudpqywzLjt9qnT3s72+8PL4Ih4cgAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR80BBBjVEp65VamYOFcQuXLAehCqKWKLByfJOFvHHsSeyFaRhZodGo3Fy64cHie7k6DQTCQlCUrteotDGxYjmMgxTBFRzC4oNaPS4ICO7BAECni6XuQnxeB4wRH3oEcn1+UikDKnIBjI1SDAgDAYmSAAF1AQyaKSorFJ8DEQA7)"></div>
 				<a href="http://open-strategies.de/sessions/openplanb-innovation-without-permission" target="_blank" rel="noopener">
 					<h2>Vortrag &quot;openPlanB - innovation without permission&quot;</h2>
 				</a>
@@ -761,7 +782,7 @@ footer {
 			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<div class="entry_background" ></div>
 				<a href="http://www.spiegel.de/netzwelt/web/google-kooperation-mit-deutscher-bahn-wirft-fragen-auf-a-856215.html" target="_blank" rel="noopener">
-					<h2>Spiegel - Online-Karten: Googles lückenhafter Bahn-FahrplanSpiegel - Online Maps: Google&#39;s incomplete railway time tables</h2>
+					<h2>Spiegel - Online-Karten: Googles lückenhafter Bahn-Fahrplan</h2>
 				</a>
 			</section>
 			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
@@ -783,7 +804,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-09-04_presentation.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-09-04_presentation.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAABMHAywTCjcpJ1YwIldHS49ELXp5mIp9l3+Fo42LmYqQrJuWppOnyZCdwgAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR+MABAjFIta8aluJjWcGQQfKFIdmcDYkiMuIr5yXITM9kQEIpEApFQyBSkwmkxbBIvjUVDQmAKhQvEQrpQDACC7XWoc8WUg8XhGhReYj5BQX1YD98IgyRQ6A8IAwIEg4QAJgMFA4o+JhMSjomLigI/lI8AkosnBJYTniaglxMRADs=)"></div>
 				<a href="https://vimeo.com/48837184" target="_blank" rel="noopener">
 					<h2>Vortrag &quot;OpenData im ÖPV&quot;</h2>
 				</a>
@@ -795,13 +816,13 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-07-08_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-07-08_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAAOPRutzU3OjayO7n1tne8d/k9vj39wAAACH5BAAAAAAALAAAAAAQABAAAANJaLrT5os9Idp4UbVq780Dp4VCZggAQFHkp6lc2EVxDMh0J8fRoN4zRWFRSe1ckR+MZdKgVjhTgVThmagoiCkQKGGaBkJhCDYkAAA7)"></div>
 				<a href="http://openplanb.tumblr.com" target="_blank" rel="noopener">
 					<h2>openPlanB - innovation without permission</h2>
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-06-26_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-06-26_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFR4PW2RUnmcXo2tc6C9iKzFlbrQp8fZt9fkytjlzQAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR+cJAihByjlDlNMcdQEQS4nUg3BAFxJAligAaCbWzxJsd86IKASFiAJTwbz5C46810Box0cDggqqDdSvDRgBBXmDUAEE6q1dj1MBFZvlaZ9VctZL5hNGGA0GQKCGJOJAMwM0iBMiB7ATwado9sPRQAV3ZlQhlTQX5umCwsAGURADs=)"></div>
 				<a href="http://www.ted.com/talks/malte_spitz_your_phone_company_is_watching.html" target="_blank" rel="noopener">
 					<h2>TED - Computer Animation für den TED-Talk &quot;Ihre Telefongesellschaft beobachtet Sie&quot;</h2>
 				</a>
@@ -819,7 +840,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-04-22_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-04-22_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJFoPppuXLmAZ7islbmNgs27r8WrlNTGs+LKv9TV1ObY1+fm2/Dw7uPg3bzAqwAAACH5BAAAAAAALAAAAAAQABAAAARhMEnZFp0429kmw003LEyZlF+YJiPqNi/JwApc2syCFEmjJATczGRYLGoulyKgKC18TZlzEPiQjs2ma3HoKpMuAyCxKGjBx8MgVwC7DgoDwZhzO8XwtjRpIQ3Gdk5GR3sMEQA7)"></div>
 				<a href="http://taz.de/Parteispenden-Watch/!t200/#parteispenden-karte" target="_blank" rel="noopener">
 					<h2>taz - Parteispenden</h2>
 				</a>
@@ -831,7 +852,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2012-03-09_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2012-03-09_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJ+fn6Cfn6inp9ybitqxqtTEu+HBttnW1ePX0ubl3t/i4vDx8QAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARNsKgDRLhYaKtmORMILomymKC5rGx7ui8sn6MqK0je2feh8y0ECHFCAFkEYsFoVPESwg5xtkIMDEYqCUFYJLULLjOhNWKxYJMiYdAeWxEAOw==)"></div>
 				<a href="http://zugmonitor.sueddeutsche.de" target="_blank" rel="noopener">
 					<h2>Süddeutsche - Zugmonitor</h2>
 				</a>
@@ -849,13 +870,13 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2011-11-05_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2011-11-05_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAOiVPeqzV+qwY+zIdOrRi+fcr+rit9zc2+bm0t7f4ufn6N/g4gAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARX8BxF66wW47urQYhxIMrSKchQIAGSJBoGKl+1cDRBGsNH4oqCDhUYDFwxCoIwAAAKCQ6pwgKoZpLSZqkzJSuFI8X7LRRkU83C62UZFLispgafyL8WYDICADs=)"></div>
 				<a href="http://www.taz.de/!81259/" target="_blank" rel="noopener">
 					<h2>taz - Was Facebook über dich weiß</h2>
 				</a>
 			</section>
 			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2011-10_work.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2011-10_work.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAH0AJHcAG4UEMpUmTcF/l8yVqc6brdy3xf7+/ubM1gAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAQ/EMlJq704682rSUjyTccxJQMAFEYAEEgamEgBCMBACMJQ8IYJIcDT8QQ2QVCCwrFchZiKJhmJQJJSZ8vtei8RADs=)"></div>
 				<a href="https://opendatacity.de" target="_blank" rel="noopener">
 					<h2>OpenDataCity</h2>
 				</a>
@@ -921,7 +942,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2011-04-25_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2011-04-25_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAABHgQHKCkUOhMYTSoaTDUgT1QoTWszUkYdR3lFX0AZN7V0d5FQX9OfmwAAAAAAACH5BAAAAAAALAAAAAAQABAAAARtEMgZhgBjhEDB9oRGfJwncdWmrl4JFAZSbNlAUANyMEQR1oSbQEE4GAmNQ23AAwgQjAXjYDj8MoYNwtBYGArG5cBjg0kNhuuykCFEqTZxPLOLyuByN8OQCPmANTF/bXI2QWJqiDVkeRkcjhg1EQA7)"></div>
 				<a href="http://crowdflow.net" target="_blank" rel="noopener">
 					<h2>crowdflow.net</h2>
 				</a>
@@ -933,7 +954,7 @@ footer {
 				</a>
 			</section>
 			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
-				<div class="entry_background"  style="background-image: url(assets/images/2011-02-24_project.jpg)"></div>
+				<div class="entry_background"  style="background-image: url(assets/images/2011-02-24_project.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPEAANPT0+/V1fb19QAAACH5BAAAAAAALAAAAAAQABAAAAIllI95wOqPgGESoiCqwtNgbYUit4kHaaZqAipU0wQM99b1KaBOAQA7)"></div>
 				<a href="http://www.zeit.de/datenschutz/malte-spitz-data-retention/" target="_blank" rel="noopener">
 					<h2>Zeit Online - Verräterisches Handy</h2>
 				</a>
@@ -947,7 +968,7 @@ footer {
 			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<div class="entry_background" ></div>
 				<a href="http://stats.ioinformatics.org/people/1545" target="_blank" rel="noopener">
-					<h2>Silbermedaille, nternationale Informatikolympiade</h2>
+					<h2>Silbermedaille, Internationale Informatikolympiade</h2>
 				</a>
 			</section>
 			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
