@@ -77,7 +77,18 @@ module.exports = [
 		start:'2017-12-30',
 		type:'press',
 		link:'http://www.deutschlandfunkkultur.de/live-vom-34-chaos-communication-congress-das-raumschiff-ist.1264.de.html?dram:article_id=407157',
-
+	},
+	{
+		title:'futurezone - Forscher: Rolle von Social Bots wird überbewertet',
+		start:'2018-01-24',
+		type:'press',
+		link:'https://futurezone.at/netzpolitik/forscher-rolle-von-social-bots-wird-ueberbewertet/304.833.033',
+	},
+	{
+		title:'Ö1 - Spricht hier die Maschine?',
+		start:'2018-02-26',
+		type:'press',
+		link:'http://oe1.orf.at/programm/20180226/504678',
 	},
 
 	
