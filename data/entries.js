@@ -514,7 +514,7 @@ module.exports = [
 		link:'http://logbuch-netzpolitik.de/lnp038/',
 	},
 	{
-		title:'Spiegel - Online-Karten: Googles lückenhafter Bahn-FahrplanSpiegel - Online Maps: Google\'s incomplete railway time tables',
+		title:'Spiegel - Online-Karten: Googles lückenhafter Bahn-Fahrplan',
 		start:'2012-09-17',
 		type:'press',
 		link:'http://www.spiegel.de/netzwelt/web/google-kooperation-mit-deutscher-bahn-wirft-fragen-auf-a-856215.html',
@@ -750,7 +750,7 @@ module.exports = [
 		ignore:true,
 	},
 	{
-		title:'Silbermedaille, nternationale Informatikolympiade',
+		title:'Silbermedaille, Internationale Informatikolympiade',
 		start:'1999-10',
 		type:'award',
 		link:'http://stats.ioinformatics.org/people/1545',
