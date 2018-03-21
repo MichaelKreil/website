@@ -54,8 +54,6 @@ function checkEntries(entries) {
 
 	entries.sort((a,b) => b.date - a.date);
 
-	entries.forEach((entry, index) => entry.tabindex = index+1)
-
 	return entries;
 }
 

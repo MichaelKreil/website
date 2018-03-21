@@ -18,7 +18,7 @@
 	<div id="wrapper">
 		<div id="container">
 		{{#entries}}
-			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}} noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}" tabindex="{{tabindex}}">
+			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}">
 				<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}})"{{/image}}></div>
 				<a{{#link}} href="{{link}}" target="_blank"{{/link}}>
 					<h2>{{title}}</h2>
