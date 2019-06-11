@@ -54,7 +54,7 @@ header {
 		cursor: pointer;
 		display: none;
 		overflow: hidden;
-		transition: left 500ms, top 500ms, width 500ms, height 500ms;
+		transition: opacity 200ms left 500ms, top 500ms, width 500ms, height 500ms;
 		font-size: 0.5em;
 		-webkit-tap-highlight-color: transparent;
 	}
@@ -69,14 +69,14 @@ header {
 			position: absolute;
 			top: 0px;
 			left: 0px;
-			right: 0px;
-			bottom: 0px;
 		}
 
 		.entry .entry_background {
 			background-color: #eee;
 			background-position: center center;
 			background-size: cover;
+			right: 1px;
+			bottom: 1px;
 		}
 
 		.entry a {
@@ -84,17 +84,19 @@ header {
 			color: #333;
 			transition: opacity 200ms;
 			text-decoration: none;
+			right: 0px;
+			bottom: 0px;
 		}
 
 		.entry:hover a, .entry:focus a {
 			opacity: 1.0;
 		}
 
-			.noimage {
+			.entry_size_1, .noimage {
 				opacity: 0.3;
-				transition: opacity 200ms left 500ms, top 500ms, width 500ms, height 500ms;
 			}
-				.noimage a {
+			
+				.entry_size_1 a, .noimage a {
 					opacity: 1.0;
 				}
 

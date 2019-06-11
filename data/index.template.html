@@ -22,7 +22,7 @@
 	<div id="wrapper">
 		<div id="container">
 		{{#entries}}
-			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}">
+			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}" entry_group="{{group}}">
 				<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/image}}></div>
 				<a{{#link}} href="{{link}}" target="_blank" rel="noopener"{{/link}}>
 					<h2>{{title}}</h2>

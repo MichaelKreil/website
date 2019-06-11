@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	entries = entries.map(function (node) {
 		return {
 			size: parseFloat(node.getAttribute('entry_size')),
+			group: parseInt(node.getAttribute('entry_group'), 10),
 			type: node.getAttribute('entry_type'),
 			node: node,
 		}
@@ -102,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 					}
 				}
 
-				entry.s = entrySize*size-padding;
+				entry.s = entrySize*size;
 				entry.x = x0*size;
-				entry.y = y0*size;
+				entry.y = y0*size;// + entry.group*size/8;
 
 				for (var x = 0; x < entrySize; x++) {
 					for (var y = 0; y < entrySize; y++) {
