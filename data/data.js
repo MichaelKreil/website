@@ -87,7 +87,7 @@ module.exports = {
 			start:'2018-05-15',
 			type:'project',
 			link:'https://www1.wdr.de/mediathek/video/sendungen/quarks-und-co/video-fake-news-und-filterblasen-100.html',
-			size: 1,
+			size: 2,
 		},
 		{
 			topic:'bots',
@@ -180,6 +180,7 @@ module.exports = {
 			start:'2017-12-28',
 			type:'press',
 			link:'https://www.zdf.de/nachrichten/heute-journal/schwachstellen-der-digitalen-welt-100.html',
+			size:2,
 		},
 		{
 			topic:'bots',

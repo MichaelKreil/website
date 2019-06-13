@@ -74,6 +74,8 @@ function checkEntries(entries) {
 			icon = resolve(__dirname, icon);
 			icon = fs.readFileSync(icon);
 			entry.icon = icon.toString('base64');
+		} else {
+			if (entry.size > 1) console.log('   you might want to add an image "'+entry.start+'_'+entry.type+'.png"');
 		}
 
 		entry.sortDate = entry.topic ? entry.topic.date : entry.date;
