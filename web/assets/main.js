@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	function layoutEntries() {
 		var layout = [];
-		entries.forEach(entry => {
+		entries.forEach(function (entry) {
 			var entrySize = Math.min(cols, entry.size);
 			var pos0 = 0;
 
