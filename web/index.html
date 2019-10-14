@@ -6,7 +6,6 @@
 	<script type="text/javascript">
 		document.addEventListener('DOMContentLoaded', function(event) {
 	var size = 80;
-	var padding = 1;
 	var lastState = '';
 
 	var wrapper = document.getElementById('wrapper');
@@ -39,25 +38,23 @@
 
 	function resize() {
 		var width = wrapper.clientWidth;
-		width = (width < 320) ? width : (width-320)*0.8+320;
+		var mobileWidth = 384;
+		var mobileCols = 4;
+		var maxSize = 256;
 
-		if (width < 480) {
-			size = 80;
-			padding = 1;
-		} else if (window.innerWidth < 1500) {
-			size = 96;
-			padding = 1;
+		if (width < mobileWidth) {
+			cols = mobileCols;
 		} else {
-			size = 192;
-			padding = 2;
+			width = (width-mobileWidth)*0.6+mobileWidth;
+			cols = mobileCols + Math.round(Math.sqrt(width-mobileWidth)/8);
 		}
-
-		cols = Math.floor(width/size);
 		
-		if (cols < 2) cols = 2;
 		if (cols > 8) cols = 8;
 
-		var state = [size, padding, cols].join(',');
+		size = Math.floor(width/cols);
+		if (size > maxSize) size = maxSize;
+
+		var state = [size, cols].join(',');
 		if (state === lastState) return;
 		lastState = state;
 
@@ -133,6 +130,7 @@
 	font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
 	font-weight: 200;
 	font-size: 20px;
+	margin: 0px;
 }
 
 @media (min-width: 1500px) {
@@ -198,14 +196,14 @@ header {
 			position: absolute;
 			top: 0px;
 			left: 0px;
+			bottom: 1px;
+			right: 1px;
 		}
 
 		.entry .entry_background {
 			background-color: #eee;
 			background-position: center center;
 			background-size: cover;
-			right: 1px;
-			bottom: 1px;
 		}
 
 		.entry a {
@@ -213,8 +211,6 @@ header {
 			color: #333;
 			transition: opacity 200ms;
 			text-decoration: none;
-			right: 0px;
-			bottom: 0px;
 		}
 
 		.entry:hover a, .entry:focus a {

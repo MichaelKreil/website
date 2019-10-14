@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(event) {
 	var size = 80;
-	var padding = 1;
 	var lastState = '';
 
 	var wrapper = document.getElementById('wrapper');
@@ -33,25 +32,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	function resize() {
 		var width = wrapper.clientWidth;
-		width = (width < 320) ? width : (width-320)*0.8+320;
+		var mobileWidth = 384;
+		var mobileCols = 4;
+		var maxSize = 256;
 
-		if (width < 480) {
-			size = 80;
-			padding = 1;
-		} else if (window.innerWidth < 1500) {
-			size = 96;
-			padding = 1;
+		if (width < mobileWidth) {
+			cols = mobileCols;
 		} else {
-			size = 192;
-			padding = 2;
+			width = (width-mobileWidth)*0.6+mobileWidth;
+			cols = mobileCols + Math.round(Math.sqrt(width-mobileWidth)/8);
 		}
-
-		cols = Math.floor(width/size);
 		
-		if (cols < 2) cols = 2;
 		if (cols > 8) cols = 8;
 
-		var state = [size, padding, cols].join(',');
+		size = Math.floor(width/cols);
+		if (size > maxSize) size = maxSize;
+
+		var state = [size, cols].join(',');
 		if (state === lastState) return;
 		lastState = state;
 

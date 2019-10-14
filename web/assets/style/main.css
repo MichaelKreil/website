@@ -4,6 +4,7 @@ body {
 	font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
 	font-weight: 200;
 	font-size: 20px;
+	margin: 0px;
 }
 
 @media (min-width: 1500px) {
@@ -69,14 +70,14 @@ header {
 			position: absolute;
 			top: 0px;
 			left: 0px;
+			bottom: 1px;
+			right: 1px;
 		}
 
 		.entry .entry_background {
 			background-color: #eee;
 			background-position: center center;
 			background-size: cover;
-			right: 1px;
-			bottom: 1px;
 		}
 
 		.entry a {
@@ -84,8 +85,6 @@ header {
 			color: #333;
 			transition: opacity 200ms;
 			text-decoration: none;
-			right: 0px;
-			bottom: 0px;
 		}
 
 		.entry:hover a, .entry:focus a {
