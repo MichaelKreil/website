@@ -1,8 +1,10 @@
 <html lang="de">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Michael Kreil</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Michael Kreil">
+	<meta name="description" content="Projekte, Vorträge, Presseberichte und Auszeichnungen des Datenjournalisten und Data Scientists Michael Kreil.">
 	<script type="text/javascript">
 		{{{import.mainscript}}}
 	</script>
@@ -23,8 +25,8 @@
 		<div id="container">
 		{{#entries}}
 			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}" entry_group="{{group}}">
-				<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/image}}></div>
 				<a{{#link}} href="{{link}}" target="_blank" rel="noopener"{{/link}}>
+					<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/image}}></div>
 					<h2>{{title}}</h2>
 				</a>
 			</section>

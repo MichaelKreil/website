@@ -55,64 +55,49 @@ header {
 		cursor: pointer;
 		display: none;
 		overflow: hidden;
-		transition: opacity 200ms left 500ms, top 500ms, width 500ms, height 500ms;
+		transition: left 500ms, top 500ms, width 500ms, height 500ms;
 		font-size: 0.5em;
 		-webkit-tap-highlight-color: transparent;
-	}
+	}	
 
-		.entry:hover, .entry:focus {
-			outline: none;
-			z-index: 10000;
-		}
-
-		.entry .entry_background, .entry a {
+		.entry a {
 			display: block;
 			position: absolute;
 			top: 0px;
 			left: 0px;
 			bottom: 1px;
 			right: 1px;
-		}
-
-		.entry .entry_background {
-			background-color: #eee;
-			background-position: center center;
-			background-size: cover;
-		}
-
-		.entry a {
-			opacity: 0.3;
 			color: #333;
-			transition: opacity 200ms;
 			text-decoration: none;
+			transition: opacity 100ms;
 		}
 
-		.entry:hover a, .entry:focus a {
-			opacity: 1.0;
-		}
-
-			.entry_size_1, .noimage {
-				opacity: 0.3;
+			.entry_background {
+				display: block;
+				position: absolute;
+				top: 0px;
+				left: 0px;
+				bottom: 0px;
+				right: 0px;
+				background-color: #333;
+				background-position: center center;
+				background-size: cover;
 			}
-			
-				.entry_size_1 a, .noimage a {
-					opacity: 1.0;
+
+				.noimage a {
+					opacity: 0.3;
 				}
 
-			.noimage.entry_press .entry_background {
-				background-image: url('assets/style/press.png');
-			}
+				.noimage.entry_press .entry_background {
+					background-image: url('assets/style/press.png');
+				}
 
-			.noimage.entry_award .entry_background {
-				background-image: url('assets/style/award.png');
-			}
+				.noimage.entry_award .entry_background {
+					background-image: url('assets/style/award.png');
+				}
 
-			.noimage.entry_presentation .entry_background {
-				background-image: url('assets/style/presentation.png');
-			}
-
-				.entry:hover, .entry:focus {
-					opacity: 1;
+				.noimage.entry_presentation .entry_background {
+					background-image: url('assets/style/presentation.png');
 				}
 
 		.entry h2 {
@@ -123,13 +108,26 @@ header {
 			bottom: 0px;
 			padding: 0.5em;
 			margin: 0;
+			opacity: 0.3;
+			transition: opacity 100ms;
 			text-align: right;
 			background-color: rgba(255,255,255,0.7);
-			transition: opacity 200ms;
 			font-weight: normal;
 			overflow-wrap: break-word;
 		}
 
+			.noimage h2 {
+				opacity: 1.0;
+			}
+
+		.entry a:hover,
+		.entry a:focus,
+		.entry a:hover h2,
+		.entry a:focus h2 {
+			opacity: 1.0;
+			outline: none;
+		}
+	
 footer {
 	padding-top: 300px;
 }
