@@ -40,17 +40,18 @@
 
 	function resize() {
 		var width = wrapper.clientWidth;
-		var mobileWidth = 384;
-		var mobileCols = 4;
+		var minWidth = 400;
+		var minSize = 96;
 		var maxSize = 256;
 
-		if (width < mobileWidth) {
-			cols = mobileCols;
+		if (width < minWidth) {
+			cols = Math.floor(width/minSize);
 		} else {
-			width = (width-mobileWidth)*0.6+mobileWidth;
-			cols = mobileCols + Math.round(Math.sqrt(width-mobileWidth)/8);
+			width = (width-minWidth)*0.6+minWidth;
+			cols = Math.floor(minWidth/minSize + Math.sqrt(width-minWidth)/8);
 		}
 		
+		if (cols < 2) cols = 2;
 		if (cols > 8) cols = 8;
 
 		size = Math.floor(width/cols);
@@ -133,12 +134,6 @@
 	font-weight: 200;
 	font-size: 20px;
 	margin: 0px;
-}
-
-@media (min-width: 1500px) {
-	body {
-		font-size: 40px;
-	}
 }
 
 header {
@@ -229,6 +224,7 @@ header {
 				}
 
 		.entry h2 {
+			hyphens: auto;
 			position: absolute;
 			font-size: 1em;
 			left: 0px;
@@ -238,7 +234,7 @@ header {
 			margin: 0;
 			opacity: 0.3;
 			transition: opacity 100ms;
-			text-align: right;
+			text-align: left;
 			background-color: rgba(255,255,255,0.7);
 			font-weight: normal;
 			overflow-wrap: break-word;

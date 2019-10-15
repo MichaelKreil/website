@@ -32,17 +32,18 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	function resize() {
 		var width = wrapper.clientWidth;
-		var mobileWidth = 384;
-		var mobileCols = 4;
+		var minWidth = 400;
+		var minSize = 96;
 		var maxSize = 256;
 
-		if (width < mobileWidth) {
-			cols = mobileCols;
+		if (width < minWidth) {
+			cols = Math.floor(width/minSize);
 		} else {
-			width = (width-mobileWidth)*0.6+mobileWidth;
-			cols = mobileCols + Math.round(Math.sqrt(width-mobileWidth)/8);
+			width = (width-minWidth)*0.6+minWidth;
+			cols = Math.floor(minWidth/minSize + Math.sqrt(width-minWidth)/8);
 		}
 		
+		if (cols < 2) cols = 2;
 		if (cols > 8) cols = 8;
 
 		size = Math.floor(width/cols);
