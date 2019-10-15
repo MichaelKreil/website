@@ -19,6 +19,14 @@ module.exports = {
 		project: { title:'Projekt', size:2 },
 	},
 	entries: [
+
+		{
+			topic:'bots',
+			title:'Die Social Bots sitzen schon in den Parlamenten',
+			start:'2019-10-01',
+			type:'press',
+			link:'https://netzpolitik.org/2019/die-social-bots-sitzen-schon-in-den-parlamenten-wenn-man-botometer-glaubt/',
+		},
 		{
 			topic:'bots',
 			title:'Maßlos überschätzt?',

@@ -96,19 +96,19 @@ header {
 				background-size: cover;
 			}
 
-				.noimage a {
+				.entry_size_1 a {
 					opacity: 0.3;
 				}
 
-				.noimage.entry_press .entry_background {
+				.entry_size_1.entry_press .entry_background {
 					background-image: url('assets/style/press.png');
 				}
 
-				.noimage.entry_award .entry_background {
+				.entry_size_1.entry_award .entry_background {
 					background-image: url('assets/style/award.png');
 				}
 
-				.noimage.entry_presentation .entry_background {
+				.entry_size_1.entry_presentation .entry_background {
 					background-image: url('assets/style/presentation.png');
 				}
 
@@ -129,7 +129,7 @@ header {
 			overflow-wrap: break-word;
 		}
 
-			.noimage h2 {
+			.entry_size_1 h2 {
 				opacity: 1.0;
 			}
 
