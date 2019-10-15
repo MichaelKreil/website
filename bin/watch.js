@@ -4,6 +4,8 @@ const fs = require('fs');
 const resolve = require('path').resolve;
 const spawnSync = require('child_process').spawnSync;
 
+spawnSync('node', [resolve(__dirname, 'generate.js')]);
+
 fs.watch(
 	resolve(__dirname, '../../'),
 	{recursive:true},
