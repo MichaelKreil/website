@@ -42,17 +42,36 @@ header {
 #container {
 	margin: 0 auto;
 	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
 }
 
 	.entry {
-		position: absolute;
+		position: relative;
+		flex: 0 0 auto;
+		width: 200px;
+		height: 200px;
+		display: inline-block;
 		cursor: pointer;
-		display: none;
 		overflow: hidden;
-		transition: left 500ms, top 500ms, width 500ms, height 500ms;
 		font-size: 0.5em;
 		-webkit-tap-highlight-color: transparent;
-	}	
+	}
+
+		#container.interactive {
+			display: block;
+			flex: unset unset;
+			justify-content: unset;
+		}
+		.interactive .entry {
+			position: absolute;
+			display: block;
+			flex: unset unset unset;
+		}
+		.transition .entry {
+			transition: left 500ms, top 500ms, width 500ms, height 500ms;
+		}
 
 		.entry a {
 			display: block;
@@ -67,7 +86,6 @@ header {
 		}
 
 			.entry_background {
-				display: block;
 				position: absolute;
 				top: 0px;
 				left: 0px;

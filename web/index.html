@@ -12,6 +12,7 @@
 
 	var wrapper = document.getElementById('wrapper');
 	var container = document.getElementById('container');
+	container.className = 'interactive';
 
 	var layoutTimeout = 200;
 	var layoutHandler = false;
@@ -28,6 +29,8 @@
 
 	window.addEventListener('resize', tryResize, false);
 	resize();
+	setTimeout(function () {
+		container.className = 'interactive transition'}, 1000);
 
 	function tryResize() {
 		if (layoutHandler) clearTimeout(layoutHandler);
@@ -79,7 +82,6 @@
 			entry.node.style.height = s+'px';
 			entry.node.style.left = x+'px';
 			entry.node.style.top = y+'px';
-			entry.node.style.display = 'block';
 		})
 
 		container.style.height = (height + size)+'px';
@@ -170,17 +172,36 @@ header {
 #container {
 	margin: 0 auto;
 	position: relative;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
 }
 
 	.entry {
-		position: absolute;
+		position: relative;
+		flex: 0 0 auto;
+		width: 200px;
+		height: 200px;
+		display: inline-block;
 		cursor: pointer;
-		display: none;
 		overflow: hidden;
-		transition: left 500ms, top 500ms, width 500ms, height 500ms;
 		font-size: 0.5em;
 		-webkit-tap-highlight-color: transparent;
-	}	
+	}
+
+		#container.interactive {
+			display: block;
+			flex: unset unset;
+			justify-content: unset;
+		}
+		.interactive .entry {
+			position: absolute;
+			display: block;
+			flex: unset unset unset;
+		}
+		.transition .entry {
+			transition: left 500ms, top 500ms, width 500ms, height 500ms;
+		}
 
 		.entry a {
 			display: block;
@@ -195,7 +216,6 @@ header {
 		}
 
 			.entry_background {
-				display: block;
 				position: absolute;
 				top: 0px;
 				left: 0px;
@@ -269,787 +289,787 @@ footer {
 	</header>
 	<div id="wrapper">
 		<div id="container">
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://detektor.fm/digital/journalist-michael-kreil-ueber-social-bots" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Maßlos überschätzt?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://background.tagesspiegel.de/die-maer-von-social-bots" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Die Mär von „Social Bots“</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.bpb.de/gesellschaft/digitales/digitale-desinformation/290568/relevanz-und-regulierung-von-social-bots" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Relevanz und Regulierung von Social Bots</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://data.info.graphics/flight-patterns/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2019-04-24_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAYaGhUmHAYeIAwsLSY3IC9OM1RrMRA9RSZWS1F7T2KQT3aAKqW8SQAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARkEEgpah1i6DGBzVs4WeF2aJQQbNdwnilBrBzg3nYFEEUhHECgy6MJAAqKZMJgKMAywEJiymASNh5ZQJpQMBQlSiAg6yISzlPtAhqQC5jMaEwTAMaWzliCsXnsHYETNYKFhocTEQA7)"></div>
 					<h2><b>Projekt:</b> Flight Patterns</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.deutschlandfunkkultur.de/europawahl-wie-die-eu-gegen-falschnachrichten-kaempft.1264.de.html?dram:article_id=446843" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Wie die EU gegen Falschnachrichten kämpft</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.mdr.de/nachrichten/vermischtes/faktencheck-social-bots-in-deutschland-100.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Sind Social Bots in Deutschland verbreitet?</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://data.info.graphics/blog/2018/12/21/social-bot-research-is-flawed/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2018-12-21_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAAM+8x9fV1uHX3OTf4vr6+gAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAMtSLrcNEGEIeOU48HANxygkznkAoJTKaosG5KvEj+q1MoDENygIIy3YAsoDCYAADs=)"></div>
 					<h2><b>Projekt:</b> The social bot research of Oxford and Co. is flawed.</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.nzz.ch/international/deutschland/haben-bots-die-debatte-um-den-migrationspakt-geentert-ld.1444330" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Haben Bots die Debatte um den Migrationspakt einseitig beeinflusst?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://meedia.de/2018/12/12/kritik-an-botswatch-warum-die-debatte-um-die-social-bot-studie-zum-migrationspakt-fuer-medien-wichtig-ist/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Kritik an Botswatch: Warum die Debatte um die Social Bot-Studie zum Migrationspakt für Medien wichtig ist</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.tagesschau.de/faktenfinder/inland/social-bots-barley-101.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Bedrohen Social Bots die Demokratie?</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://www1.wdr.de/mediathek/video/sendungen/quarks-und-co/video-fake-news-und-filterblasen-100.html" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2018-05-15_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAkGBioPDy41OxQdJgMvVys7SBhGai5WdztNWVAnKE5uh9XW1vLy8OLg3LS8wXtndSH5BAAAAAAALAAAAAAQABAAAARvUElCqyEmOyfV+eCnXJLDNCijoouTEUMmh59xyEUu7ELB9zuEAEAsEhPI4s44GAgGyESAuCw2hYHsFNBjDgDTLJg7JDaNUmXZaNySAV+2fBcQiMPggDOAcCz+fw0ngyoMficogoWLDC2IiYmIKgsRADs=)"></div>
 					<h2><b>Projekt:</b> Animation für Quarks&amp;Co - Fake-News und Filterblasen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.deutschlandfunk.de/social-media-bot-or-social-bot.2907.de.html?dram:article_id=414598" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> DLF @mediasres - Bot or Social Bot?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.srf.ch/news/panorama/soziale-medien-angriff-der-meinungs-roboter" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> SRF Digital - Angriff der Meinungs-Roboter</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://oe1.orf.at/programm/20180226/504678" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Ö1 - Spricht hier die Maschine?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://futurezone.at/netzpolitik/forscher-rolle-von-social-bots-wird-ueberbewertet/304.833.033" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> futurezone - Forscher: Rolle von Social Bots wird überbewertet</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.spiegel.de/netzwelt/web/twitter-datenanalyse-wir-hatten-eine-falsche-vorstellung-von-der-filterblase-a-1185406.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Spiegel - Twitter-Datenanalyse</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.mdr.de/nachrichten/politik/inland/beeinflussen-social-bots-politische-meinung-100.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> MDR - Beeinflussen &quot;Social Bots&quot; tatsächlich politische Meinungen?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.deutschlandfunkkultur.de/live-vom-34-chaos-communication-congress-das-raumschiff-ist.1264.de.html?dram:article_id=407157" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutschlandfunk - Das Raumschiff ist gelandet</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2" entry_group="">
+			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
 				<a href="https://media.ccc.de/v/34c3-9268-social_bots_fake_news_und_filterblasen" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-12-28_presentation.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAsKCC4rKi8SGFQVImNPTk48QqN5g2yhpJqbmouytbDMztnn5/b29tHQ0Oior8NLUyH5BAAAAAAALAAAAAAQABAAAARhEMhJq7206c1bmAIjjiTzTeKylOInSMyizEp5SnJyJLyimQDCS3YoFhGGh+NjKABUM2MiuQQUCiGogrdwOBYBAWEcW6lio8AgwB6dS4XBGsCyyQUChH7PR8j/GCB/L4EWEQA7)"></div>
 					<h2><b>Vortrag:</b> 34C3 - Social Bots, Fake News und Filterblasen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.br.de/nachrichten/34c3-social-bots-sind-seltener-als-gedacht-100.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> BR - Social Bots sind seltener als gedacht</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> WELT - Datenjournalist sieht Fehler in Social Bots-Forschung</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_2 " entry_type="press" entry_size="2" entry_group="">
+			<section class="entry entry_press entry_size_2 " entry_type="press" entry_size="2">
 				<a href="https://www.zdf.de/nachrichten/heute-journal/schwachstellen-der-digitalen-welt-100.html" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-12-28_press_zdf.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAABELER4aLiAeV1lUVlc8NaBnVcp7adqOd6iGajEk4UU4vaGgqM/Q0fb287ues1aEjyH5BAAAAAAALAAAAAAQABAAAAR9cAQiKBnDzuoWW97idB5jMk2qrmyzPC8CIyAMgkoAEEDvA4JEQrAjFA6FX2ApFFSOhwPPFwgOK8aCwaADApvObHTasyYAiqzhQK2CE2ktlyp4PASDRMaIJBCWAgoKThgDBQMIBYkDX3B4hZAYgQ6CAi0sJygNKJybKgwOJxEAOw==)"></div>
 					<h2><b>Berichterstattung:</b> ZDF heute journal - Schwachstellen der digitalen Welt</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.deutschlandfunknova.de/beitrag/chaos-communication-congress-daten-zu-fake-news-und-filterblasen" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutschlandfunk Nova - Daten zu Fake News und Filterblasen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.heise.de/newsticker/meldung/34C3-Grundlose-Hysterie-um-Social-Bots-3928440.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> heise - Grundlose Hysterie um Social Bots</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.taz.de/!5473411/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> taz - Schlecht informiert in der AfD-Blase</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.golem.de/news/soziale-medien-social-bots-verzweifelt-gesucht-1712-131890.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> golem - Social Bots verzweifelt gesucht</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.faz.net/aktuell/feuilleton/medien/chaos-communication-congress-die-twitterinsel-der-afd-getreuen-15361701.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> FAZ - Die Twitterinsel der AfD-Getreuen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.stern.de/digital/chaos-communication-congress-datenjournalist-sieht-fehler-in-social-bots-forschung-7803286.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> stern - Datenjournalist sieht Fehler in Social Bots-Forschung</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2" entry_group="">
+			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
 				<a href="https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-10-29_presentation.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAACUhH0o3MElDPG9gVo1zZJuLeqSRfV+oi6ylm9fX0+Xl3Ovt6eHa0LfAvQAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR2MMlJa1ISXztRQx7YMJxhIGbKkBVSDEOKrNtmEEFcFIjSJI3DofEZBAK3gkHB8AgPCQIMKRj0mh9iQxoAHAFL1u83AHjNgMGC00WbBWsLOkeQKu6LhSJ/zBmreQl5g2VnAAIEe4KDayCORHoJDIwXa2sYdxKMEQA7)"></div>
 					<h2><b>Vortrag:</b> wikidatacon - Keynote #2</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://wahl.tagesspiegel.de/2017/karten/tegel/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-09-25_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJC5brnRqqbMj8XWuZC3zdC/xLLK2MzX0dnk1sza49vj5/Hy8uPi29GipV6bvgAAACH5BAAAAAAALAAAAAAQABAAAAR/cC0lq5VsGZKup0TojcqWUONhSFu4SgqyIAdqJIThGFRyHIiMJtcyGA6DYKCS4BkXA4EgIFswGD8FLpFADAABwPQ6wBZU58BUSi0XGo3Fz4egIgeBGqV36ALLXiU8CoQ4NAdXCAoZgkYlXQwIiiwmhBOEXpIURjkKfT5AUIoHEQA7)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Soll Tegel offen bleiben?</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2" entry_group="">
+			<section class="entry entry_presentation entry_size_2 " entry_type="presentation" entry_size="2">
 				<a href="https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-09-01_presentation.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAACQ2RjNLVTdhZVljaSotOWR2h3mJlnOizZefqam8yJq0w7PE0M/O1sO9xol6hgAAACH5BAAAAAAALAAAAAAQABAAAASKUCk0kbUGFTTM+MEQjAFgEmgZoCxhmuRQFCVQF4oxSUohkoKAjpdQJATBQFK4kyQSsg8yOHQ+DVjDVFBdKBZQ32BaOCCeCfDC5ykIPuenejHgzNjnRnrBdzgQDgN/Fg18YGl+gH+DDQ0MDFAMFw0XhJYDDAsMjo+cDAcFCRwMCgMEgigfA6ABfgERADs=)"></div>
 					<h2><b>Vortrag:</b> np13 - Datenjournalismus für die Informationsgesellschaft</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://wahl.tagesspiegel.de/2017/karten/berlin/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-08-31_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAG1tbZCQkKGenrKxssW5us7Av9O61dLP0ebT0eXX5fb29t7E4AAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARjUMlJq002JwKyDUkAJsPgHYcQDMSBVRt6DEWCLst0rKiCHIiEQWiQhAYyxA9HHLwIpJZMmDJhMIOAMhG0IRWCg4QgKBSAiXRaIQsARIKBKj1Mn1NuN0H0fVUOHTaCfn8XHh4RADs=)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Wie Berliner Kieze seit der Wende wählten</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://wahl.tagesspiegel.de/2017/karten/gemeindegewinner/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-08-21_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAHJwcFdWVjAdHpJZXX+KiZOQkaeYmayqqsqpq73FxNLS0vb19gAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARccClJl62zSnOm8hd2FB2XYchhDOTRhdfIuW5yZUphFO0BHDAJAKDTjYAhxYCFSPFUp8VBMFDtCgRCIaogEDnX6GUX+PHEF973HLwBArod2tIlZl1tKYlHQObpcxEAOw==)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Platz eins, zwei, drei</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://digitalpresent.tagesspiegel.de/afd-unterstuetzernetzwerk" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-04-28_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAOFfX+IICGShrNqxs+KbnJ3CyLbQ1c3W2OTb3Njf4Nvm6Oju77e7uwAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARaUK25kqQ4H6puTsYkhN53FVtJHcqxLUa4eGFiKcNSFDpftoAAADErKgSCxAIBIAByxJYk1kEQBoQD6mApUgwKxABhYE0TB1k34w2z2WXOe0XMqOYzzx1fZ0cAADs=)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Auf Linie: Das inoffizielle Unterstützernetzwerk der AfD</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://digitalpresent.tagesspiegel.de/balleryna" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-04-20_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAGwvL5RJStRuc4Y8PHGw11mezK+fruahpp22zuG8w57N6P7+/t3Y4QAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARCcMlJVzqp6nWEP9vECAMwCGCYCEEpZOHCBsEbX52tGowVW4bfBMETMhAI4UJBIChiDCahkIQ2m0+oYpv9OZWSrjACADs=)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Größter AfD-Twitter-Account ist ein Scheinriese</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://digitalpresent.tagesspiegel.de/afd" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2017-04-18_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAALa0rtC3rNyvrLXQqZ/UmczIs+Tiq+Gy29jRy+jSz9Dmzunp1O7Q7Pr6+tfw9bvl8CH5BAAAAAAALAAAAAAQABAAAARdsMlJq21s3bqSSIm2NZ7wIUhypWaAAgBCLcowBHgRwPJUE4RboAAriCQKYHBYGBQMhqMjeStYn9AjTVE4IDqKhZiDOHi/YwvDfMhQHA4KY91+Ox7xyZxxuedHgIERADs=)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - So twittert die AfD</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.svdj.nl/nieuws/we-transformeren-de-traditionele-krant-van-binnenuit/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> ‘We transformeren de traditionele krant van binnenuit’</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://dbmindbox.com/en/db-opendata-hackathons/hackathons/4-db-hackathon-der-hackday/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> 1. Platz DB Open Data Hackday</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.turi2.de/aktuell/netzpolitik-org-uebernimmt-zdf-lobbyradar/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik übernimmt ZDF-Lobbyradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://1928.tagesspiegel.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2016-04-25_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFdwa29zc19dWzRVTqkwMJg1M5FfXmqCfHaIhYmSj5CknZqqpAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR8MIhAgyHErK12QImRIIa1nYoiCAk1IUsaK4lKIUE7KghP47mEELY4JGLCxEokZNKOiAPgMzLgmEHp4YMAdXu92rZywWDKGAEAUBIUCmbD5W0wHoCB8T2qvXYrFFIAUnlqgBVrazgHKxOAgx9TaxIWlIEAA4OThzddmFMBEQA7)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - 1928</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://hausnummern.tagesspiegel.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2016-04-12_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAGk3R1ROW2VUWlpZYmNdZGpoan8rN6AmKn17gIJ9g46MkQAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARpsBRCJCpKyjopGZz2fds3BOEAdpXiutfrVu2bJLLbDYiC3D+MIoEYFAIBS+GCuGhUyE1HQJWcUEZJlUqlIEMFrkB5pWy4Wg9ydQUEBOtAmYAMGA54fH19DQD+f3t8JiZxex4iRygUKgQRADs=)"></div>
 					<h2><b>Projekt:</b> Tagesspiegel - Hausnummern</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.zeit.de/wirtschaft/2015-12/lobbyismus-transparenz-zdf-lobbyradar-beendet" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Zeit Online - ZDF stellt überraschend Lobbyradar ein</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2015/die-deutsche-bahn-setzt-endlich-auf-open-data/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - Die Deutsche Bahn setzt endlich auf Open Data</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://data.deutschebahn.com" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-11-06_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAB0eGB8gGiMkHi4vKSEeGkVFODJJSU1PTWltbClAP3p9gKalpcjIx/39/X+ChQAAACH5BAAAAAAALAAAAAAQABAAAARlsMlJq72U6c07C6CQDMJgBgQIAKZpGMMhm/JRrIDwCkXR9r4DQogoIhY2k2/AWCyaHMSgJ0ocHA6EQ+Fw1gq2Uq1mKBRlQ5KgFFive9NCqUQjtebrQWA1368IgCkEHoQbGIeIFREAOw==)"></div>
 					<h2><b>Projekt:</b> DB Datenportal</h2>
 				</a>
 			</section>
-			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2" entry_group="">
+			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2">
 				<a href="https://dsst.io" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-11_work.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAALoCAsIWGMcwMdBPT9dqauGTkwAAAAAAACH5BAAAAAAALAAAAAAQABAAAANACLrc/jA6Mighoox3C9XaMwQCKQDD6QwpNWgC4QijYNPpTNMSYFEqRyAAuJUARFElpnExiClcatqLJCHDRbaaAAA7)"></div>
 					<h2><b>Arbeitgeber:</b> Data Science and Stories (Der Tagesspiegel)</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://leadacademy.de/2015/diepreistraeger.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> LeadAward Silber &quot;Webfeature des Jahres&quot; für Lobbyradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://prixeuropa.eu/competition/awards-archive" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Prix Europa &quot;Best Online Project of the Year 2015&quot; für Lobbyradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://exposingtheinvisible.org/resources/showing-evidence/michael-kreil" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Exposing the invisible - Michael Kreil: An Honest Picture of Metadata</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.presseportal.de/pm/8218/3148592" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> dpa-infografik award für Lobbyradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.presseportal.de/pm/8218/3148592" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> dpa-infografik award für &quot;Nebeneinkünfte&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://inside.bahn.de/wlan_netzradar_bahn/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> DB Netzradar: Jeder kann mitmessen</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://netzradar.deutschebahn.com" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-10-07_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAE50mlJ7onKVtF2Gq3Wmz2qdx9jJrJGwyrDG1tTX0tTd5djm7eDl4p6orQAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR5kEhS6rgjaAAmLcpRYAHXSRUYHgoymB6CLIay3ASM3jyP6JJbIqGwGQ5AxHBYVBBLp4OhVlwwF6+oIWElEosCDuWQMDCYxQM0ap0SF2FTR1AYGm7mn5wg6EupDAwuMAIEAw1LQwsNGi99fYiJLo4Aj48DAg1hDZUXEQA7)"></div>
 					<h2><b>Projekt:</b> DB Netzradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://future.arte.tv/de/datenpakete-auf-reisen-europa/wie-das-internet-europa-verbindet?language=de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-09-31_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAALvG1s/OzuLU0+Xh3cDN4N7g5e/s6wAAACH5BAAAAAAALAAAAAAQABAAAAM/GDrcbMOoAMgor5i9Gfga9HCcIkRaSG5U4KzkdMGr4HIj3e169OoGjAi4ihB5R1wSAssVNRffiyGoPhgpLCMBADs=)"></div>
 					<h2><b>Projekt:</b> ARTE Future - Wie das Internet Europa verbindet</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://future.arte.tv/de/vernetzte-burger-unter-uberwachung/internet-uberwachung-wer-liest-mit-0?language=de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-09-30_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFNTU2RjY7q4uMC/v8G/wNPS0eLb2+bj3OjY5urn6Nrd4a/a3AAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARoMIBJKwg4iM17LwXhbcMQgmhaGKyxumwiz4lCz8adIEtxKzlZcIfQBQ+LhUIBIqxkhxzrACwcCooDTZo4HAaGA8I2A96i4hhOx661wl4vQmuLulR4ELBDGHD8AiUrIQSFA30FAoknBREAOw==)"></div>
 					<h2><b>Projekt:</b> ARTE Future - Internet-Überwachung: Wer liest mit?</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://lobbyradar.org" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-05-05_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAChNWTBWaDZnbx5EVEtxdkZwVg41T2CMamycMYy/MS1zj1B5imaJjmOLlymGn4OjrSH5BAAAAAAALAAAAAAQABAAAASLcIA5h5Xg2hkoCN0HhkARCKegnKxQFAmSKo4iqIRA5IipO47AS7DY7WwLlQ2BOOiMUELShcApjIXdwXEo0GpXAkN7TCS+DumCcWC4GYqDYiFvLNaHA6HNuDcaCn92bG9ueQsICQ0Piw0Ha4UHDWZ/D5ZvfA0EfwoGAQt/dHQJoER/I1JjRXdGfyhGEQA7)"></div>
 					<h2><b>Projekt:</b> ZDF-Lobbyradar</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.heise.de/newsticker/meldung/Lobbyradar-ZDF-will-Verbindungen-zwischen-Lobbyisten-und-Politikern-verdeutlichen-2632785.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Heise - ZDF will Verbindungen zwischen Lobbyisten und Politikern verdeutlichen</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://datenblumen.wired.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2015-01-21_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAAhPQUzTyY4UR9PaFJidN1cY9E9XNqwYVl1h9J6hmqZpFGappqlqqXGydfa2ciuqSH5BAAAAAAALAAAAAAQABAAAASUMABVigqYPMWYkMpROVfANMviEEDQHPDhDEND2goAOLGMOY7Cw8FoEToiBEYRLDgErcCgo5QGKAwCZmsdcDGt6ECx0FoDBO8WwHA0GhjaIvEYQDGn9kLKMdATGQsdDAk0eYSFAm0JTgxeCm8NJ0ptD0MNhi8HDUpsKCoPUg0hBhs6BCQLo3gOBgZZOldvDFyEBQgtEQA7)"></div>
 					<h2><b>Projekt:</b> WIRED - Datenblumen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2015/datenblumen-visualisieren-tracking/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - Datenblumen visualisieren Tracking</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.watson.ch/!204848573" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Watson - Es ist nur eine Frage der Zeit, bis der Bund auch Telefongespräche und SMS speichern will</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.schweizamsonntag.ch/ressort/nachrichten/der_glaeserne_nationalrat//" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Schweiz am Sonntag -  Der gläserne Nationalrat</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://apps.opendatacity.de/vds/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2014-04-26_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAAN26udrV1erZ1+vl3Nzf4Pvf4t7s9vHx8CH5BAAAAAAALAAAAAAQABAAAANJeHTcFDC0yQZbxNCqd7NLxQheZ33nNKSTUBzFO2hDALTrKh6CVLGbQSjmOcwYmgLw0FmkVsqngdVRMQKEEHJTrTK9xjC3SG4kAAA7)"></div>
 					<h2><b>Projekt:</b> Vorratsdatenspeicherung in der Schweiz</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://gsmmap.org" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2013-12-28_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAK3OMsfaMOXmLrjTV9XdWyir6We+xdTfoK7h9Nvd19jd49Lr9O/1+OHi26HMlAAAACH5BAAAAAAALAAAAAAQABAAAASFMLWpzkknBJJUwp3ifVlwSQoxUeCwSQyjekqTOAlxiE0sHKvJZSeKyQSNWiUwUBl9AlUCwGQiYgsoIaUJGAqIbJZhORC6joIBETZ+CIB4GnxdjAdx/KHANyzYRgd4AAcLamx2YwwVhAxtjop1AwcMdlgJCwmVMUBYmQp2IUY9jigNgDQxEQA7)"></div>
 					<h2><b>Projekt:</b> GSM-Map</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://www.bpb.de/dialog/netzdebatte/168062/darf-man-die-nsa-mit-der-stasi-vergleichen" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Bundeszentrale für politische Bildung - Darf man die NSA mit der Stasi vergleichen?</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.stern.de/digital/online/infografik-stasi-vs--nsa-wie-viele-aktenschraenke-die-nsa-fuellen-wuerde-3793650.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Stern - Wie viele Aktenschränke die NSA füllen würde</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.sueddeutsche.de/politik/stasi-versus-nsa-akten-bis-oman-1.1713311" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Süddeutsche - Aktenberge, groß wie Europa</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://apps.opendatacity.de/stasi-vs-nsa/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2013-07-05_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFtbW2BgX2lqaouNjrCxsM7Ozt7g3uDh3+7u7QAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAQ+EMlJq7046322/2DVVUVpFkQ6qIJknGiaogFy3MeLwkQrdYabYEgU1C7GQMAIOIqSyujlIGgqAVhMcjgQDCIAOw==)"></div>
 					<h2><b>Projekt:</b> Stasi vs. NSA</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://Zensuskarte.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2013-05-31_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAANx2HtyIMOeSMu+iOe2yU+q6Z+GZRe/Hcu7MifXdsf79+/bm0ey5igAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR5UEm50po4q0UKqsyXIUjRFYUxCMFFHQhBGKwgrMmUIMfgywJAYUCQHA6EQ0FgAACCQUAi8fOtaE8nEymTrQJRAGOxGAqSSZMhwMAgAoZup0RAYBIpg+lYOMI0SHseJEcuClRKiQgJiRhDSX6RGAswFXxJDG0aOmQaEQA7)"></div>
 					<h2><b>Projekt:</b> Zensuskarte</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://datenjournalist.de/relog/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> re:log: Hintergrund zur Auswertung der W-LAN-Nutzung auf der re:publica 2013</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://apps.opendatacity.de/relog/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2013-05-24_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAIuQkp6wtqm1uLzHyqfd7rjs+8zR0s/e49Tt9PL5+wAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARMMKEkK7qTaooR+cXGiUWZiUZyXNwhnhIrqvEmbGlirEXm5hpYypW4qYhE2SzRGzB7AkEu6pKVeqsJgsjJbE/Z0XLDHVPCqKEGsDK7IwA7)"></div>
 					<h2><b>Projekt:</b> re:log</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.golem.de/news/open-data-verkehrsverbund-berlin-brandenburg-gibt-fahrplan-frei-1304-99026.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Golem - Verkehrsverbund Berlin-Brandenburg gibt Fahrplan frei</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.smartplanet.com/blog/global-observer/in-germany-a-61-percent-youtube-8216blackout/9734" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> SmartPlanet - In Germany, a 61-percent YouTube ‘blackout’</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://breitband.dradio.de/brb130209/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutschlandradio - Big Beautiful Data</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.thelocal.de/sci-tech/20130130-47633.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> The Local - YouTube puts Germany into digital dark ages</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.heise.de/newsticker/meldung/Youtube-60-Prozent-der-beliebtesten-Videos-in-Deutschland-gesperrt-1793048.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> heise - Youtube: 60 Prozent der beliebtesten Videos in Deutschland gesperrt</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://wissen.dradio.de/gema-youtubes-harter-kampf.33.de.html?dram:article_id=235726" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutschlandradio - Youtubes harter Kampf</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://de.engadget.com/2013/01/29/youtube-vs-gema-im-datavis-61-5-der-beliebtesten-videos-sind/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> engadget - Youtube vs. Gema im Datavis: 61,5% der beliebtesten Videos sind in Deutschland gesperrt</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.sueddeutsche.de/digital/streit-zwischen-youtube-und-gema-diese-kultur-ist-in-deutschland-leider-nicht-verfuegbar-1.1584813" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Süddeutsche - Diese Kultur ist in Deutschland leider nicht verfügbar</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://apps.opendatacity.de/gema-vs-youtube/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2013-01-28_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAH0oK48wMoIdIJtJTLN4eaJPT5Y9QdOxsciGg97Y1uLd2uXh3ufm5OLf4Muhob9/hCH5BAAAAAAALAAAAAAQABAAAARn8Jwkq7WIoPdIGeDwFcEQCOcpoEHrpgHwusZs36/Z6kFt176WDOeSBWkt1myVRA0M0IKBVOgQrAmFIsHtMr7g72I8ViwaWUZj8TWPGQszuiGOx91qdUMB1sYZfm96bGZ6bmQNe3BZEQA7)"></div>
 					<h2><b>Projekt:</b> GEMA versus YouTubes Top 1000</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.spiegel.de/netzwelt/netzpolitik/gema-streit-youtube-sperrt-61-5-prozent-der-angesagtesten-videos-a-880005.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Spiegel - Gema-Streit: YouTube sperrt jedes zweite angesagte Video</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.kuechenstud.io/medienradio/podcast/mr065-open-verkehr/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Medienradio - Open Verkehr</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://wissen.dradio.de/bundeswehr-die-afghanistan-papiere.33.de.html?dram:article_id=229268" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> DRadio Wissen - Die Afghanistan-Papiere</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.tagesschau.de/ausland/afghanistanpapiere104.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> tagesschau.de - Bundeswehrdokumente veröffentlicht</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.sueddeutsche.de/politik/dokumente-ueber-den-afghanistan-einsatz-veroeffentlicht-folgen-eines-verharmlosten-krieges-1.1535437" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Süddeutsche - Folgen eines verharmlosten Krieges</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2012/afghanistan-papiere-uber-5-000-seiten-geleakte-berichte-der-bundeswehr-veroffentlicht/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - Afghanistan Papiere: Über 5.000 Seiten geleakte Berichte der Bundeswehr veröffentlicht</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.elektrischer-reporter.de/phase3/video/292/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> ZDF Elektrischer Reporter - Verkehrsinformationen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.focus.de/politik/deutschland/bundeswehreinsatz-am-hindukusch-5000-geheimdokumente-zeigen-die-wahrheit-ueber-afghanistan_aid_870282.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> focus - 5000 Geheimdokumente zeigen die Wahrheit über Afghanistan</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.derwesten.de/politik/wie-gefaehrlich-der-bundeswehreinsatz-in-afghanistan-wirklich-ist-id7334287.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> WAZ - Wie gefährlich der Bundeswehreinsatz in Afghanistan wirklich ist</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://afghanistan.derwesten-recherche.org" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-11-27_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPEAAO7fwN3vzO3ty/39+iH5BAAAAAAALAAAAAAQABAAAAI2nBWimuaWkFzvhLhUPeCwPVCisC1AJnQVqgAB6IVUaWoazZIrloH5/ECdgI5WDpdK6nzGoaMAADs=)"></div>
 					<h2><b>Projekt:</b> WAZ - Die Afghanistan Papiere</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1" entry_group="">
+			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1">
 				<a href="http://open-strategies.de/sessions/openplanb-innovation-without-permission" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-11-15_presentation.1.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAB0WFiYZGDQtKjIhHUU3M1JCO1lZWZudpqywzLjt9qnT3872+8PL4Ih4cgAAAAAAACH5BAAAAAAALAAAAAAQABAAAASB0BBBjVEp65VamYOFcQuXLAehCqKWKLByfJOFvHHsSeyFaRhZodGo3FywzvBg8b1cnQYCYSEoSlisdNqYXLMLRuIwRXQFB8aBvG6XCwICfCAA2O3kKbxQoAfudmUIH3wEAwOAAGUpAyqHAZB/AVMMCAMBjZcAf3YBDJ8pKisUpAMRADs=)"></div>
 					<h2><b>Vortrag:</b> Vortrag &quot;openPlanB - innovation without permission&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://blog.zdf.de/hyperland/2012/09/fahrplaene-fuer-jeden-open-data-vs-deutsche-bahn/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> ZDF - Fahrpläne für jeden: Open Data vs. Deutsche Bahn</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://gigaom.com/2012/09/28/open-transport-data-in-germany-not-if-youre-not-google/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Gigaom: Open transport data in Germany? Not if you’re not Google</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.golem.de/news/openplanb-deutsche-bahn-sieht-klaren-rechtsbruch-aber-auch-chancen-1209-94819.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> golem - Deutsche Bahn sieht klaren Rechtsbruch - aber auch Chancen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.spiegel.de/netzwelt/netzpolitik/openplanb-deutsche-bahn-wehrt-sich-gegen-fahrplan-veroeffentlichung-a-858544.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Spiegel - Guerilla-Aktion: Deutsche Bahn wehrt sich gegen Fahrplan-Veröffentlichung</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2012/deutsche-bahn-beschwert-sich-uber-open-data-initiative-interview-mit-einem-macher-von-openplanb/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - Deutsche Bahn beschwert sich über Open Data-Initiative: Interview mit einem Macher von OpenPlanB</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.db-vertrieb.com/db_vertrieb/view/service/open_plan_b.shtml" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutsche Bahn - Offener Brief an das Projekt &quot;openPlanB&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.heise.de/open/meldung/Deutsche-Bahn-wirft-Open-Data-Projekt-Rechtsbruch-vor-1719902.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> heise - Deutsche Bahn wirft Open-Data-Projekt Rechtsbruch vor</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://logbuch-netzpolitik.de/lnp038/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Logbuch: Netzpolitik</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.spiegel.de/netzwelt/web/google-kooperation-mit-deutscher-bahn-wirft-fragen-auf-a-856215.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Spiegel - Online-Karten: Googles lückenhafter Bahn-Fahrplan</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.golem.de/news/open-data-openplanb-veroeffentlicht-bundesweite-fahrplandaten-1209-94416.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Golem - openPlanB veröffentlicht bundesweite Fahrplandaten</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.heise.de/open/meldung/openPlanB-Offene-Fahrplandaten-1702094.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> heise - openPlanB: Offene Fahrplandaten</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2012/openplanb-open-data-aktivisten-veroffentlichen-fahrplandaten-des-deutschen-fernverkehrs/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - openPlanB: Open-Data-Aktivisten veröffentlichen Fahrplandaten des deutschen Fernverkehrs</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1" entry_group="">
+			<section class="entry entry_presentation entry_size_1 " entry_type="presentation" entry_size="1">
 				<a href="https://vimeo.com/48837184" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-09-04_presentation.1.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAABMHAywTCjcpJ1YwIldHS49ELXp5mIp9l3+Fo42LmYqQrJuWppOnyZCdwgAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR+MABAjFIta8aluJjWcGQQfKFIdmcDYkiMuIr5yXITM9kQEIpEApFQyBSkwmkxbBIvjUVDQmAKhQvEQrpQDACC7XWoc8WUg8XhGhReYj5BQX1YD98IgyRQ6A8IAwIEg4QAJgMFA4o+JhMSjomLigI/lI8AkosnBJYTniaglxMRADs=)"></div>
 					<h2><b>Vortrag:</b> Vortrag &quot;OpenData im ÖPV&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.fluxfm.de/programm/netzwelt-openplanb-und-5fav/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> fluxfm Netzwelt - OpenPlanB und 5Fav</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://openplanb.tumblr.com" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-07-08_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPIAAOPRutzU3OjayO7n1tne8d/k9vj39wAAACH5BAAAAAAALAAAAAAQABAAAANJaLrT5os9Idp4UbVq780Dp4VCZggAQFHkp6lc2EVxDMh0J8fRoN4zRWFRSe1ckR+MZdKgVjhTgVThmagoiCkQKGGaBkJhCDYkAAA7)"></div>
 					<h2><b>Projekt:</b> openPlanB - innovation without permission</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://www.ted.com/talks/malte_spitz_your_phone_company_is_watching.html" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-06-26_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAFR4PW2RUnmcXo2tc6C9iKzFlbrQp8fZt9fkytjlzQAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAAR+cJAihByjlDlNMcdQEQS4nUg3BAFxJAligAaCbWzxJsd86IKASFiAJTwbz5C46810Box0cDggqqDdSvDRgBBXmDUAEE6q1dj1MBFZvlaZ9VctZL5hNGGA0GQKCGJOJAMwM0iBMiB7ATwado9sPRQAV3ZlQhlTQX5umCwsAGURADs=)"></div>
 					<h2><b>Projekt:</b> TED - Computer Animation für den TED-Talk &quot;Ihre Telefongesellschaft beobachtet Sie&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.grimme-institut.de/html/index.php?id=1569#c9688" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Nominierung Grimme Online Award &quot;Zugmonitor&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.grimme-institut.de/html/index.php?id=1569#c9685" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Nominierung Grimme Online Award &quot;Parteispenden&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://taz.de/Parteispenden-Watch/!t200/#parteispenden-karte" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-04-22_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJFoPppuXLmAZ7islbmNgs27r8WrlNTGs+LKv9TV1ObY1+fm2/Dw7uPg3bzAqwAAACH5BAAAAAAALAAAAAAQABAAAARiMEnZFp0429kmw003LEyZlF+YJiPqNi/JwApc2syCFEmjJATczGRYLGoulyKgyJEUTVlpMQh8SMdm07U4eEvapMsASFi24uNhwFAUxK6DwkAw5uBTsvwtTVpIA2V4KEZZSREAOw==)"></div>
 					<h2><b>Projekt:</b> taz - Parteispenden</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2012/vorratsdatenspeicherung-visualisiert-was-verbindungsdaten-alles-verraten/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - Vorratsdatenspeicherung visualisiert: Was Verbindungsdaten alles verraten</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://zugmonitor.sueddeutsche.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2012-03-09_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAJ+fn6Cfn6inp9ybitqxqtTEu+HBttnW1uPX0ubl3t/i4vDx8QAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARNsKgDRLhYaKtmORMILomymOOirqxqtm8ru2MsK0je2feh8ysECHFCAFUEYsFofNkSTNyMhRgYjKuEDEpYJLfUJO4YVCyv09UuYUi7VREAOw==)"></div>
 					<h2><b>Projekt:</b> Süddeutsche - Zugmonitor</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_1 noimage" entry_type="presentation" entry_size="1" entry_group="">
+			<section class="entry entry_presentation entry_size_1 noimage" entry_type="presentation" entry_size="1">
 				<a href="http://www.domainpulse.ch/download/movies/ea/rz3kdrewrktw1tsa8zpqity5cs5u91/10bigbrotheriswatching.flv" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Vortrag:</b> Vortrag &quot;Big Brother Is Watching You: Was die Visualisierung von Vorratsdaten verrät&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_presentation entry_size_1 noimage" entry_type="presentation" entry_size="1" entry_group="">
+			<section class="entry entry_presentation entry_size_1 noimage" entry_type="presentation" entry_size="1">
 				<a href="http://www.youtube.com/watch?v=LwFqsEh9Qug" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Vortrag:</b> Vortrag &quot;28c3 - Lightning Talk&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://www.taz.de/!81259/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2011-11-05_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAOiVPeqzV+qwY+zIdOrRi+fcr+rit9zc2+bm0t7f4ufn6N/g4gAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARS8BxF66wW47urQYhxIMrSKchQIAGSJBoGKp/F0QRpDLVyK4UcKjAYIH4VBGEAABQkMQoLoJpBbyOCMIopGCnIbkFGii1g5aHBt0H2ruEYlFuJAAA7)"></div>
 					<h2><b>Projekt:</b> taz - Was Facebook über dich weiß</h2>
 				</a>
 			</section>
-			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2" entry_group="">
+			<section class="entry entry_work entry_size_2 " entry_type="work" entry_size="2">
 				<a href="https://opendatacity.de" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2011-10_work.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAHcAG30AJYUEM5UkTcF+ls2XqtCdsN25xv/+/ubM1gAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAQABAAAARBEMlJq704683rOUhSJNM3JQMQFIZaIEMAgEgRCMJA4EKBGxMCAKcjFoZACUoAKBwDBJiMJjGAEgaSxNTper9gSwQAOw==)"></div>
 					<h2><b>Arbeitgeber:</b> OpenDataCity</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.engadget.com/2011/07/16/crowdflow-tracks-880-iphones-across-europe-wants-to-put-you-on/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> engadget - Crowdflow tracks 880 iPhones across Europe, wants to put you on the map</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://gigaom.com/2011/07/15/how-iphones-move-across-europe/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> gigaom - How iPhones move across Europe</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://netzpolitik.org/2011/consolidated-db-visualisierungen/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> netzpolitik - consolidated.db-Visualisierungen</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://leadacademy.de/2011/preistraeger.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> LeadAward Gold &quot;Webspecial des Jahres&quot; für &quot;Verräterisches Handy&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="https://journalists.org/awards/2011-awards/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Online Journalism Awards - Outstanding Data Visualization für &quot;Verräterisches Handy&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.grimme-institut.de/html/index.php?id=1122#c8530" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Grimme Online Award &quot;Spezial&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://breitband.dradio.de/schone-neue-datenwelt/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutschlandradio - Schöne neue Datenwelt</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.kuechenstud.io/medienradio/podcast/mr045-daten-sehen/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Medienradio - Daten sehen</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.dw.de/german-data-visualization-specialists-seek-iphone-tracking-data/a-15062976" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Deutsche Welle - German data visualization specialists seeks iPhone tracking data</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.freitag.de/autoren/klaus-raab/wenn-die-daten-schon-herumliegen" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Der Freitag - Wenn die Daten schon herumliegen</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="https://www.youtube.com/watch?v=EI7yQnRy7QQ" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2011-04-25_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPMAAAABHgQHKCkUOhMYTSoaTDUgT1QoTWszUkYdR3lFX0AZN7V0d5FQX9OfmwAAAAAAACH5BAAAAAAALAAAAAAQABAAAARtEMgZhgBjhEDB9oRGfJxnbtqmqlIJFAZSoBlxDsrBEEWYDQSbQEE4GAmNw2/AuAgQjAXjYDj4MgZBAGFoLAwF43LgAcKkBsN16SNEqcBxPKOLyuByN8OQCPV+VzF/NXJAa4SFc2QVeRkcQI8/EQA7)"></div>
 					<h2><b>Projekt:</b> crowdflow.net</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="https://onlinejournalismblog.com/2011/04/12/guest-post-visualising-mobile-phone-data-the-data-retention-app/" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Guest post: visualising mobile phone data – the data retention app</h2>
 				</a>
 			</section>
-			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2" entry_group="">
+			<section class="entry entry_project entry_size_2 " entry_type="project" entry_size="2">
 				<a href="http://www.zeit.de/datenschutz/malte-spitz-data-retention/" target="_blank" rel="noopener">
 					<div class="entry_background"  style="background-image: url(assets/images/2011-02-24_project.2.jpg), url(data:image/gif;base64,R0lGODlhEAAQAPEAANPT0+/V1fb19QAAACH5BAAAAAAALAAAAAAQABAAAAIllI95wOqPgGESoiCqwtNgbYUit4kHaaZqAipU0wQM99b1KaBOAQA7)"></div>
 					<h2><b>Projekt:</b> Zeit Online - Verräterisches Handy</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="https://www.heise.de/newsticker/meldung/Sieger-der-ersten-Runde-des-Interactive-TV-Award-der-Telekom-stehen-fest-204359.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Interactive TV Award 2. Platz</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://stats.ioinformatics.org/people/1545" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> Silbermedaille, Internationale Informatikolympiade</h2>
 				</a>
 			</section>
-			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1" entry_group="">
+			<section class="entry entry_press entry_size_1 noimage" entry_type="press" entry_size="1">
 				<a href="http://www.berliner-zeitung.de/archiv/jungforscher-entwickelten-verfahren-zur-digitalen-bildentwicklung-die-milka-kuh-im-wuestensand,10810590,9437702.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Berichterstattung:</b> Die Berliner Zeitung - &quot;Die Milka-Kuh im Wüstensand&quot;</h2>
 				</a>
 			</section>
-			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1" entry_group="">
+			<section class="entry entry_award entry_size_1 noimage" entry_type="award" entry_size="1">
 				<a href="http://www.jugend-forscht.de/projektdatenbank/aufnahmeverfahren-das-verlustfreies-trennen-von-objekten-vom-hintergrund-ermoeglicht.html" target="_blank" rel="noopener">
 					<div class="entry_background" ></div>
 					<h2><b>Auszeichnung:</b> 2. Platz, Bundeswettbewerb jugend forscht</h2>

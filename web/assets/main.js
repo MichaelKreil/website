@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	var wrapper = document.getElementById('wrapper');
 	var container = document.getElementById('container');
+	container.className = 'interactive';
 
 	var layoutTimeout = 200;
 	var layoutHandler = false;
@@ -20,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
 	window.addEventListener('resize', tryResize, false);
 	resize();
+	setTimeout(function () {
+		container.className = 'interactive transition'}, 1000);
 
 	function tryResize() {
 		if (layoutHandler) clearTimeout(layoutHandler);
@@ -71,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 			entry.node.style.height = s+'px';
 			entry.node.style.left = x+'px';
 			entry.node.style.top = y+'px';
-			entry.node.style.display = 'block';
 		})
 
 		container.style.height = (height + size)+'px';
