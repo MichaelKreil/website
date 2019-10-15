@@ -11,6 +11,13 @@ module.exports = {
 		afghanistan: { title:'Afghanistanpapiere'},
 		gemayoutube: { title:'GEMA vs YouTube'},
 	},
+	types: {
+		press: { title:'Berichterstattung' },
+		presentation: { title:'Vortrag' },
+		award: { title:'Auszeichnung' },
+		work: { title:'Arbeitgeber' },
+		project: { title:'Projekt', size:2 },
+	},
 	entries: [
 		{
 			topic:'bots',
@@ -83,7 +90,7 @@ module.exports = {
 		},
 		{
 			topic:'bots',
-			title:'Animation für: Quarks&Co - Fake-News und Filterblasen',
+			title:'Animation für Quarks&Co - Fake-News und Filterblasen',
 			start:'2018-05-15',
 			type:'project',
 			link:'https://www1.wdr.de/mediathek/video/sendungen/quarks-und-co/video-fake-news-und-filterblasen-100.html',
@@ -465,7 +472,7 @@ module.exports = {
 		},
 		{
 			topic:'stasinsa',
-			title:'Stasi vs NSA',
+			title:'Stasi vs. NSA',
 			start:'2013-07-05',
 			type:'project',
 			link:'https://apps.opendatacity.de/stasi-vs-nsa/',

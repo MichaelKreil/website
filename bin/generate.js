@@ -6,7 +6,6 @@ const spawnSync = require('child_process').spawnSync;
 const hogan = require('hogan.js');
 
 var data = require('../data/data.js');
-var topics = data.topics;
 var images = scanImages();
 var entries = checkEntries(data.entries);
 
@@ -30,37 +29,27 @@ function checkEntries(entries) {
 	entries = entries.filter(entry => {
 		if (entry.ignore) return false;
 
-		var use = true;
-
 		entry.date = parseDate(entry.start);
 
-		switch (entry.type) {
-			case 'project': // a project
-				if (!entry.size) entry.size = 2;
-			break;
+		var typeObj = data.types[entry.type];
 
-			case 'press': break;
-			case 'presentation': break;
-			case 'award': break;
-			case 'work': break;
-			case 'school': use = false; break;
-			default: console.error('Unknown type: "'+entry.type+'"');
-		}
+		if (!typeObj) throw Error('type unknown: "'+entry.type+'"')
+
+		if (typeObj.ignore) return false;
+		if (typeObj.size && !entry.size) entry.size = typeObj.size;
+
+		entry.typeTitle = typeObj.title;
 
 		if (!entry.size) entry.size = 1;
 		if (entry.highlight) entry.size *= 2;
 
 		if (entry.topic) {
-			var topic = topics[entry.topic];
+			var topic = data.topics[entry.topic];
 			if (!topic) throw Error('topic unknown: "'+entry.topic+'"');
 			if (!topic.date || (topic.date > entry.date)) topic.date = entry.date;
 			entry.topic = topic;
 		}
 
-		return use;
-	})
-
-	entries.forEach(entry => {
 		if (!entry.title) console.error('Missing title!!!');
 		if (!entry.slug) entry.slug = entry.start+'_'+entry.type+'_'+entry.title;
 		entry.slug = entry.slug.toLowerCase().replace(/[^a-z0-9\-]+/gi, '_').replace(/^_+|_+$/g, '');
@@ -79,22 +68,14 @@ function checkEntries(entries) {
 		}
 
 		entry.sortDate = entry.topic ? entry.topic.date : entry.date;
+
+		return true;
 	})
 
 	entries.sort((a,b) => {
 		if (a.sortDate !== b.sortDate) return b.sortDate - a.sortDate;
 		return b.date - a.date;
 	});
-
-	var lastTopic = entries[0].topic;
-	var group = 0;
-	entries.forEach(entry => {
-		if (entry.topic !== lastTopic) {
-			lastTopic = entry.topic;
-			group++;
-		}
-		entry.group = group;
-	})
 
 	return entries;
 }
