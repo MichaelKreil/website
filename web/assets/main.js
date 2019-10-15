@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	entries = entries.map(function (node) {
 		return {
 			size: parseFloat(node.getAttribute('entry_size')),
-			group: parseInt(node.getAttribute('entry_group'), 10),
 			type: node.getAttribute('entry_type'),
 			node: node,
 		}
