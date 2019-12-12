@@ -52,7 +52,8 @@ module.exports = {
 			title:'Flight Patterns',
 			start:'2019-04-24',
 			type:'project',
-			link:'https://data.info.graphics/flight-patterns/',
+			//link:'https://data.info.graphics/flight-patterns/',
+			link:'https://flight-patterns.igg.solutions',
 		},
 		{
 			topic:'bots',
@@ -73,7 +74,7 @@ module.exports = {
 			title:'The social bot research of Oxford and Co. is flawed.',
 			start:'2018-12-21',
 			type:'project',
-			link:'https://data.info.graphics/blog/2018/12/21/social-bot-research-is-flawed/',
+			//link:'https://data.info.graphics/blog/2018/12/21/social-bot-research-is-flawed/',
 		},
 		{
 			topic:'bots',
