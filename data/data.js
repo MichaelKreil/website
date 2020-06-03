@@ -1,25 +1,57 @@
 module.exports = {
 	topics: {
-		bots: { title:'Social Bots, Fake News und Filterblasen'},
-		tagesspiegel: { title:'Tagesspiegel - Data Science and Stories' },
-		lobbyradar: { title:'ZDF Lobbyradar' },
-		vds2: { title:'Vorratsdaten von Balthasar Glättli' },
-		vds1: { title:'Vorratsdaten von Malte Spitz' },
-		crowdflow: { title:'crowdflow' },
-		stasinsa: { title:'Stasi vs NSA' },
-		openplanb: { title:'OpenPlanB'},
 		afghanistan: { title:'Afghanistanpapiere'},
+		bots: { title:'Social Bots, Fake News und Filterblasen'},
+		crowdflow: { title:'crowdflow' },
 		gemayoutube: { title:'GEMA vs YouTube'},
+		lobbyradar: { title:'ZDF Lobbyradar' },
+		openplanb: { title:'OpenPlanB'},
+		rassismus: { title:'Rassismus'},
+		stasinsa: { title:'Stasi vs NSA' },
+		tagesspiegel: { title:'Tagesspiegel - Data Science and Stories' },
+		vds1: { title:'Vorratsdaten von Malte Spitz' },
+		vds2: { title:'Vorratsdaten von Balthasar Glättli' },
 	},
 	types: {
-		press: { title:'Berichterstattung' },
-		presentation: { title:'Vortrag' },
 		award: { title:'Auszeichnung' },
-		work: { title:'Arbeitgeber' },
+		presentation: { title:'Vortrag' },
+		press: { title:'Berichterstattung' },
 		project: { title:'Projekt', size:2 },
+		work: { title:'Arbeitgeber' },
 	},
 	entries: [
+//https://www.br.de/nachrichten/deutschland-welt/nadeloehr-intensivstation-die-kapazitaeten-deutscher-kliniken,RvZbQzG
+//https://www.br.de/nachrichten/deutschland-welt/datenanalyse-wo-es-beim-corona-fruehwarnsystem-hakt,RzkMbkF
+//https://web.br.de/interaktiv/corona-simulation/
 
+		{
+			topic:'bots',
+			title:'The Failure of Social Bots Research',
+			start:'2020-01-21',
+			type:'project',
+			link:'https://michaelkreil.github.io/openbots/',
+		},
+		{
+			topic:'rassismus',
+			title:'36C3 - Von Menschen radikalisiert: Über Rassismus im Internet',
+			start:'2019-12-29',
+			type:'presentation',
+			link:'https://www.youtube.com/watch?v=VdeGfGy0NwQ',
+		},
+		{
+			topic:'rassismus',
+			title:'ZDF heute-journal',
+			start:'2019-12-29',
+			type:'press',
+			link:'https://www.zdf.de/nachrichten/heute-journal/36c3-der-staat-als-datenkrake-100.html',
+		},
+		{
+			topic:'bots',
+			title:'The Failure of Social Bots Research',
+			start:'2019-11-02',
+			type:'presentation',
+			link:'https://www.youtube.com/embed/vyTmczjwFRE?start=99',
+		},
 		{
 			topic:'bots',
 			title:'Die Social Bots sitzen schon in den Parlamenten',
