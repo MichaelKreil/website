@@ -1,7 +1,8 @@
 module.exports = {
 	topics: {
 		afghanistan: { title:'Afghanistanpapiere'},
-		bots: { title:'Social Bots, Fake News und Filterblasen'},
+		bots: { title:'Social Bots'},
+		corona: { title:'Corona'},
 		crowdflow: { title:'crowdflow' },
 		gemayoutube: { title:'GEMA vs YouTube'},
 		lobbyradar: { title:'ZDF Lobbyradar' },
@@ -20,10 +21,63 @@ module.exports = {
 		work: { title:'Arbeitgeber' },
 	},
 	entries: [
-//https://www.br.de/nachrichten/deutschland-welt/nadeloehr-intensivstation-die-kapazitaeten-deutscher-kliniken,RvZbQzG
-//https://www.br.de/nachrichten/deutschland-welt/datenanalyse-wo-es-beim-corona-fruehwarnsystem-hakt,RzkMbkF
-//https://web.br.de/interaktiv/corona-simulation/
-
+		{
+			topic:'corona',
+			title:'So entwickeln sich die Corona-Zahlen in Deutschland',
+			start:'2020-09-05',
+			type:'project',
+			link:'https://www.br.de/nachrichten/wissen/so-entwickeln-sich-die-corona-zahlen-in-deutschland,S9R27fS',
+		},
+		{
+			title:'Gold, Malofiej, für Flight Patterns',
+			start:'2020-08-03',
+			type:'award',
+			link:'https://www.malofiejgraphics.com/2020/08/general/list-award/',
+		},
+		{
+			topic:'bots',
+			title:'HOPE 2020: People Are Not Bots',
+			start:'2020-07-27',
+			type:'presentation',
+			link:'https://archive.org/details/hopeconf2020/20200726_2000_People_Are_Not_Bots.mp4',
+		},
+		{
+			topic:'bots',
+			title:'NYTimes: Who\'s a Bot? Who\'s Not?',
+			start:'2020-06-16',
+			type:'press',
+			link:'https://www.nytimes.com/2020/06/16/science/social-media-bots-kazemi.html',
+		},
+		{
+			topic:'corona',
+			title:'RKI-Corona-Daten-Archiv',
+			start:'2020-05-27',
+			type:'project',
+			size:1,
+			link:'https://github.com/ard-data/2020-rki-archive',
+		},
+		{
+			topic:'corona',
+			title:'Wo es beim Corona-Frühwarnsystem hakt',
+			start:'2020-05-26',
+			type:'project',
+			size:1,
+			link:'https://www.br.de/nachrichten/deutschland-welt/datenanalyse-wo-es-beim-corona-fruehwarnsystem-hakt,RzkMbkF',
+		},
+		{
+			topic:'corona',
+			title:'Nadelöhr Intensivstation',
+			start:'2020-04-08',
+			type:'project',
+			link:'https://www.br.de/nachrichten/deutschland-welt/nadeloehr-intensivstation-die-kapazitaeten-deutscher-kliniken,RvZbQzG',
+		},
+		{
+			topic:'corona',
+			title:'Corona-Simulation',
+			start:'2020-03-20',
+			type:'project',
+			link:'https://web.br.de/interaktiv/corona-simulation/',
+		},
 		{
 			topic:'bots',
 			title:'The Failure of Social Bots Research',

@@ -104,6 +104,10 @@ header {
 					background-image: url('assets/style/press.png');
 				}
 
+				.entry_size_1.entry_project .entry_background {
+					background-image: url('assets/style/project.png');
+				}
+
 				.entry_size_1.entry_award .entry_background {
 					background-image: url('assets/style/award.png');
 				}
