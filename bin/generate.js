@@ -1,23 +1,24 @@
 "use strict"
 
 const fs = require('fs');
-const resolve = require('path').resolve;
-const spawnSync = require('child_process').spawnSync;
+const {resolve} = require('path');
+const {spawnSync} = require('child_process');
 const hogan = require('hogan.js');
 
-var data = require('../data/data.js');
-var images = scanImages();
-var entries = checkEntries(data.entries);
+const uniqueImageSrc = new Set();
 
-var template = fs.readFileSync(resolve(__dirname, '../data/index.template.html'), 'utf8');
+let data = require('../data/data.js');
+let entries = checkEntries(data.entries);
+
+let template = fs.readFileSync(resolve(__dirname, '../data/index.template.html'), 'utf8');
 template = hogan.compile(template);
 
-var importedFiles = {
+let importedFiles = {
 	mainscript: fs.readFileSync(resolve(__dirname, '../web/assets/main.js'), 'utf8'),
 	mainstyle: fs.readFileSync(resolve(__dirname, '../web/assets/style/main.css'), 'utf8'),
 }
 
-var html = template.render({
+let html = template.render({
 	import:importedFiles,
 	entries:entries
 });
@@ -31,7 +32,7 @@ function checkEntries(entries) {
 
 		entry.date = parseDate(entry.start);
 
-		var typeObj = data.types[entry.type];
+		let typeObj = data.types[entry.type];
 
 		if (!typeObj) throw Error('type unknown: "'+entry.type+'"')
 
@@ -41,34 +42,24 @@ function checkEntries(entries) {
 		entry.typeTitle = typeObj.title;
 
 		if (!entry.size) entry.size = 1;
-		if (entry.highlight) entry.size *= 2;
 
 		if (entry.topic) {
-			var topic = data.topics[entry.topic];
+			let topic = data.topics[entry.topic];
 			if (!topic) throw Error('topic unknown: "'+entry.topic+'"');
 			if (!topic.date || (topic.date > entry.date)) topic.date = entry.date;
 			entry.topic = topic;
 		}
 
-		if (!entry.title) console.error('Missing title!!!');
-		if (!entry.slug) entry.slug = entry.start+'_'+entry.type+'_'+entry.title;
-		entry.slug = entry.slug.toLowerCase().replace(/[^a-z0-9\-]+/gi, '_').replace(/^_+|_+$/g, '');
+		if (!entry.title) throw Error('Missing title!!!');
+		
+		if (!entry.slug) entry.slug = (entry.start+'_'+entry.type).toLowerCase();
+		entry.imageSrc = entry.slug+'.png';
 
-		entry.slug = getImage(entry);
+		addImage(entry);
 
-		if (entry.slug) {
-			entry.image = entry.slug+'.'+entry.size+'.jpg';
-
-			var icon = '../icons/'+entry.slug+'.gif';
-			icon = resolve(__dirname, icon);
-			icon = fs.readFileSync(icon);
-			entry.icon = icon.toString('base64');
-		} else {
-			if (entry.size > 1) console.log('   you might want to add an image "'+entry.start+'_'+entry.type+'.png"');
-		}
+		if (!entry.image && (entry.size > 1)) console.log('   you might want to add an image "'+entry.imageSrc+'"');
 
 		entry.sortDate = entry.topic ? entry.topic.date : entry.date;
-
 		return true;
 	})
 
@@ -80,87 +71,88 @@ function checkEntries(entries) {
 	return entries;
 }
 
-function scanImages() {
-	var images = new Map();
-	scan('../web/assets/images/', '.1.jpg', 'web1');
-	scan('../web/assets/images/', '.2.jpg', 'web2');
+function addImage(entry) {
+	let filenameSrc = resolve(__dirname, '../images/'+entry.imageSrc);
+	if (!fs.existsSync(filenameSrc)) return;
 
-	scan('../icons/', '.gif', 'icon');
-	scan('../images/', '.jpg', 'src');
-	scan('../images/', '.png', 'src');
+	if (uniqueImageSrc.has(entry.imageSrc)) throw Error('duplicated imageSrc file "'+entry.imageSrc+'"');
+	uniqueImageSrc.add(entry.imageSrc)
 
-	images = Array.from(images.values());
+	let filename = entry.slug+'.'+entry.size;
+	let pixelSize = entry.size*192;
+	let targetFile = resolve(__dirname, '../web/assets/images/'+filename);
 
-	images.forEach(image => {
-		if (image.src) {
-			if (!image.web1) image.web1 = generateWeb(1);
-			if (!image.web2) image.web2 = generateWeb(2);
-			if (!image.icon) image.icon = generateIcon();
+	entry.image = getImage();
+
+	if (!entry.image) return;
+	
+	entry.icon = getIcon();
+	return;
+
+	function getImage() {
+		let filenamePng = targetFile+'.png';
+		let filenameJpg = targetFile+'.jpg';
+
+		if (!fs.existsSync(filenamePng)) generatePng();
+		if (!fs.existsSync(filenameJpg)) generateJpg();
+
+		let extension = (getFilesize(filenamePng) < getFilesize(filenameJpg)) ? '.png' : '.jpg';
+
+		return filename + extension;
+
+		function getFilesize(f) {
+			return fs.statSync(f).size;
 		}
 
-		function generateWeb(size) {
-			var filename = resolve(__dirname, '../web/assets/images/', image.slug+'.'+size+'.jpg');
-			var pixelSize = (size*96-1)*2;
-			var attr = [
-				image.src,
+		function generatePng() {
+			let attr = [
+				filenameSrc,
 				'-strip',
 				'-resize', pixelSize+'x'+pixelSize+'!',
-				'-quality','80',
-				'-interlace','JPEG',
-				filename
+				filenamePng
 			];
-			spawnSync('convert', attr);
-
-			console.log('generating: '+filename);
-			//console.log('      convert '+attr.join(' '));
-			return filename;
+			spawnSyncCheck('convert', attr);
+			spawnSyncCheck('optipng', ['-o5', filenamePng]);
 		}
 
-		function generateIcon() {
-			var filename = resolve(__dirname, '../icons/', image.slug+'.gif');
-			var attr = [
-				image.src,
+		function generateJpg() {
+			let attr = [
+				filenameSrc,
+				'-strip',
+				'-resize', pixelSize+'x'+pixelSize+'!',
+				'-quality','90',
+				'-interlace','JPEG',
+				filenameJpg
+			];
+			spawnSyncCheck('convert', attr);
+		}
+	}
+
+	function getIcon() {
+		let filename = resolve(__dirname, '../icons/', entry.slug+'.gif');
+
+		if (!fs.existsSync(filename)) {
+			let attr = [
+				filenameSrc,
 				'-strip',
 				'-resize', '16x16!',
 				'-dither', 'FloydSteinberg',
 				'-colors', '16',
 				filename
 			];
-			spawnSync('convert', attr);
-
-			console.log('generating: '+filename);
-			//console.log('      convert '+attr.join(' '));
-			return filename;
+			spawnSyncCheck('convert', attr);
 		}
-	})
-
-	return images;
-
-	function scan(folder, suffix, key) {
-		folder = resolve(__dirname, folder);
-		fs.readdirSync(folder).forEach(f => {
-			if (!f.endsWith(suffix)) return;
-			var slug = f.split('.')[0];
-			if (!images.has(slug)) images.set(slug, {slug:slug, used:0});
-			images.get(slug)[key] = resolve(folder, f);
-		})
+		
+		return fs.readFileSync(filename).toString('base64');
 	}
-}
 
-function getImage(entry) {
-	if ([1,2].indexOf(entry.size) < 0) throw Error();
+	function spawnSyncCheck(command, attr) {
+		let res = spawnSync(command, attr);
+		if (!res.status) return;
 
-	var key = 'web'+entry.size;
-
-	var result = images.filter(image => entry.slug.startsWith(image.slug));
-	if (result.length === 0) return false;
-	if (result.length > 1) throw Error();
-
-	result = result[0];
-	if (result.used > 0) throw Error();
-	
-	result.used++;
-	return result.slug;
+		console.log(res.error);
+		console.log(res.stderr.toString());
+	}
 }
 
 function parseDate(text) {
