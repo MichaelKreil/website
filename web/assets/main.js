@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', function(event) {
-	var size = 80;
-	var lastState = '';
+	let size = 96;
+	let lastState = '';
 
-	var wrapper = document.getElementById('wrapper');
-	var container = document.getElementById('container');
+	let wrapper = document.getElementById('wrapper');
+	let container = document.getElementById('container');
 	container.className = 'interactive';
 
-	var layoutTimeout = 200;
-	var layoutHandler = false;
+	let layoutTimeout = 200;
+	let layoutHandler = false;
 
-	var entries = document.getElementsByClassName('entry');
+	let entries = document.getElementsByClassName('entry');
 	entries = [].slice.call(entries);
 	entries = entries.map(function (node) {
 		return {
@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	}
 
 	function resize() {
-		var width = wrapper.clientWidth;
-		var minWidth = 400;
-		var minSize = 96;
-		var maxSize = 256;
+		let width = wrapper.clientWidth;
+		let minWidth = 400;
+		let minSize = 96;
+		let maxSize = 192;
 
 		if (width < minWidth) {
 			cols = Math.floor(width/minSize);
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
 		size = Math.floor(width/cols);
 		if (size > maxSize) size = maxSize;
 
-		var state = [size, cols].join(',');
+		let state = [size, cols].join(',');
 		if (state === lastState) return;
 		lastState = state;
 
@@ -61,12 +61,12 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	}
 
 	function redrawEntries() {
-		var height = 0;
+		let height = 0;
 
 		entries.forEach(function (entry) {
-			var s = entry.s;
-			var x = entry.x;
-			var y = entry.y;
+			let s = entry.s;
+			let x = entry.x;
+			let y = entry.y;
 
 			if (y > height) height = y;
 
@@ -81,23 +81,23 @@ document.addEventListener('DOMContentLoaded', function(event) {
 	}
 
 	function layoutEntries() {
-		var layout = [];
+		let layout = [];
 		entries.forEach(function (entry) {
-			var entrySize = Math.min(cols, entry.size);
-			var pos0 = 0;
+			let entrySize = Math.min(cols, entry.size);
+			let pos0 = 0;
 
 			do {} while (check());
 
 			function check() {
-				var x0 = pos0 % cols;
-				var y0 = Math.floor(pos0/cols);
+				let x0 = pos0 % cols;
+				let y0 = Math.floor(pos0/cols);
 				pos0++;
 
 				if (x0+entrySize > cols) return true;
 
-				for (var x = 0; x < entrySize; x++) {
-					for (var y = 0; y < entrySize; y++) {
-						var pos = (y+y0)*cols + (x+x0);
+				for (let x = 0; x < entrySize; x++) {
+					for (let y = 0; y < entrySize; y++) {
+						let pos = (y+y0)*cols + (x+x0);
 						if (layout[pos]) return true;
 					}
 				}
@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function(event) {
 				entry.x = x0*size;
 				entry.y = y0*size;// + entry.group*size/8;
 
-				for (var x = 0; x < entrySize; x++) {
-					for (var y = 0; y < entrySize; y++) {
-						var pos = (y+y0)*cols + (x+x0);
+				for (let x = 0; x < entrySize; x++) {
+					for (let y = 0; y < entrySize; y++) {
+						let pos = (y+y0)*cols + (x+x0);
 						layout[pos] = true;
 					}
 				}

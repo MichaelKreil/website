@@ -40,6 +40,7 @@ module.exports = {
 			start:'2020-07-27',
 			type:'presentation',
 			link:'https://archive.org/details/hopeconf2020/20200726_2000_People_Are_Not_Bots.mp4',
+			size:2,
 		},
 		{
 			topic:'bots',
@@ -94,7 +95,7 @@ module.exports = {
 		},
 		{
 			topic:'rassismus',
-			title:'ZDF heute-journal',
+			title:'ZDF heute-journal - 36C3: Der Staat als Datenkrake',
 			start:'2019-12-29',
 			type:'press',
 			link:'https://www.zdf.de/nachrichten/heute-journal/36c3-der-staat-als-datenkrake-100.html',
@@ -189,7 +190,7 @@ module.exports = {
 			start:'2018-05-15',
 			type:'project',
 			link:'https://www1.wdr.de/mediathek/video/sendungen/quarks-und-co/video-fake-news-und-filterblasen-100.html',
-			size: 2,
+			size:2,
 		},
 		{
 			topic:'bots',
@@ -282,6 +283,7 @@ module.exports = {
 			start:'2017-12-28',
 			type:'press',
 			link:'https://www.zdf.de/nachrichten/heute-journal/schwachstellen-der-digitalen-welt-100.html',
+			slug:'2017-12-28_press_zdf',
 			size:2,
 		},
 		{
@@ -432,7 +434,7 @@ module.exports = {
 			start:'2015-11',
 			type:'work',
 			link:'https://dsst.io',
-			highlight:true
+			size:2
 		},
 		{
 			title:'Exposing the invisible - Michael Kreil: An Honest Picture of Metadata',
@@ -897,7 +899,7 @@ module.exports = {
 			end:'2015-10',
 			type:'work',
 			link:'https://opendatacity.de',
-			highlight:true
+			size:2,
 		},
 		{
 			topic:'crowdflow',
