@@ -105,6 +105,7 @@ function addImage(entry) {
 		}
 
 		function generatePng() {
+			console.log('generate PNG "'+entry.imageSrc+'"')
 			let attr = [
 				filenameSrc,
 				'-strip',
@@ -112,10 +113,12 @@ function addImage(entry) {
 				filenamePng
 			];
 			spawnSyncCheck('convert', attr);
+			spawnSyncCheck('pngquant', ['--quality=95-100', '-f', '--ext', '.png', filenamePng]);
 			spawnSyncCheck('optipng', ['-o5', filenamePng]);
 		}
 
 		function generateJpg() {
+			console.log('generate JPEG "'+entry.imageSrc+'"')
 			let attr = [
 				filenameSrc,
 				'-strip',
@@ -149,7 +152,11 @@ function addImage(entry) {
 	function spawnSyncCheck(command, attr) {
 		let res = spawnSync(command, attr);
 		if (!res.status) return;
+		if (res.status === 99) return;
 
+
+		console.log(command, attr);
+		console.log(res.status);
 		console.log(res.error);
 		console.log(res.stderr.toString());
 	}
