@@ -39,7 +39,8 @@ module.exports = {
 			title:'HOPE 2020: People Are Not Bots',
 			start:'2020-07-27',
 			type:'presentation',
-			link:'https://archive.org/details/hopeconf2020/20200726_2000_People_Are_Not_Bots.mp4',
+			link:'https://www.youtube.com/watch?v=K3Z32Sd_Fr8',
+			//link:'https://archive.org/details/hopeconf2020/20200726_2000_People_Are_Not_Bots.mp4',
 			size:2,
 		},
 		{
