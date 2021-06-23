@@ -22,6 +22,21 @@ module.exports = {
 	},
 	entries: [
 		{
+			topic:'bots',
+			title:'Scientific Paper: The Rise and Fall of \'Social Bot\' Research',
+			start:'2021-03-29',
+			type:'project',
+			link:'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3814191',
+		},
+		{
+			topic:'corona',
+			title:'GitHub-Projekt: RKI-Corona-Impf-Daten-Archiv',
+			start:'2020-12-30',
+			type:'work',
+			size:1,
+			link:'https://github.com/ard-data/2020-rki-impf-archive',
+		},
+		{
 			topic:'corona',
 			title:'So entwickeln sich die Corona-Zahlen in Deutschland',
 			start:'2020-09-05',
