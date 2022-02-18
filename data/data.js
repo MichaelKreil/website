@@ -407,6 +407,12 @@ module.exports = {
 			link:'http://dbmindbox.com/en/db-opendata-hackathons/hackathons/4-db-hackathon-der-hackday/',
 		},
 		{
+			title:'An Honest Picture of Metadata',
+			start:'2016-05-12',
+			type:'press',
+			link:'https://exposingtheinvisible.org/en/articles/michael-kreil/',
+		},
+		{
 			title:'netzpolitik übernimmt ZDF-Lobbyradar',
 			start:'2016-05-02',
 			type:'press',
