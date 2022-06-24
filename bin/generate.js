@@ -1,8 +1,9 @@
-"use strict"
+#!/usr/bin/env node
+'use strict'
 
 const fs = require('fs');
-const {resolve} = require('path');
-const {spawnSync} = require('child_process');
+const { resolve } = require('path');
+const { spawnSync } = require('child_process');
 const hogan = require('hogan.js');
 
 const uniqueImageSrc = new Set();

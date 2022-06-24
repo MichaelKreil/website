@@ -1,8 +1,9 @@
-"use strict"
+#!/usr/bin/env node
+'use strict'
 
 const fs = require('fs');
-const resolve = require('path').resolve;
-const spawnSync = require('child_process').spawnSync;
+const { resolve } = require('path');
+const { spawnSync } = require('child_process');
 
 var runUpdate = true;
 
