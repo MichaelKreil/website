@@ -156,7 +156,8 @@ module.exports = {
 			start:'2019-04-24',
 			type:'project',
 			//link:'https://data.info.graphics/flight-patterns/',
-			link:'https://flight-patterns.igg.solutions',
+			//link:'https://flight-patterns.igg.solutions',
+			link:'https://michaelkreil.github.io/flight-patterns/',
 		},
 		{
 			topic:'bots',
