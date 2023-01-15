@@ -12,6 +12,7 @@ module.exports = {
 		tagesspiegel: { title:'Tagesspiegel - Data Science and Stories' },
 		vds1: { title:'Vorratsdaten von Malte Spitz' },
 		vds2: { title:'Vorratsdaten von Balthasar Glättli' },
+		windrad: { title:'offene Geodaten und Windradabstände'},
 	},
 	types: {
 		award: { title:'Auszeichnung' },
@@ -21,6 +22,41 @@ module.exports = {
 		work: { title:'Arbeit' },
 	},
 	entries: [
+		{
+			topic:'windrad',
+			title:'Journalist verklagt Bayern auf Freigabe von Geodaten',
+			start:'2022-12-15',
+			type:'press',
+			link:'https://www.br.de/nachrichten/netzwelt/journalist-verklagt-bayern-auf-freigabe-von-geodaten,TQ4xFau',
+		},
+		{
+			topic:'windrad',
+			title:'Wie Bayern gegen Open Data und Energiewende vorgeht',
+			start:'2022-12-12',
+			type:'press',
+			link:'https://netzpolitik.org/2022/zensurheberrecht-wie-bayern-gegen-open-data-und-energiewende-vorgeht/',
+		},
+		{
+			topic:'windrad',
+			title:'GFF klagt gegen Bayern für freie Geodaten',
+			start:'2022-12-09',
+			type:'press',
+			link:'https://www.golem.de/news/open-data-gff-klagt-gegen-bayern-fuer-freie-geodaten-2212-170396.html',
+		},
+		{
+			topic:'windrad',
+			title:'Bayern missbraucht Urheberrecht, um Pressefreiheit einzuschränken',
+			start:'2022-12-09',
+			type:'press',
+			link:'https://freiheitsrechte.org/themen/demokratie/geodatenbanken',
+		},
+		{
+			topic:'windrad',
+			title:'Energiewende auf Abstand',
+			start:'2022-12-09',
+			type:'project',
+			link:'https://taz.de/Deutsche-Vorschriften-fuer-Windenergie/!5901969/',
+		},
 		{
 			topic:'bots',
 			title:'Scientific Paper: The Rise and Fall of \'Social Bot\' Research',
