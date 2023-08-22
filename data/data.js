@@ -13,6 +13,7 @@ module.exports = {
 		vds1: { title: 'Vorratsdaten von Malte Spitz' },
 		vds2: { title: 'Vorratsdaten von Balthasar Glättli' },
 		windrad: { title: 'offene Geodaten und Windradabstände' },
+		versatiles: { title: 'freier Kartenserver' },
 	},
 	types: {
 		award: { title: 'Auszeichnung' },
@@ -22,6 +23,27 @@ module.exports = {
 		work: { title: 'Arbeit' },
 	},
 	entries: [
+		{
+			topic: 'versatiles',
+			title: 'CCCamp: Freie interaktive Karten mit VersaTiles',
+			start: '2023-08-16',
+			type: 'presentation',
+			link: 'https://media.ccc.de/v/camp2023-57248-freie_interaktive_karten_mit_versatiles',
+		},
+		{
+			topic: 'versatiles',
+			title: 'FOSSGIS: VersaTiles - freie Vektorkarten für alle',
+			start: '2023-03-17',
+			type: 'presentation',
+			link: 'https://media.ccc.de/v/fossgis2023-28592-versatiles-freie-vektorkarten-fr-alle',
+		},
+		{
+			topic: 'versatiles',
+			title: 'VersaTiles.org',
+			start: '2023-01-24',
+			type: 'project',
+			link: 'https://versatiles.org',
+		},
 		{
 			topic: 'windrad',
 			title: 'Journalist verklagt Bayern auf Freigabe von Geodaten',
