@@ -11,7 +11,7 @@ spawnSync('node', [resolve(__dirname, 'generate.js')]);
 
 fs.watch(
 	resolve(__dirname, '../../'),
-	{recursive:true},
+	{ recursive: true },
 	(eventType, filename) => {
 		if (filename === 'website/web/index.html') return
 		console.log(['', eventType, filename].join('\t'));

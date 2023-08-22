@@ -20,8 +20,8 @@ let importedFiles = {
 }
 
 let html = template.render({
-	import:importedFiles,
-	entries:entries
+	import: importedFiles,
+	entries: entries
 });
 
 fs.writeFileSync(resolve(__dirname, '../web/index.html'), html, 'utf8');
@@ -35,7 +35,7 @@ function checkEntries(entries) {
 
 		let typeObj = data.types[entry.type];
 
-		if (!typeObj) throw Error('type unknown: "'+entry.type+'"')
+		if (!typeObj) throw Error('type unknown: "' + entry.type + '"')
 
 		if (typeObj.ignore) return false;
 		if (typeObj.size && !entry.size) entry.size = typeObj.size;
@@ -46,25 +46,25 @@ function checkEntries(entries) {
 
 		if (entry.topic) {
 			let topic = data.topics[entry.topic];
-			if (!topic) throw Error('topic unknown: "'+entry.topic+'"');
+			if (!topic) throw Error('topic unknown: "' + entry.topic + '"');
 			if (!topic.date || (topic.date > entry.date)) topic.date = entry.date;
 			entry.topic = topic;
 		}
 
 		if (!entry.title) throw Error('Missing title!!!');
-		
-		if (!entry.slug) entry.slug = (entry.start+'_'+entry.type).toLowerCase();
-		entry.imageSrc = entry.slug+'.png';
+
+		if (!entry.slug) entry.slug = (entry.start + '_' + entry.type).toLowerCase();
+		entry.imageSrc = entry.slug + '.png';
 
 		addImage(entry);
 
-		if (!entry.image && (entry.size > 1)) console.log('   you might want to add an image "'+entry.imageSrc+'"');
+		if (!entry.image && (entry.size > 1)) console.log('   you might want to add an image "' + entry.imageSrc + '"');
 
 		entry.sortDate = entry.topic ? entry.topic.date : entry.date;
 		return true;
 	})
 
-	entries.sort((a,b) => {
+	entries.sort((a, b) => {
 		if (a.sortDate !== b.sortDate) return b.sortDate - a.sortDate;
 		return b.date - a.date;
 	});
@@ -73,26 +73,26 @@ function checkEntries(entries) {
 }
 
 function addImage(entry) {
-	let filenameSrc = resolve(__dirname, '../images/'+entry.imageSrc);
+	let filenameSrc = resolve(__dirname, '../images/' + entry.imageSrc);
 	if (!fs.existsSync(filenameSrc)) return;
 
-	if (uniqueImageSrc.has(entry.imageSrc)) throw Error('duplicated imageSrc file "'+entry.imageSrc+'"');
+	if (uniqueImageSrc.has(entry.imageSrc)) throw Error('duplicated imageSrc file "' + entry.imageSrc + '"');
 	uniqueImageSrc.add(entry.imageSrc)
 
-	let filename = entry.slug+'.'+entry.size;
-	let pixelSize = entry.size*192;
-	let targetFile = resolve(__dirname, '../web/assets/images/'+filename);
+	let filename = entry.slug + '.' + entry.size;
+	let pixelSize = entry.size * 192;
+	let targetFile = resolve(__dirname, '../web/assets/images/' + filename);
 
 	entry.image = getImage();
 
 	if (!entry.image) return;
-	
+
 	entry.icon = getIcon();
 	return;
 
 	function getImage() {
-		let filenamePng = targetFile+'.png';
-		let filenameJpg = targetFile+'.jpg';
+		let filenamePng = targetFile + '.png';
+		let filenameJpg = targetFile + '.jpg';
 
 		if (!fs.existsSync(filenamePng)) generatePng();
 		if (!fs.existsSync(filenameJpg)) generateJpg();
@@ -106,11 +106,11 @@ function addImage(entry) {
 		}
 
 		function generatePng() {
-			console.log('generate PNG "'+entry.imageSrc+'"')
+			console.log('generate PNG "' + entry.imageSrc + '"')
 			let attr = [
 				filenameSrc,
 				'-strip',
-				'-resize', pixelSize+'x'+pixelSize+'!',
+				'-resize', pixelSize + 'x' + pixelSize + '!',
 				filenamePng
 			];
 			spawnSyncCheck('convert', attr);
@@ -119,13 +119,13 @@ function addImage(entry) {
 		}
 
 		function generateJpg() {
-			console.log('generate JPEG "'+entry.imageSrc+'"')
+			console.log('generate JPEG "' + entry.imageSrc + '"')
 			let attr = [
 				filenameSrc,
 				'-strip',
-				'-resize', pixelSize+'x'+pixelSize+'!',
-				'-quality','90',
-				'-interlace','JPEG',
+				'-resize', pixelSize + 'x' + pixelSize + '!',
+				'-quality', '90',
+				'-interlace', 'JPEG',
 				filenameJpg
 			];
 			spawnSyncCheck('convert', attr);
@@ -133,7 +133,7 @@ function addImage(entry) {
 	}
 
 	function getIcon() {
-		let filename = resolve(__dirname, '../icons/', entry.slug+'.gif');
+		let filename = resolve(__dirname, '../icons/', entry.slug + '.gif');
 
 		if (!fs.existsSync(filename)) {
 			let attr = [
@@ -146,7 +146,7 @@ function addImage(entry) {
 			];
 			spawnSyncCheck('convert', attr);
 		}
-		
+
 		return fs.readFileSync(filename).toString('base64');
 	}
 
@@ -165,7 +165,7 @@ function addImage(entry) {
 
 function parseDate(text) {
 	var m;
-	if (m = text.match(/^([12][0189][0-9][0-9])-([01][0-9])-([0-3][0-9])$/)) return new Date(parseFloat(m[1]), parseFloat(m[2])-1, parseFloat(m[3]))
-	if (m = text.match(/^([12][0189][0-9][0-9])-([01][0-9])$/)) return new Date(parseFloat(m[1]), parseFloat(m[2])-1)
+	if (m = text.match(/^([12][0189][0-9][0-9])-([01][0-9])-([0-3][0-9])$/)) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]))
+	if (m = text.match(/^([12][0189][0-9][0-9])-([01][0-9])$/)) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1)
 }
 
