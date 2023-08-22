@@ -47,7 +47,9 @@ module.exports = {
 			topic:'windrad',
 			title:'Bayern missbraucht Urheberrecht, um Pressefreiheit einzuschränken',
 			start:'2022-12-09',
-			type:'press',
+			type:'project',
+			slug:'2022-12-09_project2',
+			size:1,
 			link:'https://freiheitsrechte.org/themen/demokratie/geodatenbanken',
 		},
 		{
