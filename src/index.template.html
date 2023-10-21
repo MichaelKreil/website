@@ -6,10 +6,10 @@
 	<meta name="author" content="Michael Kreil">
 	<meta name="description" content="Projekte, Vorträge, Presseberichte und Auszeichnungen des Datenjournalisten und Data Scientists Michael Kreil.">
 	<script type="text/javascript">
-		{{{import.mainscript}}}
+		{{{mainscript}}}
 	</script>
 	<style type="text/css">
-		{{{import.mainstyle}}}
+		{{{mainstyle}}}
 	</style>
 </head>
 <body>
@@ -19,19 +19,19 @@
 			<a href="https://chaos.social/@michaelkreil" target="_blank">Mastodon</a>,
 			<a href="https://twitter.com/MichaelKreil" target="_blank">Twitter</a>,
 			<a href="https://github.com/MichaelKreil" target="_blank">GitHub</a>,
-			<a href="mailto:contact2@michael-kreil.de">e-mail</a>,
+			<a href="mailto:contact3@michael-kreil.de">e-mail</a>,
 		</p>
 	</header>
 	<div id="wrapper">
 		<div id="container">
-		{{#entries}}
-			<section class="entry entry_{{type}} entry_size_{{size}} {{^image}}noimage{{/image}}" entry_type="{{type}}" entry_size="{{size}}">
-				<a{{#link}} href="{{link}}" target="_blank" rel="noopener"{{/link}}>
-					<div class="entry_background" {{#image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/image}}></div>
+		{{#each entries}}
+			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" entry_type="{{type}}" entry_size="{{size}}">
+				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener"{{/if}}>
+					<div class="entry_background" {{#if image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/if}}></div>
 					<h2><b>{{typeTitle}}:</b> {{title}}</h2>
 				</a>
 			</section>
-		{{/entries}}
+		{{/each}}
 		</div>
 	</div>
 	<footer></footer>

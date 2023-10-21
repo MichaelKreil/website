@@ -5,7 +5,8 @@ import { existsSync, statSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import handlebars from 'handlebars';
 import { } from 'work-faster';
-import { mkdir, readFile, readdir } from 'node:fs/promises';
+import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { basename } from 'node:path';
 
 export function resolve(path) {
 	return (new URL(path, import.meta.url)).pathname;
@@ -15,28 +16,18 @@ export async function buildWebsite() {
 	let data = (await import('../src/data.js?time=' + Date.now())).default;
 	let entries = checkEntries(data);
 	await checkImages(entries);
+
+	let template = await readFile(resolve('../src/index.template.html'), 'utf8');
+	template = handlebars.compile(template);
+
+	let html = template({
+		mainscript: await readFile(resolve('../web/assets/main.js'), 'utf8'),
+		mainstyle: await readFile(resolve('../web/assets/style/main.css'), 'utf8'),
+		entries: entries
+	});
+
+	await writeFile(resolve('../web/index.html'), html);
 }
-
-/*
-
-
-let data from '../data/data.js';
-
-let template = fs.readFileSync(resolve(__dirname, '../data/index.template.html'), 'utf8');
-template = hogan.compile(template);
-
-let importedFiles = {
-	mainscript: fs.readFileSync(resolve(__dirname, '../web/assets/main.js'), 'utf8'),
-	mainstyle: fs.readFileSync(resolve(__dirname, '../web/assets/style/main.css'), 'utf8'),
-}
-
-let html = template.render({
-	import: importedFiles,
-	entries: entries
-});
-
-fs.writeFileSync(resolve(__dirname, '../web/index.html'), html, 'utf8');
-*/
 
 function checkEntries(data) {
 	const slugSet = new Set();
@@ -143,7 +134,7 @@ async function getImage(filenameSrc, basenameDst, pixelSize) {
 	if (!existsSync(filenamePng)) await generatePng(filenameSrc, filenamePng, pixelSize);
 	if (!existsSync(filenameJpg)) await generateJpg(filenameSrc, filenameJpg, pixelSize);
 
-	return `${basenameDst}.${(getFilesize(filenamePng) < getFilesize(filenameJpg) ? 'pn' : 'jp')}g`;
+	return `${basename(basenameDst)}.${(getFilesize(filenamePng) < getFilesize(filenameJpg) ? 'pn' : 'jp')}g`;
 
 	function getFilesize(f) {
 		return statSync(f).size;
