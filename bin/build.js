@@ -15,6 +15,7 @@ export function resolve(path) {
 export async function buildWebsite() {
 	let data = (await import('../src/data.js?time=' + Date.now())).default;
 	let entries = checkEntries(data);
+	
 	await checkImages(entries);
 
 	let template = await readFile(resolve('../src/index.template.html'), 'utf8');
@@ -148,7 +149,7 @@ async function generatePng(filenameSrc, filenameDst, pixelSize) {
 		filenameSrc,
 		'-quiet',
 		'-strip',
-		'-resize', pixelSize + 'x' + pixelSize + '!',
+		'-resize', pixelSize + 'x' + pixelSize,
 		filenameDst
 	]);
 	await checkedSpawn('pngquant', ['--quality=95-100', '-f', '--ext', '.png', filenameDst]);
@@ -161,7 +162,7 @@ async function generateJpg(filenameSrc, filenameDst, pixelSize) {
 		filenameSrc,
 		'-quiet',
 		'-strip',
-		'-resize', pixelSize + 'x' + pixelSize + '!',
+		'-resize', pixelSize + 'x' + pixelSize,
 		'-quality', '90',
 		'-interlace', 'JPEG',
 		filenameDst
@@ -176,7 +177,7 @@ async function getIcon(filenameSrc, slug) {
 			filenameSrc,
 			'-quiet',
 			'-strip',
-			'-resize', '16x16!',
+			'-resize', '16x16',
 			'-dither', 'FloydSteinberg',
 			'-colors', '16',
 			filename
