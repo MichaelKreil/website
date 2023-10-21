@@ -14,7 +14,6 @@ watch(
 		if (filename.startsWith('web/assets/images')) return
 		if (filename.startsWith('web/index')) return
 		if (filename.startsWith('.')) return
-		console.log(['', eventType, filename].join('\t'));
 		runUpdate();
 	}
 )
@@ -28,7 +27,6 @@ async function runUpdate() {
 	}
 
 	isRunning = true;
-	console.log('update');
 	await buildWebsite();
 	isRunning = false;
 
