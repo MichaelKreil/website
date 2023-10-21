@@ -13,8 +13,8 @@ const data = {
 		tagesspiegel: { title: 'Tagesspiegel - Data Science and Stories' },
 		vds1: { title: 'Vorratsdaten von Malte Spitz' },
 		vds2: { title: 'Vorratsdaten von Balthasar Glättli' },
-		windrad: { title: 'offene Geodaten und Windradabstände' },
 		versatiles: { title: 'freier Kartenserver' },
+		zshh: { title: 'offene Geodaten' },
 	},
 
 	types: {
@@ -26,6 +26,22 @@ const data = {
 	},
 
 	entries: [
+		{
+			topic: 'zshh',
+			title: 'nd: Journalist wehrt sich gegen Repression aus Bayern',
+			start: '2023-10-16',
+			type: 'press',
+			suffix: 'nd',
+			link: 'https://www.nd-aktuell.de/artikel/1177041.datenbank-zu-windraedern-bayern-nutzt-urheberrecht-gegen-pressefreiheit.html',
+		},
+		{
+			topic: 'zshh',
+			title: 'GFF: Heute verhandelte das LG München …',
+			start: '2023-10-16',
+			type: 'press',
+			suffix: 'gff',
+			link: 'https://chaos.social/@Freiheitsrechte/111245012760960412',
+		},
 		{
 			topic: 'versatiles',
 			title: 'CCCamp: Freie interaktive Karten mit VersaTiles',
@@ -48,28 +64,28 @@ const data = {
 			link: 'https://versatiles.org',
 		},
 		{
-			topic: 'windrad',
+			topic: 'zshh',
 			title: 'Journalist verklagt Bayern auf Freigabe von Geodaten',
 			start: '2022-12-15',
 			type: 'press',
 			link: 'https://www.br.de/nachrichten/netzwelt/journalist-verklagt-bayern-auf-freigabe-von-geodaten,TQ4xFau',
 		},
 		{
-			topic: 'windrad',
+			topic: 'zshh',
 			title: 'Wie Bayern gegen Open Data und Energiewende vorgeht',
 			start: '2022-12-12',
 			type: 'press',
 			link: 'https://netzpolitik.org/2022/zensurheberrecht-wie-bayern-gegen-open-data-und-energiewende-vorgeht/',
 		},
 		{
-			topic: 'windrad',
+			topic: 'zshh',
 			title: 'GFF klagt gegen Bayern für freie Geodaten',
 			start: '2022-12-09',
 			type: 'press',
 			link: 'https://www.golem.de/news/open-data-gff-klagt-gegen-bayern-fuer-freie-geodaten-2212-170396.html',
 		},
 		{
-			topic: 'windrad',
+			topic: 'zshh',
 			title: 'Bayern missbraucht Urheberrecht, um Pressefreiheit einzuschränken',
 			start: '2022-12-09',
 			type: 'project',
@@ -78,7 +94,7 @@ const data = {
 			link: 'https://freiheitsrechte.org/themen/demokratie/geodatenbanken',
 		},
 		{
-			topic: 'windrad',
+			topic: 'zshh',
 			title: 'Energiewende auf Abstand',
 			start: '2022-12-09',
 			type: 'project',
@@ -1180,7 +1196,7 @@ const data = {
 			title: 'Die Berliner Zeitung - "Die Milka-Kuh im Wüstensand"',
 			start: '1998-06-03',
 			type: 'press',
-			link: 'http://www.berliner-zeitung.de/archiv/jungforscher-entwickelten-verfahren-zur-digitalen-bildentwicklung-die-milka-kuh-im-wuestensand,10810590,9437702.html',
+			link: 'https://www.berliner-zeitung.de/jungforscher-entwickelten-verfahren-zur-digitalen-bildentwicklung-die-milka-kuh-im-wuestensand-li.7755',
 		},
 		{
 			title: '2. Platz, Bundeswettbewerb jugend forscht',
