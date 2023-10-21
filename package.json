@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "build": "node bin/build.js",
-    "watch": "node bin/watch.js"
+    "watch": "node bin/watch.js",
+    "upload": "./bin/upload.sh",
+    "release": "npm run build && npm run upload"
   },
   "author": "Michael Kreil",
   "license": "MIT",
