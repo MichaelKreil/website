@@ -1,29 +1,37 @@
 #!/usr/bin/env node
 'use strict'
 
-const fs = require('fs');
-const { resolve } = require('path');
-const { spawnSync } = require('child_process');
+import { watch } from 'node:fs';
+import { buildWebsite, resolve } from './build.js';
 
-var runUpdate = true;
+let isRunning = false, isRunPlaned = false;
+let mainPath = resolve('../');
 
-spawnSync('node', [resolve(__dirname, 'generate.js')]);
-
-fs.watch(
-	resolve(__dirname, '../../'),
+watch(
+	mainPath,
 	{ recursive: true },
 	(eventType, filename) => {
 		if (filename === 'website/web/index.html') return
 		console.log(['', eventType, filename].join('\t'));
-		runUpdate = true;
+		runUpdate();
 	}
 )
 
-setInterval(() => {
-	if (!runUpdate) return;
-	runUpdate = false;
-	console.log('update')
-	spawnSync('node', [resolve(__dirname, 'generate.js')]);
-}, 250)
+runUpdate();
 
+async function runUpdate() {
+	if (isRunning) {
+		isRunPlaned = true;
+		return;
+	}
 
+	isRunning = true;
+	console.log('update');
+	await buildWebsite();
+	isRunning = false;
+
+	if (isRunPlaned) {
+		isRunPlaned = false;
+		runUpdate();
+	}
+}

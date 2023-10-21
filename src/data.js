@@ -1,4 +1,5 @@
-module.exports = {
+
+const data = {
 	topics: {
 		afghanistan: { title: 'Afghanistanpapiere' },
 		bots: { title: 'Social Bots' },
@@ -15,6 +16,7 @@ module.exports = {
 		windrad: { title: 'offene Geodaten und Windradabstände' },
 		versatiles: { title: 'freier Kartenserver' },
 	},
+
 	types: {
 		award: { title: 'Auszeichnung' },
 		presentation: { title: 'Vortrag' },
@@ -22,6 +24,7 @@ module.exports = {
 		project: { title: 'Projekt', size: 2 },
 		work: { title: 'Arbeit' },
 	},
+
 	entries: [
 		{
 			topic: 'versatiles',
@@ -70,7 +73,7 @@ module.exports = {
 			title: 'Bayern missbraucht Urheberrecht, um Pressefreiheit einzuschränken',
 			start: '2022-12-09',
 			type: 'project',
-			slug: '2022-12-09_project2',
+			suffix: 'gff',
 			size: 1,
 			link: 'https://freiheitsrechte.org/themen/demokratie/geodatenbanken',
 		},
@@ -79,6 +82,7 @@ module.exports = {
 			title: 'Energiewende auf Abstand',
 			start: '2022-12-09',
 			type: 'project',
+			suffix: 'taz',
 			link: 'https://taz.de/Deutsche-Vorschriften-fuer-Windenergie/!5901969/',
 		},
 		{
@@ -302,6 +306,7 @@ module.exports = {
 			title: 'Spiegel - Twitter-Datenanalyse',
 			start: '2017-12-30',
 			type: 'press',
+			suffix: 'spiegel',
 			link: 'http://www.spiegel.de/netzwelt/web/twitter-datenanalyse-wir-hatten-eine-falsche-vorstellung-von-der-filterblase-a-1185406.html',
 		},
 		{
@@ -309,6 +314,7 @@ module.exports = {
 			title: 'MDR - Beeinflussen "Social Bots" tatsächlich politische Meinungen?',
 			start: '2017-12-30',
 			type: 'press',
+			suffix: 'mdr',
 			link: 'https://www.mdr.de/nachrichten/politik/inland/beeinflussen-social-bots-politische-meinung-100.html',
 		},
 		{
@@ -316,6 +322,7 @@ module.exports = {
 			title: 'Deutschlandfunk - Das Raumschiff ist gelandet',
 			start: '2017-12-30',
 			type: 'press',
+			suffix: 'dlf',
 			link: 'http://www.deutschlandfunkkultur.de/live-vom-34-chaos-communication-congress-das-raumschiff-ist.1264.de.html?dram:article_id=407157',
 		},
 		{
@@ -331,6 +338,7 @@ module.exports = {
 			title: 'FAZ - Die Twitterinsel der AfD-Getreuen',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'faz',
 			link: 'http://www.faz.net/aktuell/feuilleton/medien/chaos-communication-congress-die-twitterinsel-der-afd-getreuen-15361701.html',
 		},
 		{
@@ -338,6 +346,7 @@ module.exports = {
 			title: 'stern - Datenjournalist sieht Fehler in Social Bots-Forschung',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'stern',
 			link: 'https://www.stern.de/digital/chaos-communication-congress-datenjournalist-sieht-fehler-in-social-bots-forschung-7803286.html',
 		},
 		{
@@ -345,6 +354,7 @@ module.exports = {
 			title: 'BR - Social Bots sind seltener als gedacht',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'br',
 			link: 'http://www.br.de/nachrichten/34c3-social-bots-sind-seltener-als-gedacht-100.html',
 		},
 		{
@@ -352,6 +362,7 @@ module.exports = {
 			title: 'WELT - Datenjournalist sieht Fehler in Social Bots-Forschung',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'welt',
 			link: 'https://www.welt.de/newsticker/dpa_nt/infoline_nt/netzwelt/article171988830/Datenjournalist-sieht-Fehler-in-Social-Bots-Forschung.html',
 		},
 		{
@@ -359,8 +370,9 @@ module.exports = {
 			title: 'ZDF heute journal - Schwachstellen der digitalen Welt',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'zdf',
 			link: 'https://www.zdf.de/nachrichten/heute-journal/schwachstellen-der-digitalen-welt-100.html',
-			slug: '2017-12-28_press_zdf',
+			suffix: 'zdf',
 			size: 2,
 		},
 		{
@@ -368,6 +380,7 @@ module.exports = {
 			title: 'Deutschlandfunk Nova - Daten zu Fake News und Filterblasen',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'dlf',
 			link: 'https://www.deutschlandfunknova.de/beitrag/chaos-communication-congress-daten-zu-fake-news-und-filterblasen',
 		},
 		{
@@ -375,6 +388,7 @@ module.exports = {
 			title: 'heise - Grundlose Hysterie um Social Bots',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'heise',
 			link: 'https://www.heise.de/newsticker/meldung/34C3-Grundlose-Hysterie-um-Social-Bots-3928440.html',
 		},
 		{
@@ -382,13 +396,15 @@ module.exports = {
 			title: 'taz - Schlecht informiert in der AfD-Blase',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'taz',
 			link: 'http://www.taz.de/!5473411/',
 		},
 		{
 			topic: 'bots',
-			title: 'golem - Social Bots verzweifelt gesucht',
+			title: 'Golem - Social Bots verzweifelt gesucht',
 			start: '2017-12-28',
 			type: 'press',
+			suffix: 'golem',
 			link: 'https://www.golem.de/news/soziale-medien-social-bots-verzweifelt-gesucht-1712-131890.html',
 		},
 
@@ -500,7 +516,7 @@ module.exports = {
 			link: 'http://www.zeit.de/wirtschaft/2015-12/lobbyismus-transparenz-zdf-lobbyradar-beendet',
 		},
 		{
-			title: 'netzpolitik - Die Deutsche Bahn setzt endlich auf Open Data',
+			title: 'netzpolitik.org - Die Deutsche Bahn setzt endlich auf Open Data',
 			start: '2015-11-06',
 			type: 'press',
 			link: 'https://netzpolitik.org/2015/die-deutsche-bahn-setzt-endlich-auf-open-data/',
@@ -556,12 +572,14 @@ module.exports = {
 			title: 'dpa-infografik award für Lobbyradar',
 			start: '2015-10-15',
 			type: 'award',
+			suffix: 'lobbyradar',
 			link: 'http://www.presseportal.de/pm/8218/3148592',
 		},
 		{
 			title: 'dpa-infografik award für "Nebeneinkünfte"',
 			start: '2015-10-15',
 			type: 'award',
+			suffix: 'nebeneinkuenfte',
 			link: 'http://www.presseportal.de/pm/8218/3148592',
 		},
 		{
@@ -591,7 +609,7 @@ module.exports = {
 			link: 'https://lobbyradar.org',
 		},
 		{
-			title: 'netzpolitik - Datenblumen visualisieren Tracking',
+			title: 'netzpolitik.org - Datenblumen visualisieren Tracking',
 			start: '2015-01-21',
 			type: 'press',
 			link: 'https://netzpolitik.org/2015/datenblumen-visualisieren-tracking/',
@@ -641,6 +659,7 @@ module.exports = {
 			title: 'Stern - Wie viele Aktenschränke die NSA füllen würde',
 			start: '2013-07-05',
 			type: 'press',
+			suffix: 'stern',
 			link: 'http://www.stern.de/digital/online/infografik-stasi-vs--nsa-wie-viele-aktenschraenke-die-nsa-fuellen-wuerde-3793650.html',
 		},
 		{
@@ -648,6 +667,7 @@ module.exports = {
 			title: 'Süddeutsche - Aktenberge, groß wie Europa',
 			start: '2013-07-05',
 			type: 'press',
+			suffix: 'sueddeutsche',
 			link: 'http://www.sueddeutsche.de/politik/stasi-versus-nsa-akten-bis-oman-1.1713311',
 		},
 		{
@@ -707,6 +727,7 @@ module.exports = {
 			title: 'engadget - Youtube vs. Gema im Datavis: 61,5% der beliebtesten Videos sind in Deutschland gesperrt',
 			start: '2013-01-29',
 			type: 'press',
+			suffix: 'engadget',
 			link: 'http://de.engadget.com/2013/01/29/youtube-vs-gema-im-datavis-61-5-der-beliebtesten-videos-sind/',
 		},
 		{
@@ -714,6 +735,7 @@ module.exports = {
 			title: 'heise - Youtube: 60 Prozent der beliebtesten Videos in Deutschland gesperrt',
 			start: '2013-01-29',
 			type: 'press',
+			suffix: 'heise',
 			link: 'http://www.heise.de/newsticker/meldung/Youtube-60-Prozent-der-beliebtesten-Videos-in-Deutschland-gesperrt-1793048.html',
 		},
 		{
@@ -721,6 +743,7 @@ module.exports = {
 			title: 'Deutschlandradio - Youtubes harter Kampf',
 			start: '2013-01-29',
 			type: 'press',
+			suffix: 'dr',
 			link: 'http://wissen.dradio.de/gema-youtubes-harter-kampf.33.de.html?dram:article_id=235726',
 		},
 		{
@@ -728,6 +751,7 @@ module.exports = {
 			title: 'Süddeutsche - Diese Kultur ist in Deutschland leider nicht verfügbar',
 			start: '2013-01-28',
 			type: 'press',
+			suffix: 'sueddeutsche',
 			link: 'http://www.sueddeutsche.de/digital/streit-zwischen-youtube-und-gema-diese-kultur-ist-in-deutschland-leider-nicht-verfuegbar-1.1584813',
 		},
 		{
@@ -735,6 +759,7 @@ module.exports = {
 			title: 'Spiegel - Gema-Streit: YouTube sperrt jedes zweite angesagte Video',
 			start: '2013-01-28',
 			type: 'press',
+			suffix: 'spiegel',
 			link: 'http://www.spiegel.de/netzwelt/netzpolitik/gema-streit-youtube-sperrt-61-5-prozent-der-angesagtesten-videos-a-880005.html',
 		},
 		{
@@ -760,9 +785,10 @@ module.exports = {
 		},
 		{
 			topic: 'afghanistan',
-			title: 'netzpolitik - Afghanistan Papiere: Über 5.000 Seiten geleakte Berichte der Bundeswehr veröffentlicht',
+			title: 'netzpolitik.org - Afghanistan Papiere: Über 5.000 Seiten geleakte Berichte der Bundeswehr veröffentlicht',
 			start: '2012-11-28',
 			type: 'press',
+			suffix: 'netzpolitik',
 			link: 'https://netzpolitik.org/2012/afghanistan-papiere-uber-5-000-seiten-geleakte-berichte-der-bundeswehr-veroffentlicht/',
 		},
 		{
@@ -770,6 +796,7 @@ module.exports = {
 			title: 'tagesschau.de - Bundeswehrdokumente veröffentlicht',
 			start: '2012-11-28',
 			type: 'press',
+			suffix: 'tagesschau',
 			link: 'http://www.tagesschau.de/ausland/afghanistanpapiere104.html',
 		},
 		{
@@ -777,6 +804,7 @@ module.exports = {
 			title: 'Süddeutsche - Folgen eines verharmlosten Krieges',
 			start: '2012-11-28',
 			type: 'press',
+			suffix: 'sueddeutsche',
 			link: 'http://www.sueddeutsche.de/politik/dokumente-ueber-den-afghanistan-einsatz-veroeffentlicht-folgen-eines-verharmlosten-krieges-1.1535437',
 		},
 		{
@@ -784,6 +812,7 @@ module.exports = {
 			title: 'focus - 5000 Geheimdokumente zeigen die Wahrheit über Afghanistan',
 			start: '2012-11-28',
 			type: 'press',
+			suffix: 'focus',
 			link: 'http://www.focus.de/politik/deutschland/bundeswehreinsatz-am-hindukusch-5000-geheimdokumente-zeigen-die-wahrheit-ueber-afghanistan_aid_870282.html',
 		},
 		{
@@ -791,6 +820,7 @@ module.exports = {
 			title: 'ZDF Elektrischer Reporter - Verkehrsinformationen',
 			start: '2012-11-28',
 			type: 'press',
+			suffix: 'zdf',
 			link: 'http://www.elektrischer-reporter.de/phase3/video/292/',
 		},
 		{
@@ -826,6 +856,7 @@ module.exports = {
 			title: 'Gigaom: Open transport data in Germany? Not if you’re not Google',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'gigaom',
 			link: 'https://gigaom.com/2012/09/28/open-transport-data-in-germany-not-if-youre-not-google/',
 		},
 		{
@@ -833,6 +864,7 @@ module.exports = {
 			title: 'golem - Deutsche Bahn sieht klaren Rechtsbruch - aber auch Chancen',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'golem',
 			link: 'http://www.golem.de/news/openplanb-deutsche-bahn-sieht-klaren-rechtsbruch-aber-auch-chancen-1209-94819.html',
 		},
 		{
@@ -840,6 +872,7 @@ module.exports = {
 			title: 'heise - Deutsche Bahn wirft Open-Data-Projekt Rechtsbruch vor',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'heise',
 			link: 'http://www.heise.de/open/meldung/Deutsche-Bahn-wirft-Open-Data-Projekt-Rechtsbruch-vor-1719902.html',
 		},
 		{
@@ -847,13 +880,15 @@ module.exports = {
 			title: 'Spiegel - Guerilla-Aktion: Deutsche Bahn wehrt sich gegen Fahrplan-Veröffentlichung',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'spiegeö',
 			link: 'http://www.spiegel.de/netzwelt/netzpolitik/openplanb-deutsche-bahn-wehrt-sich-gegen-fahrplan-veroeffentlichung-a-858544.html',
 		},
 		{
 			topic: 'openplanb',
-			title: 'netzpolitik - Deutsche Bahn beschwert sich über Open Data-Initiative: Interview mit einem Macher von OpenPlanB',
+			title: 'netzpolitik.org - Deutsche Bahn beschwert sich über Open Data-Initiative: Interview mit einem Macher von OpenPlanB',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'netzpolitik',
 			link: 'https://netzpolitik.org/2012/deutsche-bahn-beschwert-sich-uber-open-data-initiative-interview-mit-einem-macher-von-openplanb/',
 		},
 		{
@@ -861,6 +896,7 @@ module.exports = {
 			title: 'Deutsche Bahn - Offener Brief an das Projekt "openPlanB"',
 			start: '2012-09-28',
 			type: 'press',
+			suffix: 'bahn',
 			link: 'http://www.db-vertrieb.com/db_vertrieb/view/service/open_plan_b.shtml',
 		},
 		{
@@ -893,7 +929,7 @@ module.exports = {
 		},
 		{
 			topic: 'openplanb',
-			title: 'netzpolitik - openPlanB: Open-Data-Aktivisten veröffentlichen Fahrplandaten des deutschen Fernverkehrs',
+			title: 'netzpolitik.org - openPlanB: Open-Data-Aktivisten veröffentlichen Fahrplandaten des deutschen Fernverkehrs',
 			start: '2012-09-05',
 			type: 'press',
 			link: 'https://netzpolitik.org/2012/openplanb-open-data-aktivisten-veroffentlichen-fahrplandaten-des-deutschen-fernverkehrs/',
@@ -930,12 +966,14 @@ module.exports = {
 			title: 'Nominierung Grimme Online Award "Zugmonitor"',
 			start: '2012-06',
 			type: 'award',
+			suffix: 'zugmonitor',
 			link: 'http://www.grimme-institut.de/html/index.php?id=1569#c9688',
 		},
 		{
 			title: 'Nominierung Grimme Online Award "Parteispenden"',
 			start: '2012-06',
 			type: 'award',
+			suffix: 'parteispenden',
 			link: 'http://www.grimme-institut.de/html/index.php?id=1569#c9685',
 		},
 		{
@@ -946,7 +984,7 @@ module.exports = {
 		},
 		{
 			topic: 'vds1',
-			title: 'netzpolitik - Vorratsdatenspeicherung visualisiert: Was Verbindungsdaten alles verraten',
+			title: 'netzpolitik.org - Vorratsdatenspeicherung visualisiert: Was Verbindungsdaten alles verraten',
 			start: '2012-04-05',
 			type: 'press',
 			link: 'https://netzpolitik.org/2012/vorratsdatenspeicherung-visualisiert-was-verbindungsdaten-alles-verraten/',
@@ -1000,7 +1038,7 @@ module.exports = {
 		},
 		{
 			topic: 'crowdflow',
-			title: 'netzpolitik - consolidated.db-Visualisierungen',
+			title: 'netzpolitik.org - consolidated.db-Visualisierungen',
 			start: '2011-07-14',
 			type: 'press',
 			link: 'https://netzpolitik.org/2011/consolidated-db-visualisierungen/',
@@ -1010,6 +1048,7 @@ module.exports = {
 			title: 'Grimme Online Award "Spezial"',
 			start: '2011-06',
 			type: 'award',
+			suffix: 'grimme',
 			link: 'http://www.grimme-institut.de/html/index.php?id=1122#c8530',
 		},
 		{
@@ -1017,6 +1056,7 @@ module.exports = {
 			title: 'LeadAward Gold "Webspecial des Jahres" für "Verräterisches Handy"',
 			start: '2011-06',
 			type: 'award',
+			suffix: 'leadaward',
 			link: 'http://leadacademy.de/2011/preistraeger.html',
 		},
 		{
@@ -1024,6 +1064,7 @@ module.exports = {
 			title: 'Online Journalism Awards - Outstanding Data Visualization für "Verräterisches Handy"',
 			start: '2011-06',
 			type: 'award',
+			suffix: 'oja',
 			link: 'https://journalists.org/awards/2011-awards/',
 		},
 		{
@@ -1165,3 +1206,5 @@ module.exports = {
 		}
 	]
 }
+
+export default data;
