@@ -11,7 +11,9 @@ watch(
 	mainPath,
 	{ recursive: true },
 	(eventType, filename) => {
-		if (filename === 'website/web/index.html') return
+		if (filename.startsWith('web/assets/images')) return
+		if (filename.startsWith('web/index')) return
+		if (filename.startsWith('.')) return
 		console.log(['', eventType, filename].join('\t'));
 		runUpdate();
 	}
