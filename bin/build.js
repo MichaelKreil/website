@@ -15,7 +15,7 @@ export function resolve(path) {
 export async function buildWebsite() {
 	let data = (await import('../src/data.js?time=' + Date.now())).default;
 	let entries = checkEntries(data);
-	
+
 	await checkImages(entries);
 
 	let template = await readFile(resolve('../src/index.template.html'), 'utf8');
@@ -149,7 +149,10 @@ async function generatePng(filenameSrc, filenameDst, pixelSize) {
 		filenameSrc,
 		'-quiet',
 		'-strip',
-		'-resize', pixelSize + 'x' + pixelSize,
+		'-resize', `${pixelSize}x${pixelSize}^`,
+		'-gravity', 'Center',
+		'-crop', `${pixelSize}x${pixelSize}+0+0`,
+		'+repage',
 		filenameDst
 	]);
 	await checkedSpawn('pngquant', ['--quality=95-100', '-f', '--ext', '.png', filenameDst]);
@@ -162,7 +165,10 @@ async function generateJpg(filenameSrc, filenameDst, pixelSize) {
 		filenameSrc,
 		'-quiet',
 		'-strip',
-		'-resize', pixelSize + 'x' + pixelSize,
+		'-resize', `${pixelSize}x${pixelSize}^`,
+		'-gravity', 'Center',
+		'-crop', `${pixelSize}x${pixelSize}+0+0`,
+		'+repage',
 		'-quality', '90',
 		'-interlace', 'JPEG',
 		filenameDst
@@ -177,7 +183,10 @@ async function getIcon(filenameSrc, slug) {
 			filenameSrc,
 			'-quiet',
 			'-strip',
-			'-resize', '16x16',
+			'-resize', '16x16^',
+			'-gravity', 'Center',
+			'-crop', '16x16+0+0',
+			'+repage',
 			'-dither', 'FloydSteinberg',
 			'-colors', '16',
 			filename
