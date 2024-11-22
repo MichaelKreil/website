@@ -44,11 +44,17 @@ export async function checkImages(entries: EntryChecked1[]): Promise<void> {
 async function getImage(filenameSrc: string, basenameDst: string, pixelSize: number) {
 	let filenamePng = basenameDst + '.png';
 	let filenameJpg = basenameDst + '.jpg';
+	let filenameWebp = basenameDst + '.webp';
 
 	if (!existsSync(filenamePng)) await generatePng(filenameSrc, filenamePng, pixelSize);
 	if (!existsSync(filenameJpg)) await generateJpg(filenameSrc, filenameJpg, pixelSize);
+	if (!existsSync(filenameWebp)) await generateWebp(filenameSrc, filenameWebp, pixelSize);
 
-	return `${basename(basenameDst)}.${(getFilesize(filenamePng) < getFilesize(filenameJpg) ? 'pn' : 'jp')}g`;
+	let filename = filenamePng;
+	if (getFilesize(filename) > getFilesize(filenameJpg)) filename = filenameJpg;
+	if (getFilesize(filename) > getFilesize(filenameWebp)) filename = filenameWebp;
+
+	return basename(filename);
 
 	function getFilesize(f: string) {
 		return statSync(f).size;
@@ -57,7 +63,6 @@ async function getImage(filenameSrc: string, basenameDst: string, pixelSize: num
 
 
 async function generatePng(filenameSrc: string, filenameDst: string, pixelSize: number) {
-	//console.log(`generate PNG "${basename(filenameSrc)}"`);
 	await checkedSpawn('magick', [
 		filenameSrc,
 		'-quiet',
@@ -73,7 +78,6 @@ async function generatePng(filenameSrc: string, filenameDst: string, pixelSize: 
 }
 
 async function generateJpg(filenameSrc: string, filenameDst: string, pixelSize: number) {
-	//console.log(`generate JPEG "${basename(filenameSrc)}"`);
 	await checkedSpawn('magick', [
 		filenameSrc,
 		'-quiet',
@@ -84,6 +88,20 @@ async function generateJpg(filenameSrc: string, filenameDst: string, pixelSize: 
 		'+repage',
 		'-quality', '90',
 		'-interlace', 'JPEG',
+		filenameDst
+	]);
+}
+
+async function generateWebp(filenameSrc: string, filenameDst: string, pixelSize: number) {
+	await checkedSpawn('magick', [
+		filenameSrc,
+		'-quiet',
+		'-strip',
+		'-resize', `${pixelSize}x${pixelSize}^`,
+		'-gravity', 'Center',
+		'-crop', `${pixelSize}x${pixelSize}+0+0`,
+		'+repage',
+		'-quality', '90',
 		filenameDst
 	]);
 }
