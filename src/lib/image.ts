@@ -1,5 +1,5 @@
 import { mkdir, readdir, readFile } from 'node:fs/promises';
-import { basename, resolve } from 'node:path';
+import { basename } from 'node:path';
 import { EntryChecked1 } from './types.js';
 import { forEachAsync, ProgressBar } from 'work-faster';
 import { existsSync, statSync } from 'node:fs';
@@ -7,8 +7,8 @@ import { checkedSpawn, resolveProject } from './utils.js';
 
 
 export async function checkImages(entries: EntryChecked1[]): Promise<void> {
-	await mkdir(resolve('../web/assets/images'), { recursive: true });
-	await mkdir(resolve('../icons'), { recursive: true });
+	await mkdir(resolveProject('web/assets/images'), { recursive: true });
+	await mkdir(resolveProject('icons'), { recursive: true });
 
 	const knownImages = new Set(
 		(await readdir(resolveProject('images')))
@@ -24,7 +24,7 @@ export async function checkImages(entries: EntryChecked1[]): Promise<void> {
 			uniqueImageSrc.add(entry.imageSrc);
 			knownImages.delete(entry.imageSrc);
 
-			let basenameDst = resolve('../web/assets/images/' + entry.slug + '.' + entry.size);
+			let basenameDst = resolveProject('web/assets/images/' + entry.slug + '.' + entry.size);
 			let pixelSize = entry.size * 192;
 
 			entry.image = await getImage(filenameSrc, basenameDst, pixelSize);
@@ -58,7 +58,7 @@ async function getImage(filenameSrc: string, basenameDst: string, pixelSize: num
 
 async function generatePng(filenameSrc: string, filenameDst: string, pixelSize: number) {
 	//console.log(`generate PNG "${basename(filenameSrc)}"`);
-	await checkedSpawn('convert', [
+	await checkedSpawn('magick', [
 		filenameSrc,
 		'-quiet',
 		'-strip',
@@ -74,7 +74,7 @@ async function generatePng(filenameSrc: string, filenameDst: string, pixelSize: 
 
 async function generateJpg(filenameSrc: string, filenameDst: string, pixelSize: number) {
 	//console.log(`generate JPEG "${basename(filenameSrc)}"`);
-	await checkedSpawn('convert', [
+	await checkedSpawn('magick', [
 		filenameSrc,
 		'-quiet',
 		'-strip',
@@ -92,7 +92,7 @@ async function getIcon(filenameSrc: string, slug: string) {
 	let filename = resolveProject('icons', slug + '.gif');
 
 	if (!existsSync(filename)) {
-		await checkedSpawn('convert', [
+		await checkedSpawn('magick', [
 			filenameSrc,
 			'-quiet',
 			'-strip',

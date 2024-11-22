@@ -2,16 +2,17 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
-import { Entry, EntryChecked1 } from './types.js';
+import { EntryChecked1 } from './types.js';
 
 export async function buildWebsite() {
+	console.log('build website');
 	let entries = await getEntries();
 
 	await checkImages(entries);
 
-	const template = Handlebars.compile(resolveProject('src/template/index.template.html'));
+	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8');
 
-	let html = template({
+	let html = Handlebars.compile(template)({
 		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
 		mainstyle: await readFile(resolveProject('web/assets/style/main.css'), 'utf8'),
 		entries
@@ -21,7 +22,7 @@ export async function buildWebsite() {
 }
 
 async function getEntries(): Promise<EntryChecked1[]> {
-	const data: typeof import('../data.ts') = (await import('../src/data.js?time=' + Date.now()));
+	const data: typeof import('../data.ts') = (await import('../data.js?time=' + Date.now()));
 	const slugSet = new Set();
 
 	const entries: EntryChecked1[] = data.entries.flatMap(entry => {

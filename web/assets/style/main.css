@@ -115,6 +115,10 @@ header a:hover {
 	background-image: url('assets/style/award.png');
 }
 
+.entry_size_1.entry_funding .entry_background {
+	background-image: url('assets/style/funding.png');
+}
+
 .entry_size_1.entry_presentation .entry_background {
 	background-image: url('assets/style/presentation.png');
 }

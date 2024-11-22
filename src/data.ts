@@ -57,10 +57,24 @@ export const entries: Entry[] = [
 	},
 	{
 		topic: 'versatiles',
+		title: 'NDR - Zwischen Weser und Ems liegt die deutsche Gasprovinz',
+		start: '2024-07-05',
+		type: 'work',
+		link: 'https://www.ndr.de/nachrichten/info/Zwischen-Weser-und-Ems-liegt-die-deutsche-Gasprovinz,heizung248.html',
+	},
+	{
+		topic: 'versatiles',
 		title: 'MIZ Babelsberg: VersaTiles - Editorial Tools',
 		start: '2024-07-01',
 		type: 'funding',
 		link: 'https://www.miz-babelsberg.de/foerderung/foerderprojekte-alumni/details/versatiles-editorial-tools.html',
+	},
+	{
+		topic: 'versatiles',
+		title: 'NDR - Zensus 2022: Mietpreise im Norden im Überblick',
+		start: '2024-06-26',
+		type: 'work',
+		link: 'https://www.ndr.de/nachrichten/ndrdata/Zensus-Mietpreise-im-Norden-im-Ueberblick,zensus308.html',
 	},
 	{
 		topic: 'zshh',
