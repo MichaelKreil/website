@@ -1,19 +1,18 @@
-#!/usr/bin/env node
-'use strict'
-
 import { watch } from 'node:fs';
-import { buildWebsite, resolve } from './build.js';
+import { resolveProject } from './lib/utils.js';
+import { buildWebsite } from './lib/website.js';
 
 let isRunning = false, isRunPlaned = false;
-let mainPath = resolve('../');
+let mainPath = resolveProject('');
 
 watch(
 	mainPath,
 	{ recursive: true },
 	(eventType, filename) => {
-		if (filename.startsWith('web/assets/images')) return
-		if (filename.startsWith('web/index')) return
-		if (filename.startsWith('.')) return
+		if (filename == null) return;
+		if (filename.startsWith('web/assets/images')) return;
+		if (filename.startsWith('web/index')) return;
+		if (filename.startsWith('.')) return;
 		runUpdate();
 	}
 )

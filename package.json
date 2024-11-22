@@ -3,10 +3,11 @@
   "version": "1.1.0",
   "description": "",
   "scripts": {
-    "build": "node bin/build.js",
-    "watch": "node bin/watch.js",
-    "upload": "./bin/upload.sh",
-    "release": "npm run build && npm run upload"
+    "build": "tsx src/build.ts",
+    "watch": "tsx src/watch.ts",
+    "upload": "./upload.sh",
+    "release": "npm run build && ./upload.sh",
+    "upgrade": "npm-check-updates -u && rm -f package-lock.json; rm -rf node_modules; npm i && npm update"
   },
   "author": "Michael Kreil",
   "license": "MIT",
@@ -14,6 +15,12 @@
   "type": "module",
   "dependencies": {
     "handlebars": "^4.7.8",
-    "work-faster": "^0.3.4"
+    "work-faster": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.1",
+    "npm-check-updates": "^17.1.11",
+    "tsx": "^4.19.2",
+    "typescript": "^5.6.3"
   }
 }
