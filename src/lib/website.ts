@@ -14,7 +14,6 @@ export async function buildWebsite() {
 
 	let html = Handlebars.compile(template)({
 		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
-		mainstyle: await readFile(resolveProject('web/assets/style/main.css'), 'utf8'),
 		entries
 	});
 

@@ -1,40 +1,200 @@
 <html lang="de">
+
 <head>
 	<meta charset="utf-8">
 	<title>Michael Kreil</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="author" content="Michael Kreil">
-	<meta name="description" content="Projekte, Vorträge, Presseberichte und Auszeichnungen des Datenjournalisten und Data Scientists Michael Kreil.">
+	<meta name="description" content="Projekte, Vorträge, Presseartikel und Auszeichnungen des Datenjournalisten und Data Scientist Michael Kreil.">
+	<link rel="icon" type="image/x-icon" href="/assets/profile.png">
 	<script type="text/javascript">
 		{{{mainscript}}}
 	</script>
 	<style type="text/css">
-		{{{mainstyle}}}
+		body {
+			background: #000;
+			color: #aaa;
+			font-family: "Helvetica Neue", Helvetica, Verdana, Arial, sans-serif;
+			font-weight: 200;
+			font-size: 20px;
+			margin: 0px;
+		}
+
+		header h1,
+		p {
+			text-align: center;
+			font-weight: 200;
+		}
+
+		header h1 {
+			font-size: 2em;
+		}
+
+		header p {
+			font-size: 1em;
+		}
+
+		header a {
+			color: inherit;
+			text-decoration: none;
+			border-bottom: 0.05em solid rgba(255, 255, 255, 0.2);
+			transition: border-bottom-color 100ms;
+		}
+
+		header a:hover {
+			border-bottom-color: rgba(255, 255, 255, 0.5);
+		}
+
+		#wrapper {
+			width: 100%;
+		}
+
+		#container {
+			margin: 0 auto;
+			position: relative;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+		}
+
+		.entry {
+			position: relative;
+			flex: 0 0 auto;
+			width: 200px;
+			height: 200px;
+			display: inline-block;
+			cursor: pointer;
+			overflow: hidden;
+			font-size: 0.5em;
+			-webkit-tap-highlight-color: transparent;
+		}
+
+		#container.interactive {
+			display: block;
+			flex: unset unset;
+			justify-content: unset;
+		}
+
+		.interactive .entry {
+			position: absolute;
+			display: block;
+			flex: unset unset unset;
+		}
+
+		.transition .entry {
+			transition: left 500ms, top 500ms, width 500ms, height 500ms;
+		}
+
+		.entry a {
+			display: block;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 1px;
+			right: 1px;
+			color: #333;
+			text-decoration: none;
+			transition: opacity 100ms;
+		}
+
+		.entry_background {
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			bottom: 0px;
+			right: 0px;
+			background-color: #333;
+			background-position: center center;
+			background-size: cover;
+		}
+
+		.entry_size_1 a {
+			opacity: 0.5;
+		}
+
+		.entry_size_1.entry_press .entry_background {
+			background-image: url('/assets/style/press.png');
+		}
+
+		.entry_size_1.entry_project .entry_background {
+			background-image: url('/assets/style/project.png');
+		}
+
+		.entry_size_1.entry_award .entry_background {
+			background-image: url('/assets/style/award.png');
+		}
+
+		.entry_size_1.entry_funding .entry_background {
+			background-image: url('/assets/style/funding.png');
+		}
+
+		.entry_size_1.entry_presentation .entry_background {
+			background-image: url('/assets/style/presentation.png');
+		}
+
+		.entry h2 {
+			hyphens: auto;
+			position: absolute;
+			font-size: 1em;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			padding: 0.5em;
+			margin: 0;
+			opacity: 0.3;
+			transition: opacity 100ms;
+			text-align: left;
+			background-color: rgba(255, 255, 255, 0.7);
+			font-weight: normal;
+			overflow-wrap: break-word;
+		}
+
+		.entry_size_1 h2 {
+			opacity: 1.0;
+		}
+
+		.entry a:hover,
+		.entry a:focus,
+		.entry a:hover h2,
+		.entry a:focus h2 {
+			opacity: 1.0;
+			outline: none;
+		}
+
+		footer {
+			padding-top: 300px;
+		}
 	</style>
 </head>
+
 <body>
-	<header>
-		<h1>Michael Kreil</h1>
-		<p>
-			<a href="https://chaos.social/@michaelkreil" target="_blank">Mastodon</a>,
-			<a href="https://bsky.app/profile/michaelkreil.bsky.social" target="_blank">Bluesky</a>,
-			<a href="https://github.com/MichaelKreil" target="_blank">GitHub</a>,
-			<a href="mailto:contact3@michael-kreil.de">e-mail</a>,
-			<a href="https://twitter.com/MichaelKreil" target="_blank" style="font-size: 0.7em;opacity: 0.7;">Twitter</a>
-		</p>
+	<header style="display: flex; align-content: stretch; align-items: center; width: 500px; margin: 30px auto 80px;">
+		<div>
+			<img src="/assets/profile.png" style="width:100px; height:100px">
+		</div>
+		<div style="flex: 1;">
+			<h1>Michael Kreil</h1>
+			<p>
+				<a href="https://chaos.social/@michaelkreil" target="_blank">Mastodon</a>,
+				<a href="https://bsky.app/profile/michaelkreil.bsky.social" target="_blank">Bluesky</a>,
+				<a href="https://github.com/MichaelKreil" target="_blank">GitHub</a>,
+				<a href="mailto:contact4@michael-kreil.de">e-mail</a>,
+			</p>
+		</div>
 	</header>
 	<div id="wrapper">
 		<div id="container">
-		{{#each entries}}
+			{{#each entries}}
 			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" entry_type="{{type}}" entry_size="{{size}}">
-				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener"{{/if}}>
-					<div class="entry_background" {{#if image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})"{{/if}}></div>
+				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener" {{/if}}>
+					<div class="entry_background" {{#if image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})" {{/if}}></div>
 					<h2><b>{{typeTitle}}:</b> {{title}}</h2>
-				</a>
+					</a>
 			</section>
-		{{/each}}
+			{{/each}}
 		</div>
 	</div>
 	<footer></footer>
 </body>
+
 </html>
