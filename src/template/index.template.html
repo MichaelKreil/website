@@ -52,9 +52,6 @@
 		#container {
 			margin: 0 auto;
 			position: relative;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: center;
 		}
 
 		.entry {
@@ -164,6 +161,13 @@
 		footer {
 			padding-top: 300px;
 		}
+
+		.flex {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+			width: 80%;
+		}
 	</style>
 </head>
 
@@ -183,7 +187,7 @@
 		</div>
 	</header>
 	<div id="wrapper">
-		<div id="container">
+		<div id="container" class="flex">
 			{{#each entries}}
 			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" entry_type="{{type}}" entry_size="{{size}}">
 				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener" {{/if}}>

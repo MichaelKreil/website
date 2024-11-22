@@ -171,9 +171,6 @@
 		#container {
 			margin: 0 auto;
 			position: relative;
-			display: flex;
-			flex-flow: row wrap;
-			justify-content: center;
 		}
 
 		.entry {
@@ -283,6 +280,13 @@
 		footer {
 			padding-top: 300px;
 		}
+
+		.flex {
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: center;
+			width: 80%;
+		}
 	</style>
 </head>
 
@@ -302,7 +306,7 @@
 		</div>
 	</header>
 	<div id="wrapper">
-		<div id="container">
+		<div id="container" class="flex">
 			<section class="entry entry_funding entry_size_1 noimage" entry_type="funding" entry_size="1">
 				<a href="https://nlnet.nl/project/VersaTiles/" target="_blank" rel="noopener" >
 					<div class="entry_background" ></div>
