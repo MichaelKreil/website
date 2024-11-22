@@ -1,4 +1,4 @@
 
-bin/upload.sh
+*.sh
 node_modules/
 web/google*.html
