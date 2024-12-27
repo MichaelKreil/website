@@ -14,6 +14,7 @@ export const topics: Record<string, Topic> = {
 	vds1: { title: 'Vorratsdaten von Malte Spitz' },
 	vds2: { title: 'Vorratsdaten von Balthasar Glättli' },
 	versatiles: { title: 'freier Kartenserver' },
+	volkswagen: { title: 'Datenleck bei Volkswagen' },
 	zshh: { title: 'offene Geodaten' },
 };
 
@@ -27,6 +28,14 @@ export const types: Record<string, Type> = {
 };
 
 export const entries: Entry[] = [
+	{
+		topic: 'volkswagen',
+		title: 'Spiegel - Wir wissen, wo dein Auto steht',
+		start: '2024-12-27',
+		type: 'press',
+		size: 2,
+		link: 'https://www.spiegel.de/netzwelt/web/volkswagen-konzern-datenleck-wir-wissen-wo-dein-auto-steht-a-e12d33d0-97bc-493c-96d1-aa5892861027',
+	},
 	{
 		topic: 'versatiles',
 		title: 'NGI0 Commons: VersaTiles',
