@@ -30,10 +30,25 @@ export const types: Record<string, Type> = {
 export const entries: Entry[] = [
 	{
 		topic: 'volkswagen',
+		title: 'heise - Kommentar zur VW-Datenpanne: DSGVO, zeig deine Zähne!',
+		start: '2025-01-17',
+		type: 'press',
+		link: 'https://www.heise.de/meinung/Kommentar-zur-VW-Datenpanne-DSGVO-zeig-deine-Zaehne-10245938.html',
+	},
+	{
+		topic: 'volkswagen',
+		title: '38C3 - Wir wissen, wo dein Auto steht',
+		start: '2024-12-27',
+		type: 'presentation',
+		size: 2,
+		link: 'https://www.youtube.com/watch?v=iHsz6jzjbRc',
+		//link: 'https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen'
+	},
+	{
+		topic: 'volkswagen',
 		title: 'Spiegel - Wir wissen, wo dein Auto steht',
 		start: '2024-12-27',
-		type: 'press',
-		size: 2,
+		type: 'project',
 		link: 'https://www.spiegel.de/netzwelt/web/volkswagen-konzern-datenleck-wir-wissen-wo-dein-auto-steht-a-e12d33d0-97bc-493c-96d1-aa5892861027',
 	},
 	{
