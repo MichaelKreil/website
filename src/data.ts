@@ -9,6 +9,7 @@ export const topics: Record<string, Topic> = {
 	lobbyradar: { title: 'ZDF Lobbyradar' },
 	openplanb: { title: 'OpenPlanB' },
 	rassismus: { title: 'Rassismus' },
+	faschismus: { title: 'Faschismus' },
 	stasinsa: { title: 'Stasi vs NSA' },
 	tagesspiegel: { title: 'Tagesspiegel - Data Science and Stories' },
 	vds1: { title: 'Vorratsdaten von Malte Spitz' },
@@ -28,6 +29,13 @@ export const types: Record<string, Type> = {
 };
 
 export const entries: Entry[] = [
+	{
+		topic: 'faschismus',
+		title: 'Schon wieder - Der Aufstieg der NSDAP/AfD',
+		start: '2025-02-20',
+		type: 'project',
+		link: 'https://datajournal.org/schon-wieder/',
+	},
 	{
 		topic: 'volkswagen',
 		title: 'heise - Kommentar zur VW-Datenpanne: DSGVO, zeig deine Zähne!',
