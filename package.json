@@ -7,7 +7,7 @@
     "prepack": " ",
     "release": " ",
     "build": "tsx src/build.ts",
-    "watch": "tsx src/watch.ts",
+    "dev": "tsx src/dev.ts",
     "upload": "./upload.sh",
     "publish": "npm run build && ./upload.sh",
     "upgrade": "vrt deps-upgrade"
@@ -17,8 +17,10 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@types/express": "^5.0.0",
     "@types/node": "^22.13.5",
     "@versatiles/release-tool": "^2.2.4",
+    "express": "^4.21.2",
     "handlebars": "^4.7.8",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3",

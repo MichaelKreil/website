@@ -1,4 +1,5 @@
 import { watch } from 'node:fs';
+import express from 'express';
 import { resolveProject } from './lib/utils.js';
 import { buildWebsite } from './lib/website.js';
 
@@ -18,6 +19,7 @@ watch(
 )
 
 runUpdate();
+startServer();
 
 async function runUpdate() {
 	if (isRunning) {
@@ -33,4 +35,12 @@ async function runUpdate() {
 		isRunPlaned = false;
 		runUpdate();
 	}
+}
+
+function startServer() {
+	const app = express();
+	app.use(express.static('web'));
+	app.listen(8080, () => {
+		console.log('Server running on http://localhost:8080');
+	});
 }
