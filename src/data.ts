@@ -15,7 +15,7 @@ export const topics: Record<string, Topic> = {
 	vds1: { title: 'Vorratsdaten von Malte Spitz' },
 	vds2: { title: 'Vorratsdaten von Balthasar Glättli' },
 	versatiles: { title: 'freier Kartenserver' },
-	volkswagen: { title: 'Datenleck bei Volkswagen' },
+	vw: { title: 'Datenleck bei Volkswagen' },
 	zshh: { title: 'offene Geodaten' },
 };
 
@@ -30,6 +30,13 @@ export const types: Record<string, Type> = {
 
 export const entries: Entry[] = [
 	{
+		topic: 'vw',
+		title: 'Interview, mediummagazin - Wir wissen, wo dein Auto steht',
+		start: '2025-03-06',
+		type: 'press',
+		link: 'https://www.mediummagazin.de/wir-wissen-wo-dein-auto-steht/',
+	},
+	{
 		topic: 'faschismus',
 		title: 'Schon wieder - Der Aufstieg der NSDAP/AfD',
 		start: '2025-02-20',
@@ -37,14 +44,14 @@ export const entries: Entry[] = [
 		link: 'https://datajournal.org/schon-wieder/',
 	},
 	{
-		topic: 'volkswagen',
+		topic: 'vw',
 		title: 'heise - Kommentar zur VW-Datenpanne: DSGVO, zeig deine Zähne!',
 		start: '2025-01-17',
 		type: 'press',
 		link: 'https://www.heise.de/meinung/Kommentar-zur-VW-Datenpanne-DSGVO-zeig-deine-Zaehne-10245938.html',
 	},
 	{
-		topic: 'volkswagen',
+		topic: 'vw',
 		title: '38C3 - Wir wissen, wo dein Auto steht',
 		start: '2024-12-27',
 		type: 'presentation',
@@ -53,7 +60,7 @@ export const entries: Entry[] = [
 		//link: 'https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen'
 	},
 	{
-		topic: 'volkswagen',
+		topic: 'vw',
 		title: 'Spiegel - Wir wissen, wo dein Auto steht',
 		start: '2024-12-27',
 		type: 'project',
