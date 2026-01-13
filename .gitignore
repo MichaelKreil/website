@@ -2,6 +2,7 @@
 .DS_Store
 *.sh
 coverage/
+icons/
 node_modules/
 web/*.html
 web/images/
