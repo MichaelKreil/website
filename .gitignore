@@ -5,4 +5,4 @@ coverage/
 icons/
 node_modules/
 web/*.html
-web/images/
+web/assets/images/
