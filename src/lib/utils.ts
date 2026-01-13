@@ -12,9 +12,9 @@ export function checkedSpawn(command: string, attr: string[]): Promise<void> {
 		spawn(command, attr, { stdio: 'inherit' })
 			.on('error', (error) => {
 				console.log(error)
-				throw error
+				rej(error)
 			})
-			.on('close', (code, signal) => {
+			.on('close', (code) => {
 				switch (code) {
 					case 0:
 					case 99:

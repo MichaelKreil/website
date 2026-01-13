@@ -5,7 +5,7 @@ import { buildWebsite } from './lib/website.js'
 
 let isRunning = false,
 	isRunPlaned = false
-let mainPath = resolveProject('')
+const mainPath = resolveProject('')
 
 watch(mainPath, { recursive: true }, (eventType, filename) => {
 	if (filename == null) return

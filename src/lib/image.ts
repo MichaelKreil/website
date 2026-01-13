@@ -14,14 +14,14 @@ export async function checkImages(entries: EntryChecked1[]): Promise<void> {
 
 	const progress = new ProgressBar(entries.length)
 	await forEachAsync(entries, async (entry) => {
-		let filenameSrc = resolveProject('images', entry.imageSrc)
+		const filenameSrc = resolveProject('images', entry.imageSrc)
 		if (existsSync(filenameSrc)) {
 			if (uniqueImageSrc.has(entry.imageSrc)) throw new Error(`duplicated imageSrc file "${entry.imageSrc}"`)
 			uniqueImageSrc.add(entry.imageSrc)
 			knownImages.delete(entry.imageSrc)
 
-			let basenameDst = resolveProject('web/assets/images/' + entry.slug + '.' + entry.size)
-			let pixelSize = entry.size * 192
+			const basenameDst = resolveProject('web/assets/images/' + entry.slug + '.' + entry.size)
+			const pixelSize = entry.size * 192
 
 			entry.image = await getImage(filenameSrc, basenameDst, pixelSize)
 			entry.icon = await getIcon(filenameSrc, entry.slug)
@@ -32,14 +32,14 @@ export async function checkImages(entries: EntryChecked1[]): Promise<void> {
 
 	if (knownImages.size > 0) {
 		console.log('The following images are not used:')
-		for (let image of knownImages) console.log('   ' + image)
+		for (const image of knownImages) console.log('   ' + image)
 	}
 }
 
 async function getImage(filenameSrc: string, basenameDst: string, pixelSize: number) {
-	let filenamePng = basenameDst + '.png'
-	let filenameJpg = basenameDst + '.jpg'
-	let filenameWebp = basenameDst + '.webp'
+	const filenamePng = basenameDst + '.png'
+	const filenameJpg = basenameDst + '.jpg'
+	const filenameWebp = basenameDst + '.webp'
 
 	if (!existsSync(filenamePng)) await generatePng(filenameSrc, filenamePng, pixelSize)
 	if (!existsSync(filenameJpg)) await generateJpg(filenameSrc, filenameJpg, pixelSize)
@@ -113,7 +113,7 @@ async function generateWebp(filenameSrc: string, filenameDst: string, pixelSize:
 }
 
 async function getIcon(filenameSrc: string, slug: string) {
-	let filename = resolveProject('icons', slug + '.gif')
+	const filename = resolveProject('icons', slug + '.gif')
 
 	if (!existsSync(filename)) {
 		await checkedSpawn('magick', [

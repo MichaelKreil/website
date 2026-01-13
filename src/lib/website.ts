@@ -6,13 +6,13 @@ import { EntryChecked1 } from './types.js'
 
 export async function buildWebsite() {
 	console.log('build website')
-	let entries = await getEntries()
+	const entries = await getEntries()
 
 	await checkImages(entries)
 
 	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8')
 
-	let html = Handlebars.compile(template)({
+	const html = Handlebars.compile(template)({
 		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
 		entries,
 	})
@@ -29,7 +29,7 @@ async function getEntries(): Promise<EntryChecked1[]> {
 
 		const date = parseDate(entry.start)
 
-		let typeObj = data.types[entry.type]
+		const typeObj = data.types[entry.type]
 		if (!typeObj) throw new Error('type unknown: ' + debug())
 		if (typeObj.ignore) return []
 
@@ -39,7 +39,7 @@ async function getEntries(): Promise<EntryChecked1[]> {
 
 		let topicObj
 		if (entry.topic) {
-			let topic = data.topics[entry.topic]
+			const topic = data.topics[entry.topic]
 			if (!topic) throw new Error('topic unknown: ' + debug())
 			topicObj = topic
 		}
