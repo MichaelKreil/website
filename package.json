@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "build": "tsx src/build.ts",
-    "check": "npm run format && npm run lint",
+    "check": "npm run format && npm run lint && npm run test",
     "dev": "tsx src/dev.ts",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
