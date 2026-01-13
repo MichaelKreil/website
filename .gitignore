@@ -3,4 +3,4 @@
 *.sh
 coverage/
 node_modules/
-web/google*.html
+web/*.html
