@@ -75,12 +75,12 @@ async function getEntries(): Promise<EntryChecked1[]> {
 	entries.sort((a, b) => b.date.getTime() - a.date.getTime())
 
 	return entries
+}
 
-	function parseDate(text: string): Date {
-		let m
-		if ((m = text.match(/^(\d\d\d\d)-(\d\d)-(\d\d)$/)))
-			return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]))
-		if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1)
-		throw Error('unknown date')
-	}
+export function parseDate(text: string): Date {
+	let m
+	if ((m = text.match(/^(\d\d\d\d)-(\d\d)-(\d\d)$/)))
+		return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]))
+	if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1)
+	throw Error('unknown date')
 }
