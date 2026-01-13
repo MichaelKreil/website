@@ -168,15 +168,23 @@
 			justify-content: center;
 			width: 80%;
 		}
+
+		@media (max-width: 500px) {
+			header {
+				flex-direction: column !important;
+				text-align: center;
+			}
+		}
 	</style>
 </head>
 
 <body>
-	<header style="display: flex; align-content: stretch; align-items: center; width: 500px; margin: 30px auto 80px;">
+	<header
+		style="display: flex; align-content: stretch; align-items: center; max-width: 500px; margin: 30px auto 80px;">
 		<div>
 			<img src="/assets/profile.png" style="width:100px; height:100px">
 		</div>
-		<div style="flex: 1;">
+		<div style="flex:1;">
 			<h1>Michael Kreil</h1>
 			<p>
 				<a href="https://github.com/MichaelKreil" target="_blank">GitHub</a>,
