@@ -1,28 +1,23 @@
-import js from '@eslint/js';
-import ts from 'typescript-eslint';
-import parser from '@typescript-eslint/parser';
-import eslint_plugin from '@typescript-eslint/eslint-plugin';
+import js from '@eslint/js'
+import ts from 'typescript-eslint'
+import parser from '@typescript-eslint/parser'
+import eslint_plugin from '@typescript-eslint/eslint-plugin'
 
 export default [
 	js.configs.recommended,
 	...ts.configs.recommended,
 	{
-		ignores: [
-			'**/dist/**/*.*',
-			'**/coverage/**/*.*',
-		]
+		ignores: ['**/dist/**/*.*', '**/coverage/**/*.*'],
 	},
 	{
-		files: [
-			'**/src/**/*.ts',
-		],
+		files: ['**/src/**/*.ts'],
 		languageOptions: {
 			ecmaVersion: 'latest',
 			sourceType: 'module',
 			globals: {
 				browser: false,
 				es6: true,
-				node: true
+				node: true,
 			},
 			parser,
 			parserOptions: {
@@ -44,9 +39,9 @@ export default [
 				{
 					argsIgnorePattern: '^_',
 					varsIgnorePattern: '^_',
-					caughtErrorsIgnorePattern: '^_'
-				}
-			]
-		}
-	}
+					caughtErrorsIgnorePattern: '^_',
+				},
+			],
+		},
+	},
 ]

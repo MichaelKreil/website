@@ -1,4 +1,4 @@
-import { Entry, Topic, Type } from './lib/types.js';
+import { Entry, Topic, Type } from './lib/types.js'
 
 export const topics: Record<string, Topic> = {
 	afghanistan: { title: 'Afghanistanpapiere' },
@@ -17,7 +17,7 @@ export const topics: Record<string, Topic> = {
 	versatiles: { title: 'freier Kartenserver' },
 	vw: { title: 'Datenleck bei Volkswagen' },
 	zshh: { title: 'offene Geodaten' },
-};
+}
 
 export const types: Record<string, Type> = {
 	award: { title: 'Auszeichnung' },
@@ -26,7 +26,7 @@ export const types: Record<string, Type> = {
 	press: { title: 'Berichterstattung' },
 	project: { title: 'Projekt', size: 2 },
 	work: { title: 'Arbeit' },
-};
+}
 
 export const entries: Entry[] = [
 	{
@@ -192,7 +192,7 @@ export const entries: Entry[] = [
 	},
 	{
 		topic: 'bots',
-		title: 'Scientific Paper: The Rise and Fall of \'Social Bot\' Research',
+		title: "Scientific Paper: The Rise and Fall of 'Social Bot' Research",
 		start: '2021-03-29',
 		type: 'project',
 		link: 'https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3814191',
@@ -229,7 +229,7 @@ export const entries: Entry[] = [
 	},
 	{
 		topic: 'bots',
-		title: 'NYTimes: Who\'s a Bot? Who\'s Not?',
+		title: "NYTimes: Who's a Bot? Who's Not?",
 		start: '2020-06-16',
 		type: 'press',
 		link: 'https://www.nytimes.com/2020/06/16/science/social-media-bots-kazemi.html',
@@ -514,24 +514,20 @@ export const entries: Entry[] = [
 		link: 'https://www.golem.de/news/soziale-medien-social-bots-verzweifelt-gesucht-1712-131890.html',
 	},
 
-
-
 	{
 		title: 'wikidatacon - Keynote #2',
 		start: '2017-10-29',
 		type: 'presentation',
 		link: 'https://media.ccc.de/v/wikidatacon2017-10037-keynote_2_michael_kreil_datajournalist_at_data_sciences_and_stories',
-		size: 2
+		size: 2,
 	},
-
-
 
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - Soll Tegel offen bleiben?',
 		start: '2017-09-25',
 		type: 'project',
-		link: 'https://wahl.tagesspiegel.de/2017/karten/tegel/'
+		link: 'https://wahl.tagesspiegel.de/2017/karten/tegel/',
 	},
 	{
 		topic: 'tagesspiegel',
@@ -539,42 +535,42 @@ export const entries: Entry[] = [
 		start: '2017-09-01',
 		type: 'presentation',
 		link: 'https://media.ccc.de/v/13np-15-datenjournalismus_fuer_die_informationsgesellschaft',
-		size: 2
+		size: 2,
 	},
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - Wie Berliner Kieze seit der Wende wählten',
 		start: '2017-08-31',
 		type: 'project',
-		link: 'https://wahl.tagesspiegel.de/2017/karten/berlin/'
+		link: 'https://wahl.tagesspiegel.de/2017/karten/berlin/',
 	},
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - Platz eins, zwei, drei',
 		start: '2017-08-21',
 		type: 'project',
-		link: 'https://wahl.tagesspiegel.de/2017/karten/gemeindegewinner/'
+		link: 'https://wahl.tagesspiegel.de/2017/karten/gemeindegewinner/',
 	},
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - Auf Linie: Das inoffizielle Unterstützernetzwerk der AfD',
 		start: '2017-04-28',
 		type: 'project',
-		link: 'http://digitalpresent.tagesspiegel.de/afd-unterstuetzernetzwerk'
+		link: 'http://digitalpresent.tagesspiegel.de/afd-unterstuetzernetzwerk',
 	},
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - Größter AfD-Twitter-Account ist ein Scheinriese',
 		start: '2017-04-20',
 		type: 'project',
-		link: 'http://digitalpresent.tagesspiegel.de/balleryna'
+		link: 'http://digitalpresent.tagesspiegel.de/balleryna',
 	},
 	{
 		topic: 'tagesspiegel',
 		title: 'Tagesspiegel - So twittert die AfD',
 		start: '2017-04-18',
 		type: 'project',
-		link: 'http://digitalpresent.tagesspiegel.de/afd'
+		link: 'http://digitalpresent.tagesspiegel.de/afd',
 	},
 	{
 		topic: 'tagesspiegel',
@@ -606,7 +602,7 @@ export const entries: Entry[] = [
 		title: 'Tagesspiegel - 1928',
 		start: '2016-04-25',
 		type: 'project',
-		link: 'https://1928.tagesspiegel.de'
+		link: 'https://1928.tagesspiegel.de',
 	},
 	{
 		topic: 'tagesspiegel',
@@ -639,7 +635,7 @@ export const entries: Entry[] = [
 		start: '2015-11',
 		type: 'work',
 		link: 'https://dsst.io',
-		size: 2
+		size: 2,
 	},
 	{
 		title: 'Exposing the invisible - Michael Kreil: An Honest Picture of Metadata',
@@ -991,7 +987,8 @@ export const entries: Entry[] = [
 	},
 	{
 		topic: 'openplanb',
-		title: 'netzpolitik.org - Deutsche Bahn beschwert sich über Open Data-Initiative: Interview mit einem Macher von OpenPlanB',
+		title:
+			'netzpolitik.org - Deutsche Bahn beschwert sich über Open Data-Initiative: Interview mit einem Macher von OpenPlanB',
 		start: '2012-09-28',
 		type: 'press',
 		suffix: 'netzpolitik',
@@ -1309,6 +1306,5 @@ export const entries: Entry[] = [
 		type: 'school',
 		link: '',
 		ignore: true,
-	}
+	},
 ]
-

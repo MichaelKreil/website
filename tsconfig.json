@@ -1,8 +1,6 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"ESNext"
-		],
+		"lib": ["ESNext"],
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"target": "ES2022",
@@ -12,9 +10,7 @@
 		"declaration": true,
 		"allowJs": true,
 		"noEmit": true,
-		"forceConsistentCasingInFileNames": true,
+		"forceConsistentCasingInFileNames": true
 	},
-	"include": [
-		"src/**/*.ts",
-	]
+	"include": ["src/**/*.ts"]
 }
