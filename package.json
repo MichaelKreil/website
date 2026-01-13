@@ -10,7 +10,7 @@
     "dev": "tsx src/dev.ts",
     "upload": "./upload.sh",
     "publish": "npm run build && ./upload.sh",
-    "upgrade": "vrt deps-upgrade"
+    "upgrade": "ncu -u && rm -f package-lock.json; rm -rf node_modules; npm install"
   },
   "author": "Michael Kreil",
   "license": "MIT",
@@ -22,6 +22,7 @@
     "@versatiles/release-tool": "^2.2.4",
     "express": "^4.22.1",
     "handlebars": "^4.7.8",
+    "npm-check-updates": "^19.3.1",
     "tsx": "^4.19.3",
     "typescript": "^5.7.3",
     "work-faster": "^2.5.1"
