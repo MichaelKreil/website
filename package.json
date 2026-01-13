@@ -3,14 +3,16 @@
   "version": "1.1.0",
   "description": "",
   "scripts": {
-    "check": " ",
-    "prepack": " ",
-    "release": " ",
     "build": "tsx src/build.ts",
+    "check": " ",
     "dev": "tsx src/dev.ts",
-    "upload": "./upload.sh",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "prepack": " ",
     "publish": "npm run build && ./upload.sh",
-    "upgrade": "ncu -u && rm -f package-lock.json; rm -rf node_modules; npm install"
+    "release": " ",
+    "upgrade": "ncu -u && rm -f package-lock.json; rm -rf node_modules; npm install",
+    "upload": "./upload.sh"
   },
   "author": "Michael Kreil",
   "license": "MIT",
@@ -18,6 +20,7 @@
   "type": "module",
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "prettier": "^3.7.4",
     "@types/node": "^25.0.8",
     "@versatiles/release-tool": "^2.5.0",
     "express": "^5.2.1",
