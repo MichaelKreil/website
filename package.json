@@ -8,6 +8,8 @@
     "dev": "tsx src/dev.ts",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "prepack": " ",
     "publish": "npm run build && ./upload.sh",
     "release": " ",
@@ -19,15 +21,20 @@
   "private": true,
   "type": "module",
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
     "@types/express": "^5.0.6",
-    "prettier": "^3.7.4",
     "@types/node": "^25.0.8",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
+    "prettier": "^3.7.4",
     "@versatiles/release-tool": "^2.5.0",
     "express": "^5.2.1",
     "handlebars": "^4.7.8",
     "npm-check-updates": "^19.3.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.53.0",
     "work-faster": "^2.5.4"
   }
 }
