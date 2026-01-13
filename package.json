@@ -17,14 +17,14 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@types/express": "^5.0.0",
-    "@types/node": "^22.13.5",
-    "@versatiles/release-tool": "^2.2.4",
-    "express": "^4.22.1",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.0.8",
+    "@versatiles/release-tool": "^2.5.0",
+    "express": "^5.2.1",
     "handlebars": "^4.7.8",
     "npm-check-updates": "^19.3.1",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3",
-    "work-faster": "^2.5.1"
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "work-faster": "^2.5.4"
   }
 }
