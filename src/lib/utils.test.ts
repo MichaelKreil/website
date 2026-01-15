@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { resolveProject } from './utils.js'
+import { resolve } from 'node:path'
+import { existsSync } from 'node:fs'
 
 describe('resolveProject', () => {
 	it('should return an absolute path', () => {
@@ -9,7 +11,8 @@ describe('resolveProject', () => {
 
 	it('should contain the project directory', () => {
 		const result = resolveProject()
-		expect(result).toContain('michael-kreil.de')
+		const path = resolve(result, 'package.json')
+		expect(existsSync(path)).toBe(true)
 	})
 
 	it('should handle multiple path segments', () => {
