@@ -1,59 +1,59 @@
-import { readFile, writeFile } from 'node:fs/promises'
-import { checkImages } from './image.js'
-import { resolveProject } from './utils.js'
-import Handlebars from 'handlebars'
-import { EntryChecked1 } from './types.js'
+import { readFile, writeFile } from 'node:fs/promises';
+import { checkImages } from './image.js';
+import { resolveProject } from './utils.js';
+import Handlebars from 'handlebars';
+import { EntryChecked1 } from './types.js';
 
 export async function buildWebsite() {
-	console.log('build website')
-	const entries = await getEntries()
+	console.log('build website');
+	const entries = await getEntries();
 
-	await checkImages(entries)
+	await checkImages(entries);
 
-	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8')
+	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8');
 
 	const html = Handlebars.compile(template)({
 		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
 		entries,
-	})
+	});
 
-	await writeFile(resolveProject('web/index.html'), html)
+	await writeFile(resolveProject('web/index.html'), html);
 }
 
 async function getEntries(): Promise<EntryChecked1[]> {
-	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now())
-	const slugSet = new Set()
+	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now());
+	const slugSet = new Set();
 
 	const entries: EntryChecked1[] = data.entries.flatMap((entry) => {
-		if (entry.ignore) return []
+		if (entry.ignore) return [];
 
-		const date = parseDate(entry.start)
+		const date = parseDate(entry.start);
 
-		const typeObj = data.types[entry.type]
-		if (!typeObj) throw new Error('type unknown: ' + debug())
-		if (typeObj.ignore) return []
+		const typeObj = data.types[entry.type];
+		if (!typeObj) throw new Error('type unknown: ' + debug());
+		if (typeObj.ignore) return [];
 
-		const typeTitle = typeObj.title
+		const typeTitle = typeObj.title;
 
-		entry.size ??= typeObj.size || 1
+		entry.size ??= typeObj.size || 1;
 
-		let topicObj
+		let topicObj;
 		if (entry.topic) {
-			const topic = data.topics[entry.topic]
-			if (!topic) throw new Error('topic unknown: ' + debug())
-			topicObj = topic
+			const topic = data.topics[entry.topic];
+			if (!topic) throw new Error('topic unknown: ' + debug());
+			topicObj = topic;
 		}
 
-		if (!entry.title) throw new Error('missing title: ' + debug())
+		if (!entry.title) throw new Error('missing title: ' + debug());
 
-		const slugParts = [entry.start.replace(/[^0-9]+/g, ''), entry.type.toLowerCase()]
-		if (entry.suffix) slugParts.push(entry.suffix)
-		const slug = slugParts.join('-')
+		const slugParts = [entry.start.replace(/[^0-9]+/g, ''), entry.type.toLowerCase()];
+		if (entry.suffix) slugParts.push(entry.suffix);
+		const slug = slugParts.join('-');
 
-		if (slugSet.has(slug)) throw new Error('duplicated slug: ' + debug())
-		slugSet.add(slug)
+		if (slugSet.has(slug)) throw new Error('duplicated slug: ' + debug());
+		slugSet.add(slug);
 
-		const imageSrc = slug + '.png'
+		const imageSrc = slug + '.png';
 
 		return [
 			{
@@ -65,22 +65,22 @@ async function getEntries(): Promise<EntryChecked1[]> {
 				slug,
 				imageSrc,
 			},
-		]
+		];
 
 		function debug() {
-			return JSON.stringify(entry, null, '   ')
+			return JSON.stringify(entry, null, '   ');
 		}
-	})
+	});
 
-	entries.sort((a, b) => b.date.getTime() - a.date.getTime())
+	entries.sort((a, b) => b.date.getTime() - a.date.getTime());
 
-	return entries
+	return entries;
 }
 
 export function parseDate(text: string): Date {
-	let m
+	let m;
 	if ((m = text.match(/^(\d\d\d\d)-(\d\d)-(\d\d)$/)))
-		return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]))
-	if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1)
-	throw Error('unknown date')
+		return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]));
+	if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1);
+	throw Error('unknown date');
 }
