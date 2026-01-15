@@ -13,9 +13,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepack": " ",
     "publish": "npm run build && ./upload.sh",
-    "release": " ",
     "upgrade": "ncu -u && rm -f package-lock.json; rm -rf node_modules; npm install",
     "upload": "./upload.sh"
   },
