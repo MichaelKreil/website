@@ -1,3 +1,3 @@
-import { buildWebsite } from './lib/website.js'
+import { buildWebsite } from './lib/website.js';
 
-await buildWebsite()
+await buildWebsite();

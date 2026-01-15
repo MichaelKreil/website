@@ -1,4 +1,4 @@
-import { Entry, Topic, Type } from './lib/types.js'
+import { Entry, Topic, Type } from './lib/types.js';
 
 export const topics: Record<string, Topic> = {
 	afghanistan: { title: 'Afghanistanpapiere' },
@@ -17,7 +17,7 @@ export const topics: Record<string, Topic> = {
 	versatiles: { title: 'freier Kartenserver' },
 	vw: { title: 'Datenleck bei Volkswagen' },
 	zshh: { title: 'offene Geodaten' },
-}
+};
 
 export const types: Record<string, Type> = {
 	award: { title: 'Auszeichnung' },
@@ -26,7 +26,7 @@ export const types: Record<string, Type> = {
 	press: { title: 'Berichterstattung' },
 	project: { title: 'Projekt', size: 2 },
 	work: { title: 'Arbeit' },
-}
+};
 
 export const entries: Entry[] = [
 	{
@@ -1307,4 +1307,4 @@ export const entries: Entry[] = [
 		link: '',
 		ignore: true,
 	},
-]
+];
