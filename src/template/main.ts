@@ -1,5 +1,15 @@
 'use strict';
 
+interface Entry {
+	size: number;
+	node: HTMLElement;
+}
+
+interface Slot {
+	cx: number;
+	cy: number;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 	const MIN_WIDTH = 400;
 	const MIN_SIZE = 96;
@@ -9,9 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const wrapper = document.getElementById('wrapper');
 	const container = document.getElementById('container');
+	if (!wrapper || !container) return;
 
-	const entries = [...document.querySelectorAll('.entry')].map((node) => ({
-		size: parseInt(node.dataset.size, 10) || 1,
+	const entries: Entry[] = [...document.querySelectorAll<HTMLElement>('.entry')].map((node) => ({
+		size: parseInt(node.dataset.size ?? '', 10) || 1,
 		node,
 	}));
 
@@ -19,19 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let cols = 0;
 	let lastState = '';
 
-	container.className = 'interactive';
-	layout();
-	// Activate slide transitions after the initial placement paints,
-	// so first-load entries snap into position without animating from (0,0).
-	requestAnimationFrame(() =>
-		requestAnimationFrame(() => {
-			container.className = 'interactive transition';
-		}),
-	);
-
-	new ResizeObserver(layout).observe(wrapper);
-
-	function layout() {
+	const layout = () => {
 		let width = wrapper.clientWidth;
 
 		if (width < MIN_WIDTH) {
@@ -49,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (state === lastState) return;
 		lastState = state;
 
-		const occupied = new Set();
+		const occupied = new Set<string>();
 		let bottomPx = 0;
 
 		for (const entry of entries) {
@@ -71,9 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		container.style.width = `${cols * cellPx}px`;
 		container.style.height = `${bottomPx}px`;
-	}
+	};
 
-	function findSlot(occupied, span) {
+	container.className = 'interactive';
+	layout();
+	// Activate slide transitions after the initial placement paints,
+	// so first-load entries snap into position without animating from (0,0).
+	requestAnimationFrame(() =>
+		requestAnimationFrame(() => {
+			container.className = 'interactive transition';
+		}),
+	);
+
+	new ResizeObserver(layout).observe(wrapper);
+
+	function findSlot(occupied: Set<string>, span: number): Slot {
 		for (let pos = 0; ; pos++) {
 			const cx = pos % cols;
 			const cy = Math.floor(pos / cols);
@@ -82,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	}
 
-	function slotFree(occupied, cx, cy, span) {
+	function slotFree(occupied: Set<string>, cx: number, cy: number, span: number): boolean {
 		for (let dx = 0; dx < span; dx++) {
 			for (let dy = 0; dy < span; dy++) {
 				if (occupied.has(`${cx + dx},${cy + dy}`)) return false;
@@ -91,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		return true;
 	}
 
-	function markSlot(occupied, cx, cy, span) {
+	function markSlot(occupied: Set<string>, cx: number, cy: number, span: number): void {
 		for (let dx = 0; dx < span; dx++) {
 			for (let dy = 0; dy < span; dy++) {
 				occupied.add(`${cx + dx},${cy + dy}`);

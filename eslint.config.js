@@ -22,7 +22,7 @@ export default [
 			parser,
 			parserOptions: {
 				sourceType: 'module',
-				project: './tsconfig.json',
+				project: ['./tsconfig.json', './src/template/tsconfig.json'],
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},

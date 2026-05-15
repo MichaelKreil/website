@@ -2,6 +2,7 @@ import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
+import ts from 'typescript';
 import { ResolvedEntry } from './types.js';
 
 let entriesCache: { signature: string; entries: ResolvedEntry[] } | null = null;
@@ -14,12 +15,26 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8');
 
 	const html = Handlebars.compile(template)({
-		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
+		mainscript: await compileMainScript(),
 		entries,
 		dev,
 	});
 
 	await writeFile(resolveProject('web/index.html'), html);
+}
+
+// The browser entry point is authored in TypeScript and transpiled to plain
+// JavaScript on each build, then inlined into the page via the template.
+async function compileMainScript(): Promise<string> {
+	const source = await readFile(resolveProject('src/template/main.ts'), 'utf8');
+	const { outputText } = ts.transpileModule(source, {
+		fileName: 'main.ts',
+		compilerOptions: {
+			target: ts.ScriptTarget.ES2022,
+			module: ts.ModuleKind.ESNext,
+		},
+	});
+	return outputText;
 }
 
 async function resolveEntries(dev: boolean): Promise<ResolvedEntry[]> {
