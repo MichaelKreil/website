@@ -4,7 +4,7 @@ import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
 import ts from 'typescript';
 import { format, resolveConfig } from 'prettier';
-import { ResolvedEntry, Type } from './types.js';
+import { ResolvedEntry } from './types.js';
 
 let entriesCache: { signature: string; entries: ResolvedEntry[] } | null = null;
 
@@ -42,17 +42,7 @@ function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }
 	}
 	return [...byType.values()]
 		.sort((a, b) => (a.typeObj.order ?? Infinity) - (b.typeObj.order ?? Infinity))
-		.map((entry) => ({ type: entry.type, title: entry.typeTitle }));
-}
-
-// Records each type's `order` from the trailing "// N" comment next to it in
-// data.ts's defineTypes() block.
-async function applyTypeOrder(types: Record<string, Type>): Promise<void> {
-	const source = await readFile(resolveProject('src/data.ts'), 'utf8');
-	const block = source.match(/defineTypes\(\{([\s\S]*?)\n\}\)/)?.[1] ?? '';
-	for (const [, type, n] of block.matchAll(/^\s*(\w+):.*\/\/\s*(\d+)/gm)) {
-		if (types[type]) types[type].order = Number(n);
-	}
+		.map((entry) => ({ type: entry.type, title: entry.typeObj.titlePlural }));
 }
 
 // The browser entry point is authored in TypeScript and transpiled to plain
@@ -103,7 +93,6 @@ async function inputSignature(): Promise<string> {
 
 async function getEntries(): Promise<ResolvedEntry[]> {
 	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now());
-	await applyTypeOrder(data.types);
 	const slugSet = new Set();
 
 	const entries: ResolvedEntry[] = data.entries.flatMap((entry) => {

@@ -23,12 +23,12 @@ export const topics = defineTopics({
 });
 
 export const types = defineTypes({
-	award: { title: 'Auszeichnung', order: 2 },
-	funding: { title: 'Förderung', hideFilter: true },
-	presentation: { title: 'Vortrag', order: 4 },
-	press: { title: 'Berichterstattung', order: 3 },
-	project: { title: 'Projekt', size: 2, order: 1 },
-	school: { title: 'Ausbildung', ignore: true },
+	award: { title: 'Auszeichnung', titlePlural: 'Auszeichnungen', order: 3 },
+	funding: { title: 'Förderung', titlePlural: 'Förderungen', hideFilter: true },
+	presentation: { title: 'Vortrag', titlePlural: 'Vorträge', order: 4 },
+	press: { title: 'Berichterstattung', titlePlural: 'Berichterstattung', order: 2 },
+	project: { title: 'Projekt', titlePlural: 'Projekte', size: 2, order: 1 },
+	school: { title: 'Ausbildung', titlePlural: 'Ausbildungen', ignore: true },
 });
 
 export const entries: Entry[] = [

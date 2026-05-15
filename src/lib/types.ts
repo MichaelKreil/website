@@ -8,10 +8,11 @@ export interface Topic {
 
 export interface Type {
 	title: string;
+	titlePlural: string;
 	size?: number;
 	ignore?: boolean;
 	hideFilter?: boolean;
-	// Filter-button position, parsed from the "// N" comment in data.ts.
+	// Filter-button position; lower numbers appear first.
 	order?: number;
 }
 
