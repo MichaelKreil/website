@@ -1,14 +1,9 @@
-'use strict';
+import { findSlot, markSlot } from './grid.js';
 
 interface Entry {
 	size: number;
 	type: string;
 	node: HTMLElement;
-}
-
-interface Slot {
-	cx: number;
-	cy: number;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -65,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		for (const entry of entries) {
 			if (!isVisible(entry)) continue;
 			const span = Math.min(cols, entry.size);
-			const { cx, cy } = findSlot(occupied, span);
+			const { cx, cy } = findSlot(occupied, span, cols);
 			markSlot(occupied, cx, cy, span);
 
 			const left = cx * cellPx;
@@ -109,31 +104,5 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 			layout();
 		});
-	}
-
-	function findSlot(occupied: Set<string>, span: number): Slot {
-		for (let pos = 0; ; pos++) {
-			const cx = pos % cols;
-			const cy = Math.floor(pos / cols);
-			if (cx + span > cols) continue;
-			if (slotFree(occupied, cx, cy, span)) return { cx, cy };
-		}
-	}
-
-	function slotFree(occupied: Set<string>, cx: number, cy: number, span: number): boolean {
-		for (let dx = 0; dx < span; dx++) {
-			for (let dy = 0; dy < span; dy++) {
-				if (occupied.has(`${cx + dx},${cy + dy}`)) return false;
-			}
-		}
-		return true;
-	}
-
-	function markSlot(occupied: Set<string>, cx: number, cy: number, span: number): void {
-		for (let dx = 0; dx < span; dx++) {
-			for (let dy = 0; dy < span; dy++) {
-				occupied.add(`${cx + dx},${cy + dy}`);
-			}
-		}
 	}
 });

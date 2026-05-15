@@ -2,7 +2,7 @@ import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
-import ts from 'typescript';
+import { build } from 'esbuild';
 import { format, resolveConfig } from 'prettier';
 import { ResolvedEntry } from './types.js';
 
@@ -35,7 +35,7 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 
 // Filter buttons, one per entry type. Types flagged `hideFilter` are skipped,
 // the rest are sorted by their `order` field.
-function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }[] {
+export function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }[] {
 	const byType = new Map<string, ResolvedEntry>();
 	for (const entry of entries) {
 		if (!entry.typeObj.hideFilter) byType.set(entry.type, entry);
@@ -45,18 +45,17 @@ function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }
 		.map((entry) => ({ type: entry.type, title: entry.typeObj.titlePlural }));
 }
 
-// The browser entry point is authored in TypeScript and transpiled to plain
-// JavaScript on each build, then inlined into the page via the template.
+// The browser entry point is authored in TypeScript; esbuild bundles main.ts
+// and its imports into a single script that is inlined into the page.
 async function compileMainScript(): Promise<string> {
-	const source = await readFile(resolveProject('src/template/main.ts'), 'utf8');
-	const { outputText } = ts.transpileModule(source, {
-		fileName: 'main.ts',
-		compilerOptions: {
-			target: ts.ScriptTarget.ES2022,
-			module: ts.ModuleKind.ESNext,
-		},
+	const result = await build({
+		entryPoints: [resolveProject('src/template/main.ts')],
+		bundle: true,
+		write: false,
+		format: 'iife',
+		target: 'es2022',
 	});
-	return outputText;
+	return result.outputFiles[0].text;
 }
 
 async function resolveEntries(dev: boolean): Promise<ResolvedEntry[]> {
@@ -91,7 +90,7 @@ async function inputSignature(): Promise<string> {
 	return `data:${dataStat.mtimeMs}|images:${imageStats.join(',')}`;
 }
 
-async function getEntries(): Promise<ResolvedEntry[]> {
+export async function getEntries(): Promise<ResolvedEntry[]> {
 	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now());
 	const slugSet = new Set();
 

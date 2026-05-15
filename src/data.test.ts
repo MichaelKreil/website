@@ -32,19 +32,6 @@ describe('data integrity', () => {
 		}
 	});
 
-	it('should not have duplicate slugs', () => {
-		const slugSet = new Set<string>();
-		for (const entry of entries) {
-			if (entry.ignore) continue;
-			const typeObj = types[entry.type];
-			if (typeObj?.ignore) continue;
-
-			const slugParts = [entry.start.replace(/[^0-9]+/g, ''), entry.type.toLowerCase()];
-			if (entry.suffix) slugParts.push(entry.suffix);
-			const slug = slugParts.join('-');
-
-			expect(slugSet.has(slug), `Duplicate slug "${slug}" for entry: ${entry.title}`).toBe(false);
-			slugSet.add(slug);
-		}
-	});
+	// Slug uniqueness is exercised by the getEntries() tests in website.test.ts,
+	// which resolve the real data and throw on a duplicate.
 });
