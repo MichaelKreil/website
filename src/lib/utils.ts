@@ -10,19 +10,10 @@ export function resolveProject(...paths: string[]) {
 export function checkedSpawn(command: string, attr: string[]): Promise<void> {
 	return new Promise<void>((res, rej) => {
 		spawn(command, attr, { stdio: 'inherit' })
-			.on('error', (error) => {
-				console.log(error);
-				rej(error);
-			})
+			.on('error', rej)
 			.on('close', (code) => {
-				switch (code) {
-					case 0:
-					case 99:
-						return res();
-					default:
-						console.log({ command, attr });
-						throw new Error(`unknown code: ${code}`);
-				}
+				if (code === 0 || code === 99) return res();
+				rej(new Error(`${command} exited with code ${code}: ${attr.join(' ')}`));
 			});
 	});
 }
