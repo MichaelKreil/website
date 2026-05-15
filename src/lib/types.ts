@@ -19,7 +19,7 @@ export interface Entry {
 	end?: string;
 	title: string;
 	suffix?: string;
-	link: string;
+	link?: string;
 	topic?: keyof typeof topics;
 	type: keyof typeof types;
 }

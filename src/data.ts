@@ -1,6 +1,9 @@
 import { Entry, Topic, Type } from './lib/types.js';
 
-export const topics: Record<string, Topic> = {
+const defineTopics = <K extends string>(m: Record<K, Topic>) => m;
+const defineTypes = <K extends string>(m: Record<K, Type>) => m;
+
+export const topics = defineTopics({
 	afghanistan: { title: 'Afghanistanpapiere' },
 	bots: { title: 'Social Bots' },
 	corona: { title: 'Corona' },
@@ -17,16 +20,17 @@ export const topics: Record<string, Topic> = {
 	versatiles: { title: 'freier Kartenserver' },
 	vw: { title: 'Datenleck bei Volkswagen' },
 	zshh: { title: 'offene Geodaten' },
-};
+});
 
-export const types: Record<string, Type> = {
+export const types = defineTypes({
 	award: { title: 'Auszeichnung' },
 	funding: { title: 'Förderungen' },
 	presentation: { title: 'Vortrag' },
 	press: { title: 'Berichterstattung' },
 	project: { title: 'Projekt', size: 2 },
+	school: { title: 'Ausbildung', ignore: true },
 	work: { title: 'Arbeit' },
-};
+});
 
 export const entries: Entry[] = [
 	{
@@ -1244,7 +1248,6 @@ export const entries: Entry[] = [
 		start: '2006-08',
 		end: '2011-10',
 		type: 'work',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1252,7 +1255,6 @@ export const entries: Entry[] = [
 		start: '2004-04',
 		end: '2007-09',
 		type: 'school',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1268,7 +1270,6 @@ export const entries: Entry[] = [
 		start: '2001-01',
 		end: '2001-07',
 		type: 'work',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1276,7 +1277,6 @@ export const entries: Entry[] = [
 		start: '2000-11',
 		end: '2004-04',
 		type: 'work',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1284,7 +1284,6 @@ export const entries: Entry[] = [
 		start: '1999-10',
 		end: '2004-04',
 		type: 'school',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1310,7 +1309,6 @@ export const entries: Entry[] = [
 		start: '1992-08',
 		end: '1999-07',
 		type: 'school',
-		link: '',
 		ignore: true,
 	},
 	{
@@ -1318,7 +1316,6 @@ export const entries: Entry[] = [
 		start: '1986-08',
 		end: '1990-07',
 		type: 'school',
-		link: '',
 		ignore: true,
 	},
 ];

@@ -1,5 +1,7 @@
+'use strict';
 document.addEventListener('DOMContentLoaded', function(event) {
 	let size = 96;
+	let cols = 0;
 	let lastState = '';
 
 	let wrapper = document.getElementById('wrapper');

@@ -35,7 +35,7 @@ async function getEntries(): Promise<EntryChecked1[]> {
 
 		const typeTitle = typeObj.title;
 
-		entry.size ??= typeObj.size || 1;
+		entry.size ??= typeObj.size ?? 1;
 
 		let topicObj;
 		if (entry.topic) {
@@ -58,7 +58,7 @@ async function getEntries(): Promise<EntryChecked1[]> {
 		return [
 			{
 				...entry,
-				size: entry.size ?? 1,
+				size: entry.size,
 				date,
 				typeTitle,
 				topicObj,
