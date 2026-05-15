@@ -64,8 +64,8 @@ async function loadEntries(): Promise<ResolvedEntry[]> {
 }
 
 // Signature changes when data.ts or any source image is added/removed/modified.
-// On match, the cached entries (including resolved image filenames and base64
-// icons) are reused, skipping checkImages.
+// On match, the cached entries (including resolved image filenames and average
+// colors) are reused, skipping checkImages.
 async function inputSignature(): Promise<string> {
 	const dataStat = await stat(resolveProject('src/data.ts'));
 	const imageFiles = (await readdir(resolveProject('images'))).filter((n) => /\.png$/.test(n)).sort();

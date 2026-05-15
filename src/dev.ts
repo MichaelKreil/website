@@ -7,9 +7,9 @@ const PORT = Number(process.env.PORT ?? 8080);
 const DEBOUNCE_MS = 150;
 
 // Allowlist of build inputs. Watching the project root pulled in node_modules/,
-// coverage/, .git/, and the build's own outputs in icons/ — each generating
-// rebuild storms. 'src' (watched recursively) already covers the browser
-// entry point at src/template/main.ts.
+// coverage/, .git/, and the build's own outputs — each generating rebuild
+// storms. 'src' (watched recursively) already covers the browser entry point
+// at src/template/main.ts.
 const watchPaths = ['src', 'images'].map((p) => resolveProject(p));
 
 const reloadClients = new Set<Response>();

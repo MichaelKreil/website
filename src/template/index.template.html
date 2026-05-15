@@ -225,7 +225,7 @@
 			{{#each entries}}
 			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" data-type="{{type}}" data-size="{{size}}">
 				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener" {{/if}}>
-					<div class="entry_background" {{#if icon}} style="background-image: url(data:image/gif;base64,{{icon}})" {{/if}}>
+					<div class="entry_background" {{#if color}} style="background-color: {{color}}" {{/if}}>
 						{{#if image}}<img class="entry_image" src="assets/images/{{image}}" alt="" loading="lazy" decoding="async">{{/if}}
 					</div>
 					<h2><b>{{typeTitle}}:</b> {{title}}</h2>

@@ -31,6 +31,6 @@ export interface ResolvedEntry extends Entry {
 	slug: string;
 	typeTitle: string;
 	topicObj?: Topic;
-	icon?: string;
+	color?: string;
 	image?: string;
 }

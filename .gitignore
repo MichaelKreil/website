@@ -1,8 +1,8 @@
 
 .DS_Store
 *.sh
+colors.json
 coverage/
-icons/
 node_modules/
 web/*.html
 web/assets/images/

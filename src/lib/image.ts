@@ -1,13 +1,18 @@
-import { mkdir, readdir, readFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { basename } from 'node:path';
 import { ResolvedEntry } from './types.js';
 import { forEachAsync, ProgressBar } from 'work-faster';
 import { existsSync, statSync } from 'node:fs';
-import { checkedSpawn, resolveProject } from './utils.js';
+import { checkedSpawn, checkedSpawnCapture, resolveProject } from './utils.js';
+
+// Per-image average colors, keyed by source filename. Computing them shells out
+// to ImageMagick, so results are cached on disk between builds.
+const colorCachePath = resolveProject('colors.json');
 
 export async function checkImages(entries: ResolvedEntry[]): Promise<void> {
 	await mkdir(resolveProject('web/assets/images'), { recursive: true });
-	await mkdir(resolveProject('icons'), { recursive: true });
+
+	const colorCache = await loadColorCache();
 
 	const knownImages = new Set((await readdir(resolveProject('images'))).filter((n) => /^\d{4}.*\.png$/.test(n)));
 	const uniqueImageSrc = new Set();
@@ -24,16 +29,28 @@ export async function checkImages(entries: ResolvedEntry[]): Promise<void> {
 			const pixelSize = entry.size * 192;
 
 			entry.image = await getImage(filenameSrc, basenameDst, pixelSize);
-			entry.icon = await getIcon(filenameSrc, entry.slug);
+			entry.color = await getColor(filenameSrc, entry.imageSrc, colorCache);
 		}
 		progress.increment();
 	});
 	progress.close();
 
+	await saveColorCache(colorCache);
+
 	if (knownImages.size > 0) {
 		console.log('The following images are not used:');
 		for (const image of knownImages) console.log('   ' + image);
 	}
+}
+
+async function loadColorCache(): Promise<Record<string, string>> {
+	if (!existsSync(colorCachePath)) return {};
+	return JSON.parse(await readFile(colorCachePath, 'utf8'));
+}
+
+async function saveColorCache(cache: Record<string, string>): Promise<void> {
+	const sorted = Object.fromEntries(Object.entries(cache).sort(([a], [b]) => a.localeCompare(b)));
+	await writeFile(colorCachePath, JSON.stringify(sorted, null, '\t') + '\n');
 }
 
 async function getImage(filenameSrc: string, basenameDst: string, pixelSize: number) {
@@ -112,28 +129,27 @@ async function generateWebp(filenameSrc: string, filenameDst: string, pixelSize:
 	]);
 }
 
-async function getIcon(filenameSrc: string, slug: string) {
-	const filename = resolveProject('icons', slug + '.gif');
+async function getColor(filenameSrc: string, key: string, cache: Record<string, string>): Promise<string> {
+	if (!cache[key]) cache[key] = await computeAverageColor(filenameSrc);
+	return cache[key];
+}
 
-	if (!existsSync(filename)) {
-		await checkedSpawn('magick', [
-			filenameSrc,
-			'-quiet',
-			'-strip',
-			'-resize',
-			'16x16^',
-			'-gravity',
-			'Center',
-			'-crop',
-			'16x16+0+0',
-			'+repage',
-			'-dither',
-			'FloydSteinberg',
-			'-colors',
-			'16',
-			filename,
-		]);
-	}
-
-	return (await readFile(filename)).toString('base64');
+// Averages the whole image down to a single pixel and reads back its hex value.
+async function computeAverageColor(filenameSrc: string): Promise<string> {
+	const txt = await checkedSpawnCapture('magick', [
+		filenameSrc,
+		'-quiet',
+		'-background',
+		'white',
+		'-alpha',
+		'remove',
+		'-scale',
+		'1x1',
+		'-depth',
+		'8',
+		'txt:-',
+	]);
+	const match = txt.match(/#[0-9A-Fa-f]{6}(?![0-9A-Fa-f])/);
+	if (!match) throw new Error(`could not determine average color of "${filenameSrc}": ${txt}`);
+	return match[0].toLowerCase();
 }
