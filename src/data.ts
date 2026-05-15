@@ -213,7 +213,7 @@ export const entries: Entry[] = [
 		link: 'https://www.br.de/nachrichten/wissen/so-entwickeln-sich-die-corona-zahlen-in-deutschland,S9R27fS',
 	},
 	{
-		title: 'Gold, Malofiej, für Flight Patterns',
+		title: 'Malofiej Award, Gold, für Flight Patterns',
 		start: '2020-08-03',
 		type: 'award',
 		link: 'https://www.malofiejgraphics.com/2020/08/general/list-award/',
@@ -576,7 +576,7 @@ export const entries: Entry[] = [
 		title: 'OpenDataCity - Ausgezeichnete Orte 2017 - Land der Ideen',
 		start: '2017',
 		type: 'award',
-		link: 'https://land-der-ideen.de/projekt/opendatacity-agentur-fuer-datenjournalismus-34'
+		link: 'https://land-der-ideen.de/projekt/opendatacity-agentur-fuer-datenjournalismus-34',
 	},
 	{
 		topic: 'tagesspiegel',
@@ -1152,6 +1152,13 @@ export const entries: Entry[] = [
 		start: '2011-07-14',
 		type: 'press',
 		link: 'https://netzpolitik.org/2011/consolidated-db-visualisierungen/',
+	},
+	{
+		topic: 'vds1',
+		title: 'Malofiej Award, Bronze, für "Verräterisches Handy"',
+		start: '2011-06',
+		type: 'award',
+		link: 'https://www.malofiejgraphics.com/documents/24144149/42535971/malofiej-20.pdf',
 	},
 	{
 		topic: 'vds1',
