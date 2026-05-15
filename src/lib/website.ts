@@ -82,5 +82,6 @@ export function parseDate(text: string): Date {
 	if ((m = text.match(/^(\d\d\d\d)-(\d\d)-(\d\d)$/)))
 		return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]));
 	if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1);
+	if ((m = text.match(/^(\d\d\d\d)$/))) return new Date(parseFloat(m[1]), 0);
 	throw Error('unknown date');
 }
