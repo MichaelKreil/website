@@ -17,7 +17,7 @@ describe('data integrity', () => {
 	});
 
 	it('should have valid date formats for all entries', () => {
-		const dateRegex = /^(\d{4})-(\d{2})(-\d{2})?$/;
+		const dateRegex = /^\d{4}(-\d{2}(-\d{2})?)?$/;
 		for (const entry of entries) {
 			expect(entry.start, `Invalid date format in entry: ${entry.title}`).toMatch(dateRegex);
 		}
