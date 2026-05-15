@@ -1,43 +1,82 @@
 import { watch } from 'node:fs';
-import express from 'express';
+import express, { type Response } from 'express';
 import { resolveProject } from './lib/utils.js';
 import { buildWebsite } from './lib/website.js';
 
-let isRunning = false,
-	isRunPlaned = false;
-const mainPath = resolveProject('');
+const PORT = Number(process.env.PORT ?? 8080);
+const DEBOUNCE_MS = 150;
 
-watch(mainPath, { recursive: true }, (eventType, filename) => {
-	if (filename == null) return;
-	if (filename.startsWith('web/assets/images')) return;
-	if (filename.startsWith('web/index')) return;
-	if (filename.startsWith('.')) return;
-	runUpdate();
-});
+// Allowlist of build inputs. Watching the project root pulled in node_modules/,
+// coverage/, .git/, and the build's own outputs in icons/ — each generating
+// rebuild storms.
+const watchPaths = ['src', 'images', 'web/assets/main.js'].map((p) => resolveProject(p));
 
-runUpdate();
+const reloadClients = new Set<Response>();
+let isRunning = false;
+let isRunPlanned = false;
+let debounceTimer: NodeJS.Timeout | null = null;
+
+await runUpdate();
 startServer();
+
+for (const path of watchPaths) {
+	watch(path, { recursive: true }, scheduleUpdate);
+}
+
+function scheduleUpdate() {
+	if (debounceTimer) clearTimeout(debounceTimer);
+	debounceTimer = setTimeout(() => {
+		debounceTimer = null;
+		runUpdate();
+	}, DEBOUNCE_MS);
+}
 
 async function runUpdate() {
 	if (isRunning) {
-		isRunPlaned = true;
+		isRunPlanned = true;
 		return;
 	}
 
 	isRunning = true;
-	await buildWebsite();
+	try {
+		await buildWebsite({ dev: true });
+		broadcastReload();
+	} catch (err) {
+		console.error('build failed:', err);
+	}
 	isRunning = false;
 
-	if (isRunPlaned) {
-		isRunPlaned = false;
-		runUpdate();
+	if (isRunPlanned) {
+		isRunPlanned = false;
+		void runUpdate();
 	}
+}
+
+function broadcastReload() {
+	for (const res of reloadClients) res.write('data: reload\n\n');
 }
 
 function startServer() {
 	const app = express();
-	app.use(express.static('web'));
-	app.listen(8080, () => {
-		console.log('Server running on http://localhost:8080');
+
+	app.get('/__livereload', (req, res) => {
+		res.set({
+			'Content-Type': 'text/event-stream',
+			'Cache-Control': 'no-store',
+			Connection: 'keep-alive',
+		});
+		res.flushHeaders();
+		reloadClients.add(res);
+		req.on('close', () => reloadClients.delete(res));
+	});
+
+	app.use(
+		express.static('web', {
+			setHeaders: (res) => res.set('Cache-Control', 'no-store'),
+		}),
+	);
+
+	app.listen(PORT, () => {
+		console.log(`Server running on http://localhost:${PORT}`);
 	});
 }

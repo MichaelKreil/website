@@ -1,23 +1,57 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
 import { EntryChecked1 } from './types.js';
 
-export async function buildWebsite() {
-	console.log('build website');
-	const entries = await getEntries();
+let entriesCache: { signature: string; entries: EntryChecked1[] } | null = null;
 
-	await checkImages(entries);
+export async function buildWebsite(opts: { dev?: boolean } = {}) {
+	console.log('build website');
+	const dev = opts.dev ?? false;
+	const entries = await resolveEntries(dev);
 
 	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8');
 
 	const html = Handlebars.compile(template)({
 		mainscript: await readFile(resolveProject('web/assets/main.js'), 'utf8'),
 		entries,
+		dev,
 	});
 
 	await writeFile(resolveProject('web/index.html'), html);
+}
+
+async function resolveEntries(dev: boolean): Promise<EntryChecked1[]> {
+	if (!dev) return loadEntries();
+
+	const signature = await inputSignature();
+	if (entriesCache?.signature === signature) return entriesCache.entries;
+
+	const entries = await loadEntries();
+	entriesCache = { signature, entries };
+	return entries;
+}
+
+async function loadEntries(): Promise<EntryChecked1[]> {
+	const entries = await getEntries();
+	await checkImages(entries);
+	return entries;
+}
+
+// Signature changes when data.ts or any source image is added/removed/modified.
+// On match, the cached entries (including resolved image filenames and base64
+// icons) are reused, skipping checkImages.
+async function inputSignature(): Promise<string> {
+	const dataStat = await stat(resolveProject('src/data.ts'));
+	const imageFiles = (await readdir(resolveProject('images'))).filter((n) => /\.png$/.test(n)).sort();
+	const imageStats = await Promise.all(
+		imageFiles.map(async (name) => {
+			const s = await stat(resolveProject('images', name));
+			return `${name}:${s.mtimeMs}`;
+		}),
+	);
+	return `data:${dataStat.mtimeMs}|images:${imageStats.join(',')}`;
 }
 
 async function getEntries(): Promise<EntryChecked1[]> {

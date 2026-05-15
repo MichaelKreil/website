@@ -207,6 +207,9 @@
 		</div>
 	</div>
 	<footer></footer>
+	{{#if dev}}
+	<script>new EventSource('/__livereload').onmessage = () => location.reload();</script>
+	{{/if}}
 </body>
 
 </html>
