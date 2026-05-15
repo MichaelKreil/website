@@ -573,6 +573,12 @@ export const entries: Entry[] = [
 		link: 'http://digitalpresent.tagesspiegel.de/afd',
 	},
 	{
+		title: 'OpenDataCity - Ausgezeichnete Orte 2017 - Land der Ideen',
+		start: '2017',
+		type: 'award',
+		link: 'https://land-der-ideen.de/projekt/opendatacity-agentur-fuer-datenjournalismus-34'
+	},
+	{
 		topic: 'tagesspiegel',
 		title: '‘We transformeren de traditionele krant van binnenuit’',
 		start: '2016-08-22',
