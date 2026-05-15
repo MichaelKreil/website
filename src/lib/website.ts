@@ -3,6 +3,7 @@ import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
 import ts from 'typescript';
+import { format, resolveConfig } from 'prettier';
 import { ResolvedEntry } from './types.js';
 
 let entriesCache: { signature: string; entries: ResolvedEntry[] } | null = null;
@@ -14,11 +15,19 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 
 	const template = await readFile(resolveProject('src/template/index.template.html'), 'utf8');
 
-	const html = Handlebars.compile(template)({
+	let html = Handlebars.compile(template)({
 		mainscript: await compileMainScript(),
 		entries,
 		dev,
 	});
+
+	// Prettify the output for production builds only — dev rebuilds skip this
+	// to keep the watch loop fast.
+	if (!dev) {
+		const outPath = resolveProject('web/index.html');
+		const config = await resolveConfig(outPath);
+		html = await format(html, { ...config, parser: 'html' });
+	}
 
 	await writeFile(resolveProject('web/index.html'), html);
 }
