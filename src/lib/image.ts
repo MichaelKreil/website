@@ -1,11 +1,11 @@
 import { mkdir, readdir, readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import { EntryChecked1 } from './types.js';
+import { ResolvedEntry } from './types.js';
 import { forEachAsync, ProgressBar } from 'work-faster';
 import { existsSync, statSync } from 'node:fs';
 import { checkedSpawn, resolveProject } from './utils.js';
 
-export async function checkImages(entries: EntryChecked1[]): Promise<void> {
+export async function checkImages(entries: ResolvedEntry[]): Promise<void> {
 	await mkdir(resolveProject('web/assets/images'), { recursive: true });
 	await mkdir(resolveProject('icons'), { recursive: true });
 

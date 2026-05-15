@@ -24,7 +24,7 @@ export interface Entry {
 	type: keyof typeof types;
 }
 
-export interface EntryChecked1 extends Entry {
+export interface ResolvedEntry extends Entry {
 	date: Date;
 	imageSrc: string;
 	size: number;

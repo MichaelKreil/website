@@ -2,9 +2,9 @@ import { readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { checkImages } from './image.js';
 import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
-import { EntryChecked1 } from './types.js';
+import { ResolvedEntry } from './types.js';
 
-let entriesCache: { signature: string; entries: EntryChecked1[] } | null = null;
+let entriesCache: { signature: string; entries: ResolvedEntry[] } | null = null;
 
 export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	console.log('build website');
@@ -22,7 +22,7 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	await writeFile(resolveProject('web/index.html'), html);
 }
 
-async function resolveEntries(dev: boolean): Promise<EntryChecked1[]> {
+async function resolveEntries(dev: boolean): Promise<ResolvedEntry[]> {
 	if (!dev) return loadEntries();
 
 	const signature = await inputSignature();
@@ -33,7 +33,7 @@ async function resolveEntries(dev: boolean): Promise<EntryChecked1[]> {
 	return entries;
 }
 
-async function loadEntries(): Promise<EntryChecked1[]> {
+async function loadEntries(): Promise<ResolvedEntry[]> {
 	const entries = await getEntries();
 	await checkImages(entries);
 	return entries;
@@ -54,11 +54,11 @@ async function inputSignature(): Promise<string> {
 	return `data:${dataStat.mtimeMs}|images:${imageStats.join(',')}`;
 }
 
-async function getEntries(): Promise<EntryChecked1[]> {
+async function getEntries(): Promise<ResolvedEntry[]> {
 	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now());
 	const slugSet = new Set();
 
-	const entries: EntryChecked1[] = data.entries.flatMap((entry) => {
+	const entries: ResolvedEntry[] = data.entries.flatMap((entry) => {
 		if (entry.ignore) return [];
 
 		const date = parseDate(entry.start);
