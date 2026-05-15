@@ -1,122 +1,101 @@
 'use strict';
-document.addEventListener('DOMContentLoaded', function(event) {
-	let size = 96;
+
+document.addEventListener('DOMContentLoaded', () => {
+	const MIN_WIDTH = 400;
+	const MIN_SIZE = 96;
+	const MAX_SIZE = 192;
+	const MIN_COLS = 2;
+	const MAX_COLS = 8;
+
+	const wrapper = document.getElementById('wrapper');
+	const container = document.getElementById('container');
+
+	const entries = [...document.querySelectorAll('.entry')].map((node) => ({
+		size: parseInt(node.dataset.size, 10) || 1,
+		node,
+	}));
+
+	let cellPx = MIN_SIZE;
 	let cols = 0;
 	let lastState = '';
 
-	let wrapper = document.getElementById('wrapper');
-	let container = document.getElementById('container');
 	container.className = 'interactive';
+	layout();
+	// Activate slide transitions after the initial placement paints,
+	// so first-load entries snap into position without animating from (0,0).
+	requestAnimationFrame(() =>
+		requestAnimationFrame(() => {
+			container.className = 'interactive transition';
+		}),
+	);
 
-	let layoutTimeout = 200;
-	let layoutHandler = false;
+	new ResizeObserver(layout).observe(wrapper);
 
-	let entries = document.getElementsByClassName('entry');
-	entries = [].slice.call(entries);
-	entries = entries.map(function (node) {
-		return {
-			size: parseFloat(node.getAttribute('entry_size')),
-			type: node.getAttribute('entry_type'),
-			node: node,
-		}
-	});
-
-	window.addEventListener('resize', tryResize, false);
-	resize();
-	setTimeout(function () {
-		container.className = 'interactive transition'}, 1000);
-
-	function tryResize() {
-		if (layoutHandler) clearTimeout(layoutHandler);
-		layoutHandler = setTimeout(function () {
-			layoutHandler = false;
-			resize();
-		}, layoutTimeout)
-	}
-
-	function resize() {
+	function layout() {
 		let width = wrapper.clientWidth;
-		let minWidth = 400;
-		let minSize = 96;
-		let maxSize = 192;
 
-		if (width < minWidth) {
-			cols = Math.floor(width/minSize);
+		if (width < MIN_WIDTH) {
+			cols = Math.floor(width / MIN_SIZE);
 		} else {
-			width = (width-minWidth)*0.6+minWidth;
-			cols = Math.floor(minWidth/minSize + Math.sqrt(width-minWidth)/8);
+			// Above MIN_WIDTH, compress further growth so cell count grows
+			// roughly with sqrt(viewport) — wider screens add columns slowly.
+			width = (width - MIN_WIDTH) * 0.6 + MIN_WIDTH;
+			cols = Math.floor(MIN_WIDTH / MIN_SIZE + Math.sqrt(width - MIN_WIDTH) / 8);
 		}
-		
-		if (cols < 2) cols = 2;
-		if (cols > 8) cols = 8;
+		cols = Math.max(MIN_COLS, Math.min(MAX_COLS, cols));
+		cellPx = Math.min(MAX_SIZE, Math.floor(width / cols));
 
-		size = Math.floor(width/cols);
-		if (size > maxSize) size = maxSize;
-
-		let state = [size, cols].join(',');
+		const state = `${cellPx},${cols}`;
 		if (state === lastState) return;
 		lastState = state;
 
-		layoutEntries();
+		const occupied = new Set();
+		let bottomPx = 0;
 
-		redrawEntries();
+		for (const entry of entries) {
+			const span = Math.min(cols, entry.size);
+			const { cx, cy } = findSlot(occupied, span);
+			markSlot(occupied, cx, cy, span);
+
+			const left = cx * cellPx;
+			const top = cy * cellPx;
+			const side = span * cellPx;
+
+			entry.node.style.left = `${left}px`;
+			entry.node.style.top = `${top}px`;
+			entry.node.style.width = `${side}px`;
+			entry.node.style.height = `${side}px`;
+
+			if (top + side > bottomPx) bottomPx = top + side;
+		}
+
+		container.style.width = `${cols * cellPx}px`;
+		container.style.height = `${bottomPx}px`;
 	}
 
-	function redrawEntries() {
-		let height = 0;
-
-		entries.forEach(function (entry) {
-			let s = entry.s;
-			let x = entry.x;
-			let y = entry.y;
-
-			if (y > height) height = y;
-
-			entry.node.style.width = s+'px';
-			entry.node.style.height = s+'px';
-			entry.node.style.left = x+'px';
-			entry.node.style.top = y+'px';
-		})
-
-		container.style.height = (height + size)+'px';
-		container.style.width = (cols*size)+'px';
+	function findSlot(occupied, span) {
+		for (let pos = 0; ; pos++) {
+			const cx = pos % cols;
+			const cy = Math.floor(pos / cols);
+			if (cx + span > cols) continue;
+			if (slotFree(occupied, cx, cy, span)) return { cx, cy };
+		}
 	}
 
-	function layoutEntries() {
-		let layout = [];
-		entries.forEach(function (entry) {
-			let entrySize = Math.min(cols, entry.size);
-			let pos0 = 0;
-
-			do {} while (check());
-
-			function check() {
-				let x0 = pos0 % cols;
-				let y0 = Math.floor(pos0/cols);
-				pos0++;
-
-				if (x0+entrySize > cols) return true;
-
-				for (let x = 0; x < entrySize; x++) {
-					for (let y = 0; y < entrySize; y++) {
-						let pos = (y+y0)*cols + (x+x0);
-						if (layout[pos]) return true;
-					}
-				}
-
-				entry.s = entrySize*size;
-				entry.x = x0*size;
-				entry.y = y0*size;// + entry.group*size/8;
-
-				for (let x = 0; x < entrySize; x++) {
-					for (let y = 0; y < entrySize; y++) {
-						let pos = (y+y0)*cols + (x+x0);
-						layout[pos] = true;
-					}
-				}
-
-				return false;
+	function slotFree(occupied, cx, cy, span) {
+		for (let dx = 0; dx < span; dx++) {
+			for (let dy = 0; dy < span; dy++) {
+				if (occupied.has(`${cx + dx},${cy + dy}`)) return false;
 			}
-		})
+		}
+		return true;
 	}
-})
+
+	function markSlot(occupied, cx, cy, span) {
+		for (let dx = 0; dx < span; dx++) {
+			for (let dy = 0; dy < span; dy++) {
+				occupied.add(`${cx + dx},${cy + dy}`);
+			}
+		}
+	}
+});

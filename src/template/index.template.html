@@ -197,7 +197,7 @@
 	<div id="wrapper">
 		<div id="container" class="flex">
 			{{#each entries}}
-			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" entry_type="{{type}}" entry_size="{{size}}">
+			<section class="entry entry_{{type}} entry_size_{{size}} {{#unless image}}noimage{{/unless}}" data-type="{{type}}" data-size="{{size}}">
 				<a{{#if link}} href="{{link}}" target="_blank" rel="noopener" {{/if}}>
 					<div class="entry_background" {{#if image}} style="background-image: url(assets/images/{{image}}), url(data:image/gif;base64,{{icon}})" {{/if}}></div>
 					<h2><b>{{typeTitle}}:</b> {{title}}</h2>
