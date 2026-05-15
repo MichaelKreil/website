@@ -33,10 +33,26 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	await writeFile(resolveProject('web/index.html'), html);
 }
 
-// Distinct entry types present on the page, used to render the filter buttons.
+// Filter buttons, one per entry type. Types flagged `hideFilter` are skipped,
+// the rest are sorted by their `order` field.
 function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }[] {
-	const titles = new Map<string, string>(entries.filter((e) => !e.typeObj.hideFilter).map((entry) => [entry.type, entry.typeTitle]));
-	return [...titles].map(([type, title]) => ({ type, title })).sort((a, b) => a.title.localeCompare(b.title));
+	const byType = new Map<string, ResolvedEntry>();
+	for (const entry of entries) {
+		if (!entry.typeObj.hideFilter) byType.set(entry.type, entry);
+	}
+	return [...byType.values()]
+		.sort((a, b) => (a.typeObj.order ?? Infinity) - (b.typeObj.order ?? Infinity))
+		.map((entry) => ({ type: entry.type, title: entry.typeTitle }));
+}
+
+// Records each type's `order` from the trailing "// N" comment next to it in
+// data.ts's defineTypes() block.
+async function applyTypeOrder(types: Record<string, Type>): Promise<void> {
+	const source = await readFile(resolveProject('src/data.ts'), 'utf8');
+	const block = source.match(/defineTypes\(\{([\s\S]*?)\n\}\)/)?.[1] ?? '';
+	for (const [, type, n] of block.matchAll(/^\s*(\w+):.*\/\/\s*(\d+)/gm)) {
+		if (types[type]) types[type].order = Number(n);
+	}
 }
 
 // The browser entry point is authored in TypeScript and transpiled to plain
@@ -87,6 +103,7 @@ async function inputSignature(): Promise<string> {
 
 async function getEntries(): Promise<ResolvedEntry[]> {
 	const data: typeof import('../data.ts') = await import('../data.js?time=' + Date.now());
+	await applyTypeOrder(data.types);
 	const slugSet = new Set();
 
 	const entries: ResolvedEntry[] = data.entries.flatMap((entry) => {

@@ -11,6 +11,8 @@ export interface Type {
 	size?: number;
 	ignore?: boolean;
 	hideFilter?: boolean;
+	// Filter-button position, parsed from the "// N" comment in data.ts.
+	order?: number;
 }
 
 export interface Entry {
