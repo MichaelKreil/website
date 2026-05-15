@@ -10,6 +10,7 @@ export interface Type {
 	title: string;
 	size?: number;
 	ignore?: boolean;
+	hideFilter?: boolean;
 }
 
 export interface Entry {
@@ -31,6 +32,7 @@ export interface ResolvedEntry extends Entry {
 	slug: string;
 	typeTitle: string;
 	topicObj?: Topic;
+	typeObj: Type;
 	color?: string;
 	image?: string;
 }

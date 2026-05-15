@@ -4,7 +4,7 @@ import { resolveProject } from './utils.js';
 import Handlebars from 'handlebars';
 import ts from 'typescript';
 import { format, resolveConfig } from 'prettier';
-import { ResolvedEntry } from './types.js';
+import { ResolvedEntry, Type } from './types.js';
 
 let entriesCache: { signature: string; entries: ResolvedEntry[] } | null = null;
 
@@ -18,6 +18,7 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	let html = Handlebars.compile(template)({
 		mainscript: await compileMainScript(),
 		entries,
+		filters: buildFilters(entries),
 		dev,
 	});
 
@@ -30,6 +31,12 @@ export async function buildWebsite(opts: { dev?: boolean } = {}) {
 	}
 
 	await writeFile(resolveProject('web/index.html'), html);
+}
+
+// Distinct entry types present on the page, used to render the filter buttons.
+function buildFilters(entries: ResolvedEntry[]): { type: string; title: string }[] {
+	const titles = new Map<string, string>(entries.filter((e) => !e.typeObj.hideFilter).map((entry) => [entry.type, entry.typeTitle]));
+	return [...titles].map(([type, title]) => ({ type, title })).sort((a, b) => a.title.localeCompare(b.title));
 }
 
 // The browser entry point is authored in TypeScript and transpiled to plain
@@ -122,6 +129,7 @@ async function getEntries(): Promise<ResolvedEntry[]> {
 				topicObj,
 				slug,
 				imageSrc,
+				typeObj,
 			},
 		];
 

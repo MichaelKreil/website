@@ -24,7 +24,7 @@ export const topics = defineTopics({
 
 export const types = defineTypes({
 	award: { title: 'Auszeichnung' },
-	funding: { title: 'Förderungen' },
+	funding: { title: 'Förderung', hideFilter: true },
 	presentation: { title: 'Vortrag' },
 	press: { title: 'Berichterstattung' },
 	project: { title: 'Projekt', size: 2 },

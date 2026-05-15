@@ -2,6 +2,7 @@
 
 interface Entry {
 	size: number;
+	type: string;
 	node: HTMLElement;
 }
 
@@ -23,8 +24,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	const entries: Entry[] = [...document.querySelectorAll<HTMLElement>('.entry')].map((node) => ({
 		size: parseInt(node.dataset.size ?? '', 10) || 1,
+		type: node.dataset.type ?? '',
 		node,
 	}));
+
+	// Currently selected type; '' shows every entry.
+	let activeType = '';
 
 	let cellPx = MIN_SIZE;
 	let cols = 0;
@@ -44,14 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
 		cols = Math.max(MIN_COLS, Math.min(MAX_COLS, cols));
 		cellPx = Math.min(MAX_SIZE, Math.floor(width / cols));
 
-		const state = `${cellPx},${cols}`;
+		const state = `${cellPx},${cols},${activeType}`;
 		if (state === lastState) return;
 		lastState = state;
+
+		const isVisible = (entry: Entry) => activeType === '' || entry.type === activeType;
+
+		for (const entry of entries) {
+			entry.node.style.display = isVisible(entry) ? '' : 'none';
+		}
 
 		const occupied = new Set<string>();
 		let bottomPx = 0;
 
 		for (const entry of entries) {
+			if (!isVisible(entry)) continue;
 			const span = Math.min(cols, entry.size);
 			const { cx, cy } = findSlot(occupied, span);
 			markSlot(occupied, cx, cy, span);
@@ -83,6 +95,21 @@ document.addEventListener('DOMContentLoaded', () => {
 	);
 
 	new ResizeObserver(layout).observe(wrapper);
+
+	// The filter buttons act as radio buttons: selecting one shows only that
+	// type, or every entry for the 'Alle' button (which has an empty type).
+	const filterButtons = [...document.querySelectorAll<HTMLElement>('.filter')];
+	for (const button of filterButtons) {
+		const type = button.dataset.type ?? '';
+		button.classList.toggle('active', type === activeType);
+		button.addEventListener('click', () => {
+			activeType = type;
+			for (const other of filterButtons) {
+				other.classList.toggle('active', (other.dataset.type ?? '') === activeType);
+			}
+			layout();
+		});
+	}
 
 	function findSlot(occupied: Set<string>, span: number): Slot {
 		for (let pos = 0; ; pos++) {
