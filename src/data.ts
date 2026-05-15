@@ -624,9 +624,10 @@ export const entries: Entry[] = [
 		link: 'https://netzpolitik.org/2015/die-deutsche-bahn-setzt-endlich-auf-open-data/',
 	},
 	{
-		title: 'DB Datenportal',
+		title: 'Open-Data-Portal der Deutschen Bahn',
 		start: '2015-11-06',
 		type: 'project',
+		topic: 'openplanb',
 		link: 'http://data.deutschebahn.com',
 	},
 	{
@@ -1207,7 +1208,7 @@ export const entries: Entry[] = [
 	},
 	{
 		topic: 'vds1',
-		title: 'Guest post: visualising mobile phone data – the data retention app',
+		title: 'Guest post: visualising mobile phone data - the data retention app',
 		start: '2011-04-12',
 		type: 'press',
 		link: 'https://onlinejournalismblog.com/2011/04/12/guest-post-visualising-mobile-phone-data-the-data-retention-app/',
