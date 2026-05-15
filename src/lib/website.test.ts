@@ -15,10 +15,16 @@ describe('parseDate', () => {
 		expect(date.getMonth()).toBe(2); // March is month 2
 	});
 
+	it('should parse YYYY format', () => {
+		const date = parseDate('2024');
+		expect(date.getFullYear()).toBe(2024);
+		expect(date.getMonth()).toBe(0);
+	});
+
 	it('should throw on invalid format', () => {
 		expect(() => parseDate('invalid')).toThrow('unknown date');
-		expect(() => parseDate('2024')).toThrow('unknown date');
 		expect(() => parseDate('2024-1-1')).toThrow('unknown date');
+		expect(() => parseDate('24-01-01')).toThrow('unknown date');
 	});
 
 	it('should handle edge cases', () => {

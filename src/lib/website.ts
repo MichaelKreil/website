@@ -79,9 +79,9 @@ async function getEntries(): Promise<EntryChecked1[]> {
 
 export function parseDate(text: string): Date {
 	let m;
-	if ((m = text.match(/^(\d\d\d\d)-(\d\d)-(\d\d)$/)))
-		return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1, parseFloat(m[3]));
-	if ((m = text.match(/^(\d\d\d\d)-(\d\d)$/))) return new Date(parseFloat(m[1]), parseFloat(m[2]) - 1);
-	if ((m = text.match(/^(\d\d\d\d)$/))) return new Date(parseFloat(m[1]), 0);
-	throw Error('unknown date');
+	if ((m = text.match(/^(\d{4})-(\d{2})-(\d{2})$/)))
+		return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1, parseInt(m[3], 10));
+	if ((m = text.match(/^(\d{4})-(\d{2})$/))) return new Date(parseInt(m[1], 10), parseInt(m[2], 10) - 1);
+	if ((m = text.match(/^(\d{4})$/))) return new Date(parseInt(m[1], 10), 0);
+	throw new Error('unknown date');
 }
